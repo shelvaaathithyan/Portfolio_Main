@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   animation: marqueeScroll 25s linear infinite;
+  will-change: transform;
 }
 
 .skills-marquee-track:hover {
@@ -27,6 +28,7 @@
   padding: 0 2rem;
   letter-spacing: 2px;
   transition: color 0.3s ease;
+  will-change: color, text-shadow;
 }
 
 .marquee-item:hover {
@@ -41,6 +43,6 @@
 }
 
 @keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); } /* Since we repeated 3 times */
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.33%, 0, 0); } /* Since we repeated 3 times */
 }

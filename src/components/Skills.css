@@ -25,13 +25,12 @@
 }
 
 .cap-metric-card {
-  background: rgba(20, 20, 25, 0.4);
+  background: rgba(20, 20, 25, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1.5rem 3rem;
   text-align: center;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  min-width: 200px;
   min-width: 200px;
 }
 

@@ -24,7 +24,7 @@ const Footer = () => {
   return (
     <footer ref={footerRef} style={{
       width: '100%',
-      padding: '4rem 2rem',
+      padding: '1.5rem 1rem',
       textAlign: 'center',
       borderTop: '1px solid rgba(255, 255, 255, 0.05)',
       background: 'rgba(10, 10, 10, 0.8)',
@@ -34,17 +34,17 @@ const Footer = () => {
     }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <p style={{
-          fontSize: '1.2rem',
-          color: '#fff',
-          marginBottom: '0.5rem',
+          fontSize: '0.9rem',
+          color: 'rgba(255,255,255,0.7)',
+          marginBottom: '0.3rem',
           fontFamily: 'var(--font-major)',
           letterSpacing: '1px'
         }}>
           Designed & Developed by Shelvaaathithyan VK
         </p>
         <p style={{
-          color: 'var(--text-secondary)',
-          fontSize: '1rem'
+          color: 'rgba(255,255,255,0.4)',
+          fontSize: '0.8rem'
         }}>
           Building intelligent systems, one idea at a time.
         </p>

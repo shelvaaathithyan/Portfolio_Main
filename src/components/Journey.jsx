@@ -52,7 +52,7 @@ const Journey = () => {
       title: "Mobile App Development Training", 
       institution: "Freelancer League",
       desc: "Completed intensive training in mobile application development, including Firebase integration, Kodular, and Android Studio development workflows.",
-      highlight: false
+      highlight: true
     },
     { 
       year: "Mid 2024", 
@@ -60,7 +60,7 @@ const Journey = () => {
       title: "Achievement Award", 
       institution: "PSG Polytechnic College",
       desc: "Received the Achievement Award for outstanding academic performance and excellence in co-curricular and extra-curricular activities during the diploma program.",
-      highlight: false
+      highlight: true
     },
     { 
       year: "Present", 
@@ -68,14 +68,31 @@ const Journey = () => {
       title: "Computer Science Engineering (AI & ML)", 
       institution: "PSG College of Technology",
       desc: "Currently pursuing B.E. Computer Science Engineering (AI & ML), focusing on intelligent systems, machine learning, full-stack development, and real-world problem solving.",
-      highlight: false
+      highlight: true
+    },
+    { 
+      year: "Current", 
+      icon: <span style={{fontSize: "1.2rem"}}>🔬</span>,
+      title: "Research Intern", 
+      institution: "Software Engineering Research Center (SERC), IIIT Hyderabad",
+      desc: "Currently working as a Research Intern at the Software Engineering Research Center (SERC), IIIT Hyderabad, contributing to the development of LoCoML (Low-Code Machine Learning), an innovative low-code framework for building, managing, and orchestrating complex machine learning inference pipelines.\n\nLoCoML simplifies AI workflow creation through dynamic pipeline orchestration, automated model integration, and flexible workflow management for real-world machine learning applications.",
+      badge: "CURRENT ROLE",
+      highlight: true,
+      isResearch: true,
+      tags: [
+        "🔬 Research & Development",
+        "🧠 Low-Code Machine Learning",
+        "⚙️ Pipeline Orchestration",
+        "🤖 AI Workflow Automation",
+        "🌐 Bhashini Integration"
+      ]
     },
     { 
       year: "Future", 
       icon: <FiTarget />,
       title: "Building Intelligent Systems", 
-      institution: "AI/ML Engineer",
-      desc: "Working towards becoming an AI Engineer who develops impactful products, intelligent applications, and innovative technology solutions.",
+      institution: "AI Engineer & Researcher",
+      desc: "Building scalable intelligent systems, machine learning platforms, and impactful AI solutions that solve real-world problems.",
       highlight: false
     }
   ];
@@ -97,7 +114,18 @@ const Journey = () => {
 
     // Batch animate timeline cards for better performance
     ScrollTrigger.batch('.journey-card', {
-      onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, ease: 'power2.out' }),
+      onEnter: batch => {
+        gsap.to(batch, { opacity: 1, y: 0, x: 0, stagger: 0.1, duration: 0.5, ease: 'power2.out' });
+        // Stagger tags for research card
+        batch.forEach(card => {
+          if (card.classList.contains('research-card')) {
+            gsap.fromTo(card.querySelectorAll('.journey-tag'), 
+              { opacity: 0, y: 15 },
+              { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, delay: 0.3, ease: 'power2.out' }
+            );
+          }
+        });
+      },
       onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 30, stagger: 0.1, duration: 0.4, ease: 'power2.in' }),
       start: 'top 90%'
     });
@@ -139,7 +167,7 @@ const Journey = () => {
                 </div>
               </div>
               
-              <div className="journey-card" style={{ opacity: 0, transform: 'translateY(30px)' }}>
+              <div className={`journey-card ${data.isResearch ? 'research-card' : ''}`} style={{ opacity: 0, transform: data.isResearch ? 'translateX(50px)' : 'translateY(30px)' }}>
                 <div className="journey-card-header">
                   <span className="journey-year-tag key-text text-blue">{data.year}</span>
                   {data.badge && (
@@ -148,7 +176,17 @@ const Journey = () => {
                 </div>
                 <h3 className="journey-card-title">{data.title}</h3>
                 <h4 className="journey-card-institution">{data.institution}</h4>
-                <p className="journey-card-desc">{data.desc}</p>
+                {data.desc.split('\n\n').map((para, pIdx) => (
+                  <p key={pIdx} className="journey-card-desc">{para}</p>
+                ))}
+                
+                {data.tags && (
+                  <div className="journey-tags-container">
+                    {data.tags.map((tag, tIdx) => (
+                      <span key={tIdx} className="journey-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}

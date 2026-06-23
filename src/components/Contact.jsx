@@ -8,15 +8,49 @@ import './SectionStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Note: Using placeholders since I don't have your actual personal files.
+// Please replace these URLs with your real photos in your public/ directory or imports!
+const filmData = [
+  {
+    id: 1,
+    img: "/dip.jpeg",
+    title: "Diploma Graduation",
+    subtitle: "PSG Polytechnic College"
+  },
+  {
+    id: 2,
+    img: "/press.jpeg",
+    title: "Ideathon-Hackathon Press Meet",
+    subtitle: "SNS College Of Engineering"
+  },
+  {
+    id: 3,
+    img: "/dipp.jpeg",
+    title: "Recognition of Diploma Project",
+    subtitle: "ApartiBot"
+  },
+  {
+    id: 4,
+    img: "/del.jpeg",
+    title: "PSG TECH : National Science Expo",
+    subtitle: "Mayoor School,Noida"
+  }
+];
+
+// Duplicate the array for a seamless infinite scroll loop
+const extendedFilmData = [...filmData, ...filmData];
+
 const Contact = () => {
   const sectionRef = useRef(null);
+  const reelRef = useRef(null);
 
   useGSAP(() => {
-    gsap.from('.contact-header > *', {
+    // Left Content Animation
+    gsap.from('.contact-left-content > *', {
       y: 50,
       opacity: 0,
       duration: 1,
-      stagger: 0.2,
+      stagger: 0.15,
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top 75%',
@@ -24,45 +58,70 @@ const Contact = () => {
       }
     });
 
-    gsap.from('.contact-btn', {
-      y: 30,
+    // Film Strip Entrance
+    gsap.from('.film-strip-container', {
+      x: 100,
       opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
+      duration: 1,
+      ease: 'power4.out',
       scrollTrigger: {
-        trigger: '.contact-buttons',
-        start: 'top 85%',
+        trigger: '.contact-gallery',
+        start: 'top 75%',
         toggleActions: 'play none none reverse'
       }
     });
+
   }, { scope: sectionRef });
 
   return (
     <section className="portfolio-section contact-section" id="contact" ref={sectionRef}>
       
       <div className="section-container contact-container">
-        <div className="contact-content">
-          <div className="contact-header">
-            <h2 className="contact-mega-title key-text text-white">
-              Let's Build Something Great Together
-            </h2>
-            <p className="contact-subtitle">
-              Ready to collaborate on intelligent systems and impactful digital experiences?
-            </p>
-          </div>
+        
+        <div className="contact-layout">
           
-          <div className="contact-buttons">
-            <a href="mailto:hello@shelvaaathithyan.com" className="contact-btn email-btn">
-              <FiMail className="contact-icon" /> Email Me
-            </a>
-            <a href="#" className="contact-btn linkedin-btn">
-              <FiLinkedin className="contact-icon" /> LinkedIn
-            </a>
-            <a href="#" className="contact-btn github-btn">
-              <FiGithub className="contact-icon" /> GitHub
-            </a>
+          {/* Left Side: Contact Info */}
+          <div className="contact-left-content">
+            <h2 className="contact-mega-title key-text text-white">
+              Let's Build<br/>Something Great<br/>Together
+            </h2>
+            
+            <div className="contact-buttons">
+              <a href="mailto:hello@shelvaaathithyan.com" className="contact-btn email-btn">
+                <FiMail className="contact-icon" /> Email Me
+              </a>
+              <a href="#" className="contact-btn linkedin-btn">
+                <FiLinkedin className="contact-icon" /> LinkedIn
+              </a>
+              <a href="#" className="contact-btn github-btn">
+                <FiGithub className="contact-icon" /> GitHub
+              </a>
+            </div>
           </div>
+
+          {/* Right Side: Film Strip Gallery */}
+          <div className="contact-gallery">
+            
+            <div className="film-strip-container">
+              
+              <div className="film-reel" ref={reelRef}>
+                {filmData.map((data, index) => (
+                  <div className="film-frame" key={`${data.id}-${index}`}>
+                    <img src={data.img} alt={data.title} className="film-img" />
+                    <div className="film-caption">
+                      <span className="film-title">{data.title}</span>
+                      <span className="film-subtitle">{data.subtitle}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+        
       </div>
     </section>
   );

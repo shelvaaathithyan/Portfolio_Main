@@ -1,26 +1,33 @@
 /* Contact.css */
 .contact-section {
-  padding-bottom: 6rem;
+  padding-bottom: 8rem;
+}
+
+.contact-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-left-content {
+  flex: 1;
+  max-width: 600px;
 }
 
 .contact-mega-title {
-  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-size: clamp(3rem, 5vw, 5rem);
   line-height: 1.1;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   background: linear-gradient(to bottom right, #ffffff 0%, #a0a0a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.contact-subtitle {
-  font-size: 1.4rem;
-  color: var(--text-secondary);
-  margin-bottom: 4rem;
-}
-
 .contact-buttons {
   display: flex;
-  justify-content: center;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
@@ -28,17 +35,17 @@
 .contact-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 36px;
+  gap: 10px;
+  padding: 14px 28px;
   border-radius: 40px;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.3s ease;
 }
 
 .contact-btn:hover {
-  transform: translateY(-5px); /* GSAP-like hover lift */
+  transform: translateY(-5px);
 }
 
 .email-btn {
@@ -60,14 +67,143 @@
 }
 
 .github-btn {
-  background: #333;
+  background: rgba(255,255,255,0.08);
   color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
 }
 
 .github-btn:hover {
-  box-shadow: 0 15px 30px rgba(51, 51, 51, 0.4);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
 }
 
-.contact-icon {
-  font-size: 1.3rem;
+/* Right Side: Film Strip Gallery */
+.contact-gallery {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.film-strip-container {
+  width: 320px;
+  height: 600px;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+}
+
+/* Scrolling Reel (Removed Animation) */
+.film-reel {
+  width: 100%; /* Full width without perforations */
+  height: 100%; /* Fixes scroll by bounding it to container */
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 15px;
+  z-index: 2;
+  overflow-y: auto; /* Allow manual scroll if needed */
+}
+
+/* Hide scrollbar for cleaner look */
+.film-reel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Frame */
+.film-frame {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  background: #111;
+  border: none;
+  flex-shrink: 0; /* Prevent shrinking when scrolling */
+}
+
+.film-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(40%) contrast(1.1) brightness(0.8);
+  transition: filter 0.4s ease, transform 0.6s ease;
+}
+
+.film-frame:hover {
+  transform: scale(1.03);
+  z-index: 5;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.film-frame:hover .film-img {
+  filter: grayscale(0%) contrast(1.1) brightness(1.1);
+  transform: scale(1.05);
+}
+
+/* Caption Reveal */
+.film-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 15px 15px 15px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.film-frame:hover .film-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.film-title {
+  font-size: 1.1rem;
+  color: #ffffff !important;
+  background: transparent !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.film-subtitle {
+  font-size: 0.8rem;
+  color: var(--theme-glow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 992px) {
+  .contact-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contact-buttons {
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+  
+  .contact-gallery {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .film-strip-container {
+    height: 450px;
+  }
 }

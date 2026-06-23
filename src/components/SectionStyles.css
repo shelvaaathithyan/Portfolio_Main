@@ -147,11 +147,15 @@
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
     overflow-x: visible;
     padding-bottom: 0;
   }
   .project-card {
     min-width: unset;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -207,28 +211,20 @@
   transform: translateY(0);
 }
 
-.project-view-btn {
-  background: transparent;
-  border: 1px solid #fff;
+.project-github-link {
   color: #fff;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transform: translateY(20px);
   transition: all 0.4s ease 0.15s;
+  transform: translateY(20px);
+  display: inline-flex;
 }
 
-.project-card:hover .project-view-btn {
+.project-card:hover .project-github-link {
   transform: translateY(0);
 }
 
-.project-view-btn:hover {
-  background: #fff;
-  color: #000;
+.project-github-link:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
 }
 
 .project-info {

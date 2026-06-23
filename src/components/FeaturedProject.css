@@ -38,10 +38,7 @@
   position: absolute;
   top: -10%;
   left: 0;
-  /* Placeholder image style */
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  background-size: cover;
-  background-position: center;
+  background: url('/Screenshot 2026-05-25 143611.png') center/cover no-repeat;
 }
 
 .fp-overlay {

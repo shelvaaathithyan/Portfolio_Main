@@ -177,18 +177,28 @@ const Hero = () => {
           >
             {/* Center Photo Area */}
             <div className="profile-photo-wrapper">
-              <div className="profile-photo-placeholder">
-                <span>PHOTO</span>
-              </div>
+              <img src="/portrait.png" alt="Shelvaaathithyan VK" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }} />
             </div>
 
             {/* Orbiting Badges */}
-            <div className="orbit-badge badge-1">React</div>
-            <div className="orbit-badge badge-2">Node.js</div>
-            <div className="orbit-badge badge-3">MongoDB</div>
-            <div className="orbit-badge badge-4">AI/ML</div>
-            <div className="orbit-badge badge-5">Python</div>
-            <div className="orbit-badge badge-6">Firebase</div>
+            <div className="orbit-badge badge-1" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/react logo.png" alt="React" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(97, 218, 251, 0.4))' }} />
+            </div>
+            <div className="orbit-badge badge-2" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/node logo.png" alt="Node.js" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(104, 160, 99, 0.4))' }} />
+            </div>
+            <div className="orbit-badge badge-3" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/mongodb-removebg-preview.png" alt="MongoDB" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(71, 162, 72, 0.4))' }} />
+            </div>
+            <div className="orbit-badge badge-4" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/aimlLogo-removebg-preview.png" alt="AI/ML" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(125, 211, 252, 0.4))' }} />
+            </div>
+            <div className="orbit-badge badge-5" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/hd-python-logo-symbol-transparent-png-735811696257415dbkifcuokn-removebg-preview.png" alt="Python" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(55, 118, 171, 0.4))' }} />
+            </div>
+            <div className="orbit-badge badge-6" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/firebase-removebg-preview.png" alt="Firebase" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(255, 160, 0, 0.4))' }} />
+            </div>
           </div>
         </div>
 

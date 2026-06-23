@@ -24,7 +24,7 @@ const StickySectionNumbers = () => {
       if (element) {
         ScrollTrigger.create({
           trigger: element,
-          start: "top 50%",
+          start: sec.id === 'contact' ? "top 75%" : "top 50%",
           end: "bottom 50%",
           onEnter: () => setActiveSection(sec.id),
           onEnterBack: () => setActiveSection(sec.id),

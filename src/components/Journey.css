@@ -157,6 +157,46 @@
   font-size: 1.05rem;
   color: #adb5bd;
   line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.journey-card-desc:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Research Intern Card Special Styling */
+.journey-card.research-card {
+  border: 1px solid rgba(125,211,252,0.25);
+  box-shadow: 0 0 30px rgba(125,211,252,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.journey-card.research-card:hover {
+  box-shadow: 0 0 40px rgba(125,211,252,0.15);
+  transform: translateY(-5px);
+}
+
+.journey-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.journey-tag {
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #adb5bd;
+  transition: all 0.3s ease;
+}
+
+.journey-tag:hover {
+  background: rgba(125,211,252,0.1);
+  border-color: rgba(125,211,252,0.3);
+  color: #fff;
 }
 
 @media (max-width: 768px) {

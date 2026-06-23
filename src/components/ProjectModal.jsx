@@ -33,14 +33,14 @@ const ProjectModal = ({ project, onClose }) => {
   useEffect(() => {
     if (!isLoading) {
       gsap.fromTo('.project-modal-content',
-        { y: 50, opacity: 0, scale: 0.98 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' }
+        { y: 40, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'power4.out' }
       );
     }
   }, [isLoading]);
 
   const handleClose = () => {
-    gsap.to('.project-modal-content', { y: 50, opacity: 0, scale: 0.98, duration: 0.3, ease: 'power3.in' });
+    gsap.to('.project-modal-content', { y: 40, opacity: 0, scale: 0.95, duration: 0.3, ease: 'power3.in' });
     gsap.to('.project-modal-overlay', { opacity: 0, duration: 0.4, ease: 'power2.in', onComplete: onClose });
   };
 
@@ -59,9 +59,14 @@ const ProjectModal = ({ project, onClose }) => {
           <FiX />
         </button>
 
-        <div className="modal-header">
+        <div className="modal-header" style={{ paddingTop: '40px' }}>
           <h2 className="modal-title key-text">{project.title}</h2>
           <p className="modal-context text-blue">{project.context}</p>
+          {project.title === 'VisionBite' && (
+            <div style={{ marginTop: '1rem', color: '#adb5bd', fontSize: '1rem', letterSpacing: '0.5px' }}>
+              Computer Vision • Recommendation Engine • Full Stack
+            </div>
+          )}
         </div>
 
         <div className="modal-body">
@@ -79,34 +84,14 @@ const ProjectModal = ({ project, onClose }) => {
             <h3 className="modal-section-title">Architecture</h3>
             <p>Built using a microservices pattern. Edge devices process video feeds via OpenCV/TensorFlow, sending structured data to a Node.js backend. The frontend dashboard is built in React, providing real-time analytics.</p>
             
-            <div className="arch-viz-container">
-              {project.title === 'VisionBite' ? (
-                <svg className="arch-svg" viewBox="0 0 600 200">
-                  <path className="arch-path" d="M 50 100 L 150 100 L 250 50 L 350 50 L 450 100 L 550 100" fill="none" stroke="var(--theme-glow)" strokeWidth="3" strokeDasharray="5,5" />
-                  <circle cx="50" cy="100" r="10" fill="var(--accent-color)" />
-                  <text x="50" y="130" fill="#fff" fontSize="12" textAnchor="middle">Camera</text>
-                  <circle cx="150" cy="100" r="10" fill="var(--accent-color)" />
-                  <text x="150" y="130" fill="#fff" fontSize="12" textAnchor="middle">Face Rec.</text>
-                  <circle cx="300" cy="50" r="10" fill="var(--accent-color)" />
-                  <text x="300" y="30" fill="#fff" fontSize="12" textAnchor="middle">Emotion Engine</text>
-                  <circle cx="450" cy="100" r="10" fill="var(--accent-color)" />
-                  <text x="450" y="130" fill="#fff" fontSize="12" textAnchor="middle">Rec. Engine</text>
-                  <circle cx="550" cy="100" r="10" fill="var(--accent-color)" />
-                  <text x="550" y="130" fill="#fff" fontSize="12" textAnchor="middle">Customer</text>
-                </svg>
-              ) : (
-                <svg className="arch-svg" viewBox="0 0 600 150">
-                  <path className="arch-path" d="M 50 75 L 200 75 L 350 75 L 500 75" fill="none" stroke="var(--theme-glow)" strokeWidth="3" />
-                  <circle cx="50" cy="75" r="10" fill="var(--accent-color)" />
-                  <text x="50" y="105" fill="#fff" fontSize="12" textAnchor="middle">CR Request</text>
-                  <circle cx="200" cy="75" r="10" fill="var(--accent-color)" />
-                  <text x="200" y="105" fill="#fff" fontSize="12" textAnchor="middle">Booking System</text>
-                  <circle cx="350" cy="75" r="10" fill="var(--accent-color)" />
-                  <text x="350" y="105" fill="#fff" fontSize="12" textAnchor="middle">Approval Flow</text>
-                  <circle cx="500" cy="75" r="10" fill="var(--accent-color)" />
-                  <text x="500" y="105" fill="#fff" fontSize="12" textAnchor="middle">Allocation</text>
-                </svg>
-              )}
+            <div className="arch-flow">
+              <div className="arch-node">Camera</div>
+              <div className="arch-connector"></div>
+              <div className="arch-node">Recognition</div>
+              <div className="arch-connector"></div>
+              <div className="arch-node">Recommendation</div>
+              <div className="arch-connector"></div>
+              <div className="arch-node">Dashboard</div>
             </div>
           </div>
 

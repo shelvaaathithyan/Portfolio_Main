@@ -81,8 +81,7 @@ const FeaturedProject = () => {
             </div>
             
             <div className="fp-links">
-              <a href="#" className="fp-link"><FiGithub /> Source Code</a>
-              <a href="#" className="fp-link"><FiExternalLink /> Live Demo</a>
+              <a href="https://github.com/shelvaaathithyan/VisionBite" target="_blank" rel="noopener noreferrer" className="fp-link"><FiGithub /> Source Code</a>
             </div>
           </div>
         </div>

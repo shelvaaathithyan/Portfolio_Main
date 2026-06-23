@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiGithub } from 'react-icons/fi';
 import './SectionStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,22 +12,45 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "VisionBite",
-      context: "AI-Powered Smart Café Platform",
-      tech: ["React", "Python", "OpenCV", "TensorFlow"],
-      image: "linear-gradient(135deg, #2a0845 0%, #6441A5 100%)" // Placeholder gradient
+      title: "Dia-sole",
+      context: "Mobile app to analyze & monitor foot health",
+      tech: ["Flutter", "Dart", "Cloud"],
+      image: "url('/diasole.jpeg') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/Dia-sole"
     },
     {
       title: "Repora",
-      context: "Automated Data Reporting Engine",
+      context: "Full-stack web application for managing class activities",
       tech: ["Node.js", "Express", "MongoDB", "React"],
-      image: "linear-gradient(135deg, #1A2980 0%, #26D0CE 100%)"
+      image: "url('/repora.jpeg') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/repora-final"
     },
     {
-      title: "ProgressTracker",
-      context: "Developer Habit & Goal System",
-      tech: ["Next.js", "Tailwind", "Firebase"],
-      image: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)"
+      title: "Neptune",
+      context: "AI-assisted mental health companion",
+      tech: ["Flutter", "Dart", "C++"],
+      image: "url('/neptune.jpeg') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/mental-health_frontend"
+    },
+    {
+      title: "Smart Snacky",
+      context: "An interactive educational device",
+      tech: ["Raspberry PI", "Python", "Sensor"],
+      image: "url('/smartsnacky.jpeg') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/Smart_Snacky"
+    },
+    {
+      title: "SmartBin",
+      context: "Smart Garbage Collector for Smart City",
+      tech: ["Arduino", "Bluetooth", "Sensors"],
+      image: "url('/smartbin.png') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/SmartBin"
+    },
+    {
+      title: "CloudSync",
+      context: "Distributed File Storage Platform",
+      tech: ["Next.js", "AWS S3", "MongoDB", "Redis"],
+      image: "linear-gradient(135deg, #1f4037 0%, #99f2c8 100%)"
     }
   ];
 
@@ -47,7 +70,6 @@ const Projects = () => {
 
   return (
     <section className="portfolio-section projects-section" id="projects" ref={sectionRef}>
-      <div className="section-number-bg key-text">03</div>
       
       <div className="section-container">
         <h2 className="section-title key-text text-white">Featured Projects</h2>
@@ -58,10 +80,10 @@ const Projects = () => {
               <div className="project-image-container" style={{ background: project.image }}>
                 {/* Overlay that appears on hover */}
                 <div className="project-overlay">
-                  <span className="project-context text-blue">{project.context}</span>
-                  <button className="project-view-btn">
-                    View Project <FiArrowRight />
-                  </button>
+                  <span className="project-context text-white">{project.context}</span>
+                  <a href={project.link || "#"} target="_blank" rel="noopener noreferrer" className="project-github-link">
+                    <FiGithub size={36} />
+                  </a>
                 </div>
               </div>
               <div className="project-info">

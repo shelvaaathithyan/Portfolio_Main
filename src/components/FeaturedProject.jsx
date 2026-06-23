@@ -46,7 +46,6 @@ const FeaturedProject = () => {
 
   return (
     <section className="portfolio-section fp-section" id="featured" ref={sectionRef}>
-      <div className="section-number-bg key-text">01</div>
       
       <div className="section-container fp-container">
         <div className="fp-header">

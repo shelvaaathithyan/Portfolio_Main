@@ -1,74 +1,61 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
 import { FiMenu, FiX } from 'react-icons/fi';
 import './Navbar.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const navItems = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Achievements', path: '/achievements' },
-  { name: 'Skills', path: '/skills' },
-  { name: 'Contact', path: '/contact' }
+  { name: 'Home', path: '#home' },
+  { name: 'About', path: '#about' },
+  { name: 'Projects', path: '#projects' },
+  { name: 'Journey', path: '#journey' },
+  { name: 'Contact', path: '#contact' }
 ];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const containerRef = useRef(null);
+  const navbarRef = useRef(null);
   const mobileDrawerRef = useRef(null);
   const mobileLinksRef = useRef([]);
 
   useGSAP(() => {
-    // Initial desktop navbar animation
-    gsap.from('.navbar-container', {
-      y: -100,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      delay: 0.2
-    });
+    // Entrance Animation
+    gsap.fromTo(containerRef.current,
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out', delay: 0.2 }
+    );
 
-    gsap.from('.nav-link', {
-      y: -20,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power2.out',
-      delay: 0.5
-    });
-
-    // Scroll trigger for shrinking navbar
+    // Scroll trigger for shrinking navbar width and height
     ScrollTrigger.create({
       start: 'top -50',
       end: 99999,
-      toggleClass: {className: 'navbar-scrolled', targets: '.navbar-container'}
+      toggleClass: { className: 'navbar-scrolled', targets: navbarRef.current }
     });
   }, { scope: containerRef });
 
   useGSAP(() => {
     if (isMobileMenuOpen) {
-      // Animate drawer opening
+      // Animate mobile drawer opening
       gsap.to(mobileDrawerRef.current, {
-        clipPath: 'circle(150% at calc(100% - 3rem) 3rem)',
-        duration: 0.8,
-        ease: 'power3.inOut'
+        y: '0%',
+        duration: 0.6,
+        ease: 'power3.out'
       });
-      // Animate mobile links appearing
+      // Animate links
       gsap.fromTo(mobileLinksRef.current, 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.3, ease: 'power2.out' }
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.2, ease: 'power2.out' }
       );
     } else {
       // Animate drawer closing
       gsap.to(mobileDrawerRef.current, {
-        clipPath: 'circle(0px at calc(100% - 3rem) 3rem)',
-        duration: 0.6,
-        ease: 'power3.inOut'
+        y: '-100%',
+        duration: 0.5,
+        ease: 'power3.in'
       });
     }
   }, [isMobileMenuOpen]);
@@ -77,30 +64,41 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleLinkClick = (e, path) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    if (path === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const target = document.querySelector(path);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div ref={containerRef} className="navbar-wrapper">
-      <div className="navbar-container">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="navbar-video-bg"
-        >
-          <source src="/black-hole.3840x2160.mp4" type="video/mp4" />
-        </video>
-
-        <Link to="/" className="navbar-logo-container">
-          <span className="navbar-logo">Shelvaaathithyan VK</span>
+      <div ref={navbarRef} className="navbar-container">
+        
+        <div className="navbar-logo-container" onClick={(e) => handleLinkClick(e, '#home')} style={{ cursor: 'pointer' }}>
+          <span className="navbar-logo">SHELVAAATHITHYAN VK</span>
           <span className="navbar-subtitle">AI Engineer</span>
-        </Link>
+        </div>
 
         {/* Desktop Links */}
         <div className="navbar-links">
           {navItems.map((item, index) => (
-            <Link key={index} to={item.path} className="nav-link">
+            <a 
+              key={index} 
+              href={item.path} 
+              className="navbar-link"
+              onClick={(e) => handleLinkClick(e, item.path)}
+            >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -110,19 +108,19 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Slides from top) */}
       <div ref={mobileDrawerRef} className="mobile-drawer">
         <div className="mobile-nav-links">
           {navItems.map((item, index) => (
-            <Link 
+            <a 
               key={index} 
-              to={item.path} 
+              href={item.path} 
               className="mobile-nav-link"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleLinkClick(e, item.path)}
               ref={el => mobileLinksRef.current[index] = el}
             >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
       </div>

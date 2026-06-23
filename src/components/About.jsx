@@ -26,9 +26,8 @@ const About = () => {
 
   return (
     <section className="portfolio-section about-section" id="about" ref={sectionRef}>
-      <div className="section-number-bg key-text">01</div>
       
-      <div className="section-container">
+      <div className="section-container about-container">
         <h2 className="section-title key-text text-white">About Me</h2>
         
         <div className="about-content">

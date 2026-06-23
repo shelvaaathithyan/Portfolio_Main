@@ -39,9 +39,8 @@ const Contact = () => {
 
   return (
     <section className="portfolio-section contact-section" id="contact" ref={sectionRef}>
-      <div className="section-number-bg key-text" style={{ fontSize: '15rem', top: '15%' }}>04</div>
       
-      <div className="section-container">
+      <div className="section-container contact-container">
         <div className="contact-content">
           <div className="contact-header">
             <h2 className="contact-mega-title key-text text-white">

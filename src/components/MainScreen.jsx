@@ -8,16 +8,18 @@ import Skills from './Skills';
 import Projects from './Projects';
 import Contact from './Contact';
 import Footer from './Footer';
+import StickySectionNumbers from './StickySectionNumbers';
 
 const MainScreen = () => {
   return (
     <div className="main-layout" style={{ position: 'relative', pointerEvents: 'auto', zIndex: 1 }}>
+      <StickySectionNumbers />
       <Hero />
-      <FeaturedProject />
       <About />
       <Journey />
       <Terminal />
       <Skills />
+      <FeaturedProject />
       <Projects />
       <Contact />
       <Footer />

@@ -65,9 +65,8 @@ const Terminal = () => {
 
   return (
     <section className="portfolio-section terminal-section" id="terminal" ref={terminalRef}>
-      <div className="section-number-bg key-text">03</div>
       
-      <div className="section-container">
+      <div className="section-container terminal-container">
         <div className="terminal-window">
           <div className="terminal-header">
             <div className="term-btn term-close"></div>

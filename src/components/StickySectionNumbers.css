@@ -1,0 +1,55 @@
+/* StickySectionNumbers.css */
+.sticky-section-numbers {
+  position: fixed;
+  left: 40px;
+  top: 55%;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sticky-number-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transform: translateY(-50%); /* Centers exactly on the sticky-section-numbers wrapper */
+}
+
+.sticky-number-container.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sticky-number {
+  font-family: var(--font-major);
+  font-size: clamp(220px, 18vw, 340px);
+  font-weight: 900;
+  letter-spacing: -10px;
+  color: rgba(125, 211, 252, 0.08);
+  line-height: 0.8;
+  margin-bottom: -10px;
+}
+
+.sticky-label {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: rgba(125, 211, 252, 0.22);
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .sticky-section-numbers {
+    display: none;
+  }
+}

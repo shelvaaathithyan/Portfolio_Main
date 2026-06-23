@@ -1,0 +1,145 @@
+/* Skills.css */
+.skills-section {
+  padding-top: 6rem;
+}
+
+.capabilities-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.cap-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Metrics Row */
+.cap-metrics-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 6rem;
+  flex-wrap: wrap;
+}
+
+.cap-metric-card {
+  background: rgba(20, 20, 25, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem 3rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  min-width: 200px;
+}
+
+.cap-metric-value {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px rgba(125, 211, 252, 0.25);
+}
+
+.cap-metric-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Capability List */
+.capabilities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cap-block-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.cap-block-wrapper.align-left {
+  justify-content: flex-start;
+}
+
+.cap-block-wrapper.align-right {
+  justify-content: flex-end;
+}
+
+.cap-block {
+  width: 80%; /* Limits width so alternating layout is visible */
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cap-block-wrapper:last-child .cap-block {
+  border-bottom: none;
+}
+
+.cap-title {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.cap-desc {
+  font-size: 1.1rem;
+  color: #adb5bd;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 90%;
+}
+
+/* Tech Pills */
+.cap-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.tech-pill {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--theme-glow);
+  background: rgba(125, 211, 252, 0.08);
+  border: 1px solid rgba(125, 211, 252, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.tech-pill:hover {
+  background: rgba(125, 211, 252, 0.15);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .cap-metrics-row {
+    gap: 1rem;
+  }
+  .cap-metric-card {
+    min-width: 140px;
+    padding: 1.2rem;
+  }
+  .cap-block-wrapper.align-left,
+  .cap-block-wrapper.align-right {
+    justify-content: center;
+  }
+  .cap-block {
+    width: 100%;
+  }
+  .cap-title {
+    font-size: 1.5rem;
+  }
+  .cap-desc {
+    max-width: 100%;
+  }
+}

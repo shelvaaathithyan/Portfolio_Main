@@ -47,10 +47,11 @@ const Projects = () => {
       link: "https://github.com/shelvaaathithyan/SmartBin"
     },
     {
-      title: "CloudSync",
-      context: "Distributed File Storage Platform",
-      tech: ["Next.js", "AWS S3", "MongoDB", "Redis"],
-      image: "linear-gradient(135deg, #1f4037 0%, #99f2c8 100%)"
+      title: "ApartiBot",
+      context: "Automated delivery robot using an application for ordering groceries",
+      tech: ["Robotics", "IoT", "Mobile App"],
+      image: "url('/apartibot.jpg') center top / cover no-repeat",
+      link: "https://github.com/shelvaaathithyan/ApartiBot"
     }
   ];
 

@@ -106,6 +106,41 @@
   color: var(--accent-color);
 }
 
+.modal-ai-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--theme-glow);
+}
+
+.arch-viz-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.arch-svg {
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+.arch-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 3s ease forwards;
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .project-modal-content {
     padding: 2rem;

@@ -176,7 +176,7 @@
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+  box-shadow: 0 10px 20px rgba(125, 211, 252, 0.2), 0 0 15px var(--theme-glow);
 }
 
 .secondary-btn {
@@ -190,7 +190,6 @@
 .secondary-btn:hover {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.3);
-  /* Animated border glow equivalent via box-shadow */
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }

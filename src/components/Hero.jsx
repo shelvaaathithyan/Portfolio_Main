@@ -1,15 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { useGSAP } from '@gsap/react';
 import { FiDownload, FiMail, FiMapPin, FiBriefcase, FiCheckCircle } from 'react-icons/fi';
 import NeuralSphere from './NeuralSphere';
+import { useMagnetic } from '../hooks/useMagnetic';
+import ResumeModal from './ResumeModal';
 import './Hero.css';
 
 gsap.registerPlugin(TextPlugin);
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const primaryBtnRef = useMagnetic();
+  const secondaryBtnRef = useMagnetic();
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const textRef = useRef(null);
   const profileCardRef = useRef(null);
 
@@ -151,11 +156,13 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="hero-cta-group">
-            <button className="cta-btn primary-btn">
-              <FiDownload /> Download Resume
+            <button className="cta-btn primary-btn" ref={primaryBtnRef} onClick={() => setIsResumeModalOpen(true)}>
+              <FiDownload className="btn-icon" />
+              Download Resume
             </button>
-            <button className="cta-btn secondary-btn">
-              <FiMail /> Get In Touch
+            <button className="cta-btn secondary-btn" ref={secondaryBtnRef} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+              <FiMail className="btn-icon" />
+              Get In Touch
             </button>
           </div>
         </div>
@@ -186,6 +193,8 @@ const Hero = () => {
         </div>
 
       </div>
+      
+      {isResumeModalOpen && <ResumeModal onClose={() => setIsResumeModalOpen(false)} />}
     </section>
   );
 };

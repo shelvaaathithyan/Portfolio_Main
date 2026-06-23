@@ -8,6 +8,7 @@ import NeuralNetwork from './components/NeuralNetwork';
 import Spotlight from './components/Spotlight';
 import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
+import CommandPalette from './components/CommandPalette';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,7 @@ function App() {
       <Spotlight />
       <ScrollProgress />
       <Navbar />
+      <CommandPalette />
       <Routes>
         <Route path="/" element={<MainScreen />} />
       </Routes>

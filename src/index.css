@@ -5,21 +5,26 @@
   cursor: url('/cursor.png'), auto !important;
 }
 
+/* Dynamic Theme Variables */
 :root {
-  --bg-color: #000000;
+  --bg-primary: #050505;
   --text-primary: #ffffff;
-  --text-secondary: #abb2bf;
-  --accent-color: #3b82f6; /* Bright dodger blue from reference */
-  --border-color: #abb2bf;
+  --text-secondary: #888888;
+  --accent-color: #3b82f6;
+  --theme-glow: #7dd3fc; /* Sky blue */
   --font-major: 'Anton', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 body {
-  background-color: var(--bg-color);
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 #root {

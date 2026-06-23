@@ -20,16 +20,23 @@
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  /* Metallic glassmorphism */
-  background: linear-gradient(145deg, rgba(50, 50, 50, 0.4) 0%, rgba(20, 20, 20, 0.7) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  /* Premium Glassmorphism */
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
-  padding: 0.75rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: 0 2rem;
+  height: 65px;
+  transition: height 0.4s ease, background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.navbar-scrolled {
+  height: 55px;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-color: rgba(255,255,255,0.05);
 }
 
 .navbar-video-bg {
@@ -44,21 +51,34 @@
   pointer-events: none;
 }
 
+.navbar-logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-decoration: none;
+}
+
 .navbar-logo {
   font-family: var(--font-major);
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1;
-  /* Metallic Silver Text */
-  background: linear-gradient(to bottom right, #ffffff 0%, #e0e0e0 40%, #9e9e9e 60%, #ffffff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  transition: background-position 0.5s ease;
+}
+
+.navbar-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
 }
 
 .navbar-logo:hover {

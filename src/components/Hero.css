@@ -1,0 +1,275 @@
+/* Hero.css */
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 2rem 2rem 2rem; /* Account for navbar */
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+/* Left Content */
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 600px;
+}
+
+.hero-greeting {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-typing-container {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 3rem; /* Fixed height to prevent layout jump */
+}
+
+.cursor {
+  font-family: var(--font-major);
+  color: var(--accent-color);
+  margin-left: 5px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 90%;
+}
+
+/* Status Indicators */
+.hero-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #adb5bd;
+  background: rgba(255,255,255,0.03);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  width: fit-content;
+}
+
+.status-icon {
+  color: var(--text-secondary);
+}
+
+.status-green .status-icon {
+  color: #10b981;
+}
+
+/* Stats Row */
+.hero-stats-row {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.stats-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  margin: 10px 0;
+}
+
+.stats-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.stat {
+  font-size: 0.85rem;
+  color: #adb5bd;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* CTA Buttons */
+.hero-cta-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.secondary-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px rgba(255,255,255,0.05);
+  transform: translateY(-2px);
+}
+
+/* Right Content - Orbit Container */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-orbit-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d; /* For mouse tilt */
+}
+
+.profile-photo-wrapper {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 10;
+}
+
+.profile-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-major);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+/* Orbiting Badges */
+.orbit-badge {
+  position: absolute;
+  padding: 8px 16px;
+  background: rgba(20,20,20,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  /* Default position relative to center */
+  transform-origin: center;
+}
+
+/* Position the badges manually around the photo for a premium floating look */
+.badge-1 { top: 5%; left: 20%; animation: floatBadge 4s ease-in-out infinite 0s; }
+.badge-2 { top: -5%; right: 20%; animation: floatBadge 4.5s ease-in-out infinite 1s; }
+.badge-3 { top: 40%; right: -10%; animation: floatBadge 5s ease-in-out infinite 2s; }
+.badge-4 { bottom: -5%; right: 30%; animation: floatBadge 4.2s ease-in-out infinite 0.5s; }
+.badge-5 { bottom: 10%; left: 0%; animation: floatBadge 4.8s ease-in-out infinite 1.5s; }
+.badge-6 { top: 40%; left: -10%; animation: floatBadge 4.6s ease-in-out infinite 2.5s; }
+
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-left {
+    align-items: center;
+  }
+  
+  .hero-description {
+    text-align: center;
+  }
+  
+  .hero-status-list {
+    align-items: center;
+  }
+  
+  .hero-typing-container {
+    justify-content: center;
+  }
+
+  .stats-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

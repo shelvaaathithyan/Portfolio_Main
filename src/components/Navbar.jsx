@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 import { FiMenu, FiX } from 'react-icons/fi';
 import './Navbar.css';
 
@@ -37,6 +40,13 @@ const Navbar = () => {
       stagger: 0.1,
       ease: 'power2.out',
       delay: 0.5
+    });
+
+    // Scroll trigger for shrinking navbar
+    ScrollTrigger.create({
+      start: 'top -50',
+      end: 99999,
+      toggleClass: {className: 'navbar-scrolled', targets: '.navbar-container'}
     });
   }, { scope: containerRef });
 
@@ -80,8 +90,9 @@ const Navbar = () => {
           <source src="/black-hole.3840x2160.mp4" type="video/mp4" />
         </video>
 
-        <Link to="/" className="navbar-logo">
-          PORTFOLIO
+        <Link to="/" className="navbar-logo-container">
+          <span className="navbar-logo">Shelvaaathithyan VK</span>
+          <span className="navbar-subtitle">AI Engineer</span>
         </Link>
 
         {/* Desktop Links */}

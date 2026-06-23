@@ -105,8 +105,7 @@ const Projects = () => {
             href="https://github.com/shelvaaathithyan?tab=repositories" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="btn-outline"
-            style={{ fontSize: '1.1rem', padding: '12px 32px', backgroundColor: 'var(--bg-primary)' }}
+            className="btn-outline explore-more-btn"
           >
             <FaGithub size={20} /> Explore More
           </a>

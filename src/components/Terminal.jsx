@@ -202,11 +202,15 @@ const Terminal = () => {
   };
 
   useGSAP(() => {
+    let triggered = false;
+    
     ScrollTrigger.create({
       trigger: terminalRef.current,
       start: 'top 75%',
+      once: true,
       onEnter: () => {
-        if (bootState === 'idle') {
+        if (!triggered) {
+          triggered = true;
           setBootState('booting');
           runBootSequence();
         }
@@ -231,7 +235,7 @@ const Terminal = () => {
       setBootState('ready');
       if (inputRef.current) inputRef.current.focus();
     };
-  }, { scope: terminalRef, dependencies: [bootState] });
+  }, { scope: terminalRef });
 
   // Animate new history entries
   useGSAP(() => {

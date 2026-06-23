@@ -4,80 +4,127 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--bg-color);
+  background-color: #000; /* Pure black for cinematic effect */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+  transition: opacity 1s ease-in-out, filter 1s ease-in-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .loading-container.fade-out {
   opacity: 0;
-  filter: blur(10px);
+  filter: blur(20px);
+  transform: scale(1.1); /* Smooth cinematic zoom through the core */
+}
+
+.vortex-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .loading-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; /* Space between logo and text */
+  gap: 24px;
 }
 
-/* Base wrapper for glitch offsets */
 .glitch-wrapper {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Base image that we'll reveal */
-.coin-image {
-  width: 90px;
-  height: auto;
-  position: absolute;
-  /* The image is always visible, but obscured by the pixel overlay */
-  filter: brightness(0) invert(1);
+.spider-logo {
+  width: 100%;
+  height: 100%;
+  background-image: url('/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Base state: white/inverted to match energy */
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+  opacity: 0; /* Handled by GSAP */
+  position: relative;
 }
 
-.pixel-overlay {
+/* Glitch Pseudo-elements */
+.glitch-effect::before,
+.glitch-effect::after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: grid;
-  z-index: 2;
+  background-image: inherit;
+  background-size: inherit;
+  background-repeat: inherit;
+  background-position: inherit;
+  opacity: 0.8;
+  z-index: -1;
 }
 
-.pixel-block {
-  background-color: var(--bg-color); /* matches pure black background */
-  width: 100%;
-  height: 100%;
+.glitch-effect::before {
+  left: 3px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
 }
 
-@keyframes hide-pixel {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+.glitch-effect::after {
+  left: -3px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+/* Aggressive slice and shift keyframes for scanline/glitch effect */
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 1px); }
+  20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, -1px); }
+  40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); }
+  60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, -2px); }
+  80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, 1px); }
+  100% { clip-path: inset(5% 0 80% 0); transform: translate(-1px, -1px); }
 }
 
 .loading-text {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 16px;
-  color: var(--text-primary);
-  letter-spacing: 2px;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 4px;
   font-weight: 500;
-  /* Left to right reveal dynamically */
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
+  opacity: 0; /* Handled by GSAP */
 }
 
-.is-playing .loading-text {
-  animation: reveal-text var(--anim-dur, 6s) ease-in-out forwards;
+/* Glowing text to match the bright core */
+.glow-text {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 .loading-text sup {
@@ -85,51 +132,13 @@
   vertical-align: super;
 }
 
-/* Mobile adjustments */
 @media (max-width: 600px) {
   .glitch-wrapper {
-    width: 70px;
-    height: 70px;
-  }
-  .coin-image {
-    width: 70px;
+    width: 80px;
+    height: 80px;
   }
   .loading-text {
     font-size: 14px;
+    letter-spacing: 2px;
   }
-}
-
-/* Fills the image from bottom to top */
-@keyframes load-up {
-  0% {
-    clip-path: inset(100% 0 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-/* Left to right text reveal */
-@keyframes reveal-text {
-  0% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-}
-
-/* Constant small shaking effect */
-.shake-effect {
-  animation: constant-shake 0.3s infinite;
-}
-
-@keyframes constant-shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  25% { transform: translate(-1px, -1px) rotate(-1deg); }
-  50% { transform: translate(-1px, 1px) rotate(1deg); }
-  75% { transform: translate(1px, -1px) rotate(0deg); }
-  100% { transform: translate(1px, 1px) rotate(0deg); }
 }

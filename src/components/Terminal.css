@@ -41,15 +41,39 @@
 
 .terminal-body {
   padding: 24px;
-  min-height: 300px;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
   font-size: 1.1rem;
   line-height: 1.6;
+  scroll-behavior: smooth;
+  cursor: text;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
 }
 
 .term-line {
-  display: none; /* Handled by GSAP */
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.term-active-line {
+  margin-bottom: 8px;
 }
 
 .term-user { color: #27c93f; font-weight: bold; }
@@ -58,8 +82,7 @@
 .term-prompt { color: #fff; margin-right: 8px; }
 .term-input { color: #fff; }
 
-.term-output {
-  display: none;
+.term-output-wrapper {
   color: #adb5bd;
   margin-bottom: 16px;
   padding-left: 1rem;
@@ -72,6 +95,22 @@
 
 .term-cursor {
   animation: termBlink 1s step-end infinite;
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background-color: #10b981;
+  vertical-align: middle;
+}
+
+.term-cli-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  flex-grow: 1;
+  font-family: inherit;
+  font-size: inherit;
+  caret-color: #10b981;
 }
 
 @keyframes termBlink {
@@ -82,5 +121,6 @@
   .terminal-body {
     font-size: 0.9rem;
     padding: 16px;
+    height: 350px;
   }
 }

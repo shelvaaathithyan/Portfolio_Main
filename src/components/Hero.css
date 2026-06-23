@@ -141,17 +141,42 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .primary-btn {
   background: #ffffff;
   color: #000000;
   border: none;
+  z-index: 1;
+}
+
+/* Subtle shine sweep */
+.primary-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+  z-index: -1;
+}
+
+.primary-btn:hover::after {
+  animation: shineSweep 0.6s ease-in-out;
+}
+
+@keyframes shineSweep {
+  100% { left: 200%; }
 }
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+  box-shadow: 0 10px 20px rgba(255,255,255,0.2);
 }
 
 .secondary-btn {
@@ -159,12 +184,14 @@
   color: #ffffff;
   border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
 .secondary-btn:hover {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 0 20px rgba(255,255,255,0.05);
+  /* Animated border glow equivalent via box-shadow */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 

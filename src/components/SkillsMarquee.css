@@ -1,0 +1,46 @@
+.skills-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(20, 20, 20, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 0;
+  display: flex;
+  white-space: nowrap;
+  position: relative;
+  z-index: 10;
+}
+
+.skills-marquee-track {
+  display: flex;
+  align-items: center;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.skills-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  padding: 0 2rem;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.marquee-item:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.marquee-separator {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); } /* Since we repeated 3 times */
+}

@@ -4,7 +4,9 @@ import './App.css';
 
 import MainScreen from './components/MainScreen';
 import LoadingScreen from './components/LoadingScreen';
-import LightRays from './components/LightRays';
+import NeuralNetwork from './components/NeuralNetwork';
+import Spotlight from './components/Spotlight';
+import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <LightRays />
+      <NeuralNetwork />
+      <Spotlight />
+      <ScrollProgress />
       <Navbar />
       <Routes>
         <Route path="/" element={<MainScreen />} />

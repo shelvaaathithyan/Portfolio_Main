@@ -70,6 +70,16 @@ const Navbar = () => {
   return (
     <div ref={containerRef} className="navbar-wrapper">
       <div className="navbar-container">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="navbar-video-bg"
+        >
+          <source src="/black-hole.3840x2160.mp4" type="video/mp4" />
+        </video>
+
         <Link to="/" className="navbar-logo">
           PORTFOLIO
         </Link>

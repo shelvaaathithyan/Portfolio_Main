@@ -39,6 +39,21 @@ const About = () => {
           <p className="about-text">
             I specialize in bridging the gap between complex machine learning models and intuitive user interfaces. My goal is to build digital experiences that are not just highly performant, but genuinely useful.
           </p>
+
+          <div className="about-stats">
+            <div className="about-stat-item">
+              <span className="stat-number key-text text-blue">10+</span>
+              <span className="stat-label">Projects Built</span>
+            </div>
+            <div className="about-stat-item">
+              <span className="stat-number key-text text-blue">15+</span>
+              <span className="stat-label">Technologies Used</span>
+            </div>
+            <div className="about-stat-item">
+              <span className="stat-number key-text text-blue">3+</span>
+              <span className="stat-label">Years Learning</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,20 +1,26 @@
 import React from 'react';
 import Hero from './Hero';
-import SkillsMarquee from './SkillsMarquee';
+import FeaturedProject from './FeaturedProject';
 import About from './About';
+import Journey from './Journey';
+import Terminal from './Terminal';
 import Skills from './Skills';
 import Projects from './Projects';
 import Contact from './Contact';
+import Footer from './Footer';
 
 const MainScreen = () => {
   return (
-    <div className="main-layout" style={{ position: 'relative', pointerEvents: 'auto' }}>
+    <div className="main-layout" style={{ position: 'relative', pointerEvents: 'auto', zIndex: 1 }}>
       <Hero />
-      <SkillsMarquee />
+      <FeaturedProject />
       <About />
+      <Journey />
+      <Terminal />
       <Skills />
       <Projects />
       <Contact />
+      <Footer />
     </div>
   );
 };

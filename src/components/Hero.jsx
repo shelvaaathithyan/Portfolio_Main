@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { useGSAP } from '@gsap/react';
 import { FiDownload, FiMail, FiMapPin, FiBriefcase, FiCheckCircle } from 'react-icons/fi';
+import NeuralSphere from './NeuralSphere';
 import './Hero.css';
 
 gsap.registerPlugin(TextPlugin);
@@ -105,7 +106,8 @@ const Hero = () => {
 
   return (
     <section className="hero-section" ref={heroRef}>
-      <div className="hero-container">
+      <NeuralSphere />
+      <div className="hero-container" style={{ position: 'relative', zIndex: 10 }}>
         
         {/* Left Content */}
         <div className="hero-left">

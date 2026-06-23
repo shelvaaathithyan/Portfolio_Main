@@ -1,0 +1,95 @@
+/* Journey.css */
+.journey-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 4rem auto 0 auto;
+  padding: 2rem 0;
+}
+
+.journey-line-bg {
+  position: absolute;
+  top: 0;
+  left: 20px; /* Offset for the vertical line */
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.journey-line-fill {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 2px;
+  height: 0%;
+  background: linear-gradient(to bottom, var(--accent-color), #fff);
+  box-shadow: 0 0 10px var(--accent-color);
+  z-index: 1;
+}
+
+.journey-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 4rem;
+}
+
+.journey-item:last-child {
+  margin-bottom: 0;
+}
+
+.journey-node {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid var(--accent-color);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.journey-item:hover .journey-node {
+  background: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-color);
+  transform: scale(1.2);
+}
+
+.journey-content {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.journey-item:hover .journey-content {
+  transform: translateX(10px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.journey-year {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.journey-item-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.journey-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .journey-timeline {
+    margin-left: 0;
+  }
+}

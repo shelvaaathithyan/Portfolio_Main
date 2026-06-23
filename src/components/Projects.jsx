@@ -98,6 +98,19 @@ const Projects = () => {
             </div>
           ))}
         </div>
+        
+        {/* Explore More Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '6rem', paddingBottom: '1rem', width: '100%', clear: 'both', position: 'relative' }}>
+          <a 
+            href="https://github.com/shelvaaathithyan?tab=repositories" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn-outline"
+            style={{ fontSize: '1.1rem', padding: '12px 32px', backgroundColor: 'var(--bg-primary)' }}
+          >
+            <FaGithub size={20} /> Explore More
+          </a>
+        </div>
       </div>
     </section>
   );

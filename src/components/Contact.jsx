@@ -87,13 +87,13 @@ const Contact = () => {
             </h2>
             
             <div className="contact-buttons">
-              <a href="mailto:hello@shelvaaathithyan.com" className="contact-btn email-btn">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shelvaaathithyan@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-btn email-btn">
                 <FiMail className="contact-icon" /> Email Me
               </a>
-              <a href="#" className="contact-btn linkedin-btn">
+              <a href="https://www.linkedin.com/in/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-btn linkedin-btn">
                 <FiLinkedin className="contact-icon" /> LinkedIn
               </a>
-              <a href="#" className="contact-btn github-btn">
+              <a href="https://github.com/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-btn github-btn">
                 <FiGithub className="contact-icon" /> GitHub
               </a>
             </div>

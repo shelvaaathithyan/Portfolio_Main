@@ -28,6 +28,7 @@
   font-weight: 400;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 15px rgba(125, 211, 252, 0.25);
+  margin-right: -2px; /* Compensates for key-text letter spacing */
 }
 
 .journey-stat-label {

@@ -85,7 +85,7 @@ const Navbar = () => {
         
         <div className="navbar-logo-container" onClick={(e) => handleLinkClick(e, '#home')} style={{ cursor: 'pointer' }}>
           <span className="navbar-logo">SHELVAAATHITHYAN VK</span>
-          <span className="navbar-subtitle">AI Engineer</span>
+          <span className="navbar-subtitle">Developer</span>
         </div>
 
         {/* Desktop Links */}

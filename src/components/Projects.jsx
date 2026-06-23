@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { FiGithub } from 'react-icons/fi';
+import { FaGithub } from 'react-icons/fa';
 import './SectionStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -83,7 +83,7 @@ const Projects = () => {
                 <div className="project-overlay">
                   <span className="project-context text-white">{project.context}</span>
                   <a href={project.link || "#"} target="_blank" rel="noopener noreferrer" className="project-github-link">
-                    <FiGithub size={36} />
+                    <FaGithub size={36} />
                   </a>
                 </div>
               </div>

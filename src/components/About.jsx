@@ -31,7 +31,7 @@ const About = () => {
         <h2 className="section-title key-text text-white">About Me</h2>
         
         <div className="about-content">
-          <h3 className="about-subtitle text-blue">Who I Am</h3>
+          <h3 className="about-subtitle text-blue">Who I Am!?</h3>
           <p className="about-text">
             I am an AI/ML student at PSG College of Technology, passionate about intelligent systems, web applications and real-world problem solving.
           </p>

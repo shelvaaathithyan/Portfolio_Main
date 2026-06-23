@@ -1,0 +1,279 @@
+.elias-app-wrapper {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+/* Sidebar */
+.elias-sidebar {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding-top: 0;
+}
+
+.sidebar-line {
+  width: 1px;
+  height: 25vh;
+  background-color: var(--border-color);
+  margin-bottom: 20px;
+}
+
+.elias-sidebar a {
+  color: var(--text-secondary);
+  font-size: 24px;
+  margin: 10px 0;
+  transition: 0.3s;
+}
+
+.elias-sidebar a:hover {
+  color: var(--accent-color);
+}
+
+/* Main Content Area */
+.elias-main-content {
+  flex: 1;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 50px);
+}
+
+/* Navbar */
+.elias-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 60px;
+}
+
+.elias-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo-icon {
+  font-size: 24px;
+}
+
+.elias-nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.elias-nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.elias-nav-links a:hover, .elias-nav-links a.active {
+  color: var(--text-primary);
+}
+
+.hash {
+  color: var(--accent-color);
+}
+
+/* Hero Section */
+.elias-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-headline {
+  font-size: 32px;
+  line-height: 1.4;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.highlight {
+  color: var(--accent-color);
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.contact-btn {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--accent-color);
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+.contact-btn:hover {
+  background: rgba(199, 120, 221, 0.1);
+}
+
+/* Hero Visual */
+.hero-visual {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 400px;
+}
+
+.visual-background {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.hero-image {
+  max-height: 400px;
+  z-index: 2;
+  /* Masking the bottom for effect if needed */
+  filter: grayscale(100%);
+}
+
+.status-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  background: #282c33;
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-color);
+  display: inline-block;
+}
+
+.highlight-text {
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* Quote Section */
+.elias-quote-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.quote-container {
+  border: 1px solid var(--border-color);
+  padding: 30px;
+  position: relative;
+  max-width: 600px;
+}
+
+.quote-text {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.quote-mark {
+  position: absolute;
+  background: var(--bg-color);
+  padding: 0 10px;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--text-secondary);
+}
+
+.top-mark {
+  top: -20px;
+  left: 20px;
+}
+
+.bottom-mark {
+  bottom: -20px;
+  right: 20px;
+}
+
+.quote-author {
+  position: absolute;
+  bottom: -40px;
+  right: 0;
+  border: 1px solid var(--border-color);
+  padding: 10px 20px;
+  border-top: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .elias-sidebar {
+    display: none; /* Hide vertical sidebar on smaller screens */
+  }
+  
+  .elias-main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .elias-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-visual {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .elias-navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .elias-nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .hero-headline {
+    font-size: 26px;
+  }
+  
+  .quote-text {
+    font-size: 16px;
+  }
+}

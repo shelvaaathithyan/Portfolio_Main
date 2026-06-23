@@ -1,0 +1,59 @@
+.elias-contacts-section {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.contacts-content {
+  display: flex;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.contacts-text {
+  flex: 1;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.contacts-box-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contacts-box {
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  width: fit-content;
+}
+
+.contacts-box-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--text-secondary);
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.contact-icon {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .contacts-content {
+    flex-direction: column;
+  }
+  .contacts-box-container {
+    justify-content: flex-start;
+  }
+}

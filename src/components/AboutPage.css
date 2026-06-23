@@ -1,0 +1,47 @@
+.about-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.fun-facts-section {
+  margin-top: 100px;
+  margin-bottom: 80px;
+}
+
+.fun-facts-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.facts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  flex: 2;
+}
+
+.fact-box {
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.facts-visual {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .fun-facts-content {
+    flex-direction: column;
+  }
+  .facts-visual {
+    justify-content: center;
+    margin-top: 30px;
+  }
+}

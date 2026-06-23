@@ -1,22 +1,9 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import About from './About';
-import Experience from './Experience';
-import Portfolio from './Portfolio';
-import Blog from './Blog';
-import Footer from './Footer';
 
 const MainScreen = () => {
   return (
-    <div className="main-layout" style={{ position: 'relative' }}>
-      <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Portfolio />
-      <Blog />
-      <Footer />
+    <div className="main-layout" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+      <h1 className="key-text text-white" style={{ fontSize: '4rem', opacity: 0.1 }}>MAIN SCREEN</h1>
     </div>
   );
 };

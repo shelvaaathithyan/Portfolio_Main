@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import ProjectsPage from './components/ProjectsPage';
-import AboutPage from './components/AboutPage';
+import MainScreen from './components/MainScreen';
 import LoadingScreen from './components/LoadingScreen';
 import LightRays from './components/LightRays';
+import Navbar from './components/Navbar';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,15 +15,13 @@ function App() {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <LightRays />
-      <BrowserRouter>
-        <Routes>
-          <Route path="projects" element={<ProjectsPage />} />
-          <Route path="about" element={<AboutPage />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<MainScreen />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

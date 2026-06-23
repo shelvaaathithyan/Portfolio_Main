@@ -9,8 +9,9 @@
   --bg-color: #000000;
   --text-primary: #ffffff;
   --text-secondary: #abb2bf;
-  --accent-color: #c778dd;
+  --accent-color: #3b82f6; /* Bright dodger blue from reference */
   --border-color: #abb2bf;
+  --font-major: 'Anton', sans-serif;
 }
 
 body {
@@ -24,6 +25,23 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
+}
+
+/* Key Text Styles based on reference images */
+.key-text {
+  font-family: var(--font-major);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  font-weight: 400; /* Anton is naturally bold */
+}
+
+.text-blue {
+  color: var(--accent-color);
+}
+
+.text-white {
+  color: var(--text-primary);
 }
 
 /* Base button styles */

@@ -3,13 +3,25 @@
   position: relative;
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(10, 10, 15, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   font-family: 'Fira Code', 'Consolas', monospace;
+  transition: max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.terminal-window.mv-expanded {
+  max-width: 1000px;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.terminal-window.mv-expanded .term-title {
+  color: #3b82f6;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
 }
 
 .terminal-header {
@@ -198,3 +210,18 @@
     height: 160px;
   }
 }
+
+.terminal-body { transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1); } 
+.terminal-window.mv-expanded .terminal-body { height: 600px; max-height: 600px; }
+
+.term-help-container { margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.4; }
+.help-title { color: #FFFFFF; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 8px; }
+.help-divider { color: #444; margin-bottom: 16px; user-select: none; }
+.help-section-header { margin-bottom: 12px; font-weight: bold; letter-spacing: 1px; }
+.help-grid { display: grid; grid-template-columns: 1fr 1fr; row-gap: 8px; column-gap: 16px; max-width: 400px; }
+.help-cmd { transition: filter 0.2s ease; cursor: default; }
+.help-cmd:hover { filter: brightness(1.5); }
+.help-cmd.core { color: #3b82f6; }
+.help-cmd.proto { color: #FF4D4D; }
+.help-cursor { margin-left: 8px; animation: helpBlink 1s step-end infinite; }
+@keyframes helpBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }

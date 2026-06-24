@@ -124,11 +124,11 @@
   color: #fff;
   font-size: 1.8rem;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1003;
   pointer-events: auto;
 }
 
-/* Mobile Drawer - Slide from top */
+/* Mobile Drawer */
 .mobile-drawer {
   position: fixed;
   top: 0;
@@ -136,37 +136,74 @@
   width: 100%;
   height: 100vh;
   background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   z-index: 999;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  transform: translateY(-100%);
-  opacity: 0;
+  align-items: flex-start;
   pointer-events: auto;
+  overflow-y: auto;
+}
+
+.mobile-drawer-content {
+  width: 100%;
+  max-width: 500px;
+  padding: 110px 24px 40px 24px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100%;
+}
+
+.mobile-drawer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(77, 163, 255, 0.15);
+  margin-bottom: 32px;
+  transform-origin: left;
 }
 
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  align-items: center;
+  gap: 14px;
+  width: 100%;
+  flex-grow: 1;
 }
 
-.mobile-nav-link {
-  font-family: var(--font-body);
-  font-size: 2rem;
-  font-weight: 600;
+.mobile-nav-card {
   text-decoration: none;
-  color: #fff;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(77, 163, 255, 0.15);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
 
-.mobile-nav-link:hover {
+.mobile-nav-card:active, .mobile-nav-card:hover {
+  transform: scale(1.03);
+  border-color: rgba(77, 163, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 15px rgba(77, 163, 255, 0.15);
+}
+
+.mobile-card-title {
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.mobile-card-subtitle {
   color: #7dd3fc;
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
 @media (max-width: 992px) {

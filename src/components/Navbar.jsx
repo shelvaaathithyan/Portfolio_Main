@@ -8,11 +8,11 @@ import './Navbar.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
-  { name: 'Home', path: '#home' },
-  { name: 'About', path: '#about' },
-  { name: 'Projects', path: '#projects' },
-  { name: 'Journey', path: '#journey' },
-  { name: 'Contact', path: '#contact' }
+  { name: 'HOME', subtitle: 'Main Dashboard', path: '#home' },
+  { name: 'ABOUT', subtitle: 'Personal Profile', path: '#about' },
+  { name: 'PROJECTS', subtitle: 'Build Archive', path: '#projects' },
+  { name: 'JOURNEY', subtitle: 'Career Timeline', path: '#journey' },
+  { name: 'CONTACT', subtitle: 'Communication Hub', path: '#contact' }
 ];
 
 const Navbar = () => {
@@ -39,28 +39,33 @@ const Navbar = () => {
 
   useGSAP(() => {
     if (isMobileMenuOpen) {
-      // Animate mobile drawer opening with fade + slide
+      gsap.set(mobileDrawerRef.current, { visibility: 'visible' });
       gsap.to(mobileDrawerRef.current, {
-        y: '0%',
         opacity: 1,
-        duration: 0.6,
+        duration: 0.4,
         ease: 'power3.out'
       });
-      // Animate links
+      
+      gsap.fromTo('.mobile-drawer-divider',
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.1 }
+      );
+      
       gsap.fromTo(mobileLinksRef.current, 
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.2, ease: 'power2.out' }
+        { x: 30, y: 30, opacity: 0 },
+        { x: 0, y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.1, ease: 'power3.out' }
       );
     } else {
-      // Animate drawer closing with fade + slide
       gsap.to(mobileDrawerRef.current, {
-        y: '-100%',
         opacity: 0,
-        duration: 0.5,
-        ease: 'power3.in'
+        duration: 0.4,
+        ease: 'power3.in',
+        onComplete: () => {
+          gsap.set(mobileDrawerRef.current, { visibility: 'hidden' });
+        }
       });
     }
-  }, [isMobileMenuOpen]);
+  }, { dependencies: [isMobileMenuOpen] });
 
   // Accessibility: Handle ESC key and body scroll lock
   useEffect(() => {
@@ -120,7 +125,7 @@ const Navbar = () => {
               className="navbar-link"
               onClick={(e) => handleLinkClick(e, item.path)}
             >
-              {item.name}
+              {item.name === 'HOME' ? 'Home' : item.name === 'ABOUT' ? 'About' : item.name === 'PROJECTS' ? 'Projects' : item.name === 'JOURNEY' ? 'Journey' : 'Contact'}
             </a>
           ))}
         </div>
@@ -131,26 +136,29 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Drawer (Slides from top) */}
+      {/* Mobile Drawer */}
       <div 
         ref={mobileDrawerRef} 
         className="mobile-drawer"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) setIsMobileMenuOpen(false);
-        }}
+        style={{ visibility: 'hidden', opacity: 0 }}
       >
-        <div className="mobile-nav-links">
-          {navItems.map((item, index) => (
-            <a 
-              key={index} 
-              href={item.path} 
-              className="mobile-nav-link"
-              onClick={(e) => handleLinkClick(e, item.path)}
-              ref={el => mobileLinksRef.current[index] = el}
-            >
-              {item.name}
-            </a>
-          ))}
+        <div className="mobile-drawer-content">
+          <div className="mobile-drawer-divider"></div>
+
+          <div className="mobile-nav-links">
+            {navItems.map((item, index) => (
+              <a 
+                key={index} 
+                href={item.path} 
+                className="mobile-nav-card"
+                onClick={(e) => handleLinkClick(e, item.path)}
+                ref={el => mobileLinksRef.current[index] = el}
+              >
+                <div className="mobile-card-title">{item.name}</div>
+                <div className="mobile-card-subtitle">{item.subtitle}</div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>

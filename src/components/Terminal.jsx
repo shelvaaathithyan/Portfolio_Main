@@ -4,31 +4,42 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './Terminal.css';
 import './SectionStyles.css';
+import MultiverseDatabase from './MultiverseDatabase';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const COMMANDS = {
   help: () => (
-    <div style={{ marginBottom: '1rem' }}>
-      <div style={{ color: '#adb5bd', marginBottom: '0.5rem' }}>Available Commands:</div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', color: 'var(--accent-color, #3b82f6)', maxWidth: '400px' }}>
-        <div>whoami</div><div>skills</div>
-        <div>projects</div><div>experience</div>
-        <div>education</div><div>achievements</div>
-        <div>contact</div><div>visionbite</div>
-        <div>repora</div><div>locoml</div>
-        <div>resume</div><div>clear</div>
-        <div>help</div>
-      </div>
+    <div className="term-help-container">
+      <div className="help-title">COMMAND DATABASE</div>
+      <div className="help-divider">────────────────────────────────</div>
       
-      <div style={{ marginTop: '1.5rem', marginBottom: '1rem', color: '#3b82f6', fontWeight: 'bold' }}>━━━━━━━━━━━━━━━━━━</div>
-      <div style={{ color: '#adb5bd', marginBottom: '0.5rem' }}>Hidden Protocols</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <div className="classified-cmd">spider</div>
-        <div className="classified-cmd">ironman</div>
-        <div className="classified-cmd">thor</div>
+      <div className="help-section-header" style={{ color: '#8A8A8A' }}>CORE COMMANDS</div>
+      <div className="help-grid">
+        <div className="help-cmd core">whoami</div><div className="help-cmd core">skills</div>
+        <div className="help-cmd core">projects</div><div className="help-cmd core">experience</div>
+        <div className="help-cmd core">education</div><div className="help-cmd core">achievements</div>
+        <div className="help-cmd core">contact</div><div className="help-cmd core">visionbite</div>
+        <div className="help-cmd core">repora</div><div className="help-cmd core">locoml</div>
+        <div className="help-cmd core">resume</div><div className="help-cmd core">clear</div>
+        <div className="help-cmd core">help</div>
       </div>
-      <div style={{ marginTop: '1rem', color: '#3b82f6', fontWeight: 'bold' }}>━━━━━━━━━━━━━━━━━━</div>
+
+      <div className="help-section-header" style={{ color: '#FF4D4D', marginTop: '16px' }}>PROTOCOLS</div>
+      <div className="help-grid">
+        <div className="help-cmd proto">spider</div><div className="help-cmd proto">ironman</div>
+        <div className="help-cmd proto">thor</div><div className="help-cmd proto">multiverse</div>
+      </div>
+
+      <div className="help-divider" style={{ marginTop: '16px' }}>────────────────────────────────</div>
+
+      <div className="help-status-header" style={{ color: '#00D4AA', marginBottom: '8px' }}>STATUS:</div>
+      <div style={{ color: '#4DA3FF', marginBottom: '4px' }}>13 COMMANDS AVAILABLE</div>
+      <div style={{ color: '#FF4D4D', marginBottom: '16px' }}>4 HIDDEN PROTOCOLS DETECTED</div>
+      
+      <div style={{ color: '#00D4AA', display: 'flex', alignItems: 'center' }}>
+        SYSTEM STATUS: ONLINE <span className="help-cursor">█</span>
+      </div>
     </div>
   ),
   whoami: () => (
@@ -164,6 +175,7 @@ const parseCommand = (rawInput) => {
   if (input === 'spider') return 'spider';
   if (input === 'ironman') return 'ironman';
   if (input === 'thor') return 'thor';
+  if (input === 'multiverse') return 'multiverse';
   
   // Fuzzy match
   if (input.includes('visionbite')) return 'visionbite';
@@ -194,6 +206,7 @@ const Terminal = () => {
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [easterEggType, setEasterEggType] = useState(null);
+  const [multiverseState, setMultiverseState] = useState('idle');
   const [scanBars, setScanBars] = useState([
     { label: "AI ENGINEERING", value: 95, current: 0 },
     { label: "RESEARCH", value: 93, current: 0 },
@@ -295,6 +308,33 @@ const Terminal = () => {
       .to('.protocol-layer', { opacity: 0, duration: 0.5 }, 5.1);
   };
 
+  const runMultiverseSequence = async (cmdString) => {
+    setCmdHistory(prev => [...prev, cmdString]);
+    setInput('');
+    setHistory(prev => [...prev, { command: cmdString, component: null, isBoot: false }]);
+    setMultiverseState('booting');
+    
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    
+    await wait(200);
+    setHistory(prev => [...prev, { command: '', component: <div className="text-blue">ACCESSING MULTIVERSE DATABASE...</div>, isBoot: false }]);
+    await wait(600);
+    
+    setHistory(prev => [...prev, { command: '', component: <div>Establishing Quantum Link... <span className="status-green">[██████████████] 100%</span></div>, isBoot: false }]);
+    await wait(600);
+    
+    setHistory(prev => [...prev, { command: '', component: <div>Scanning Alternate Timelines... <span className="status-green">[██████████████] 100%</span></div>, isBoot: false }]);
+    await wait(600);
+    
+    setHistory(prev => [...prev, { command: '', component: <div className="text-blue">5 TIMELINES DETECTED</div>, isBoot: false }]);
+    await wait(600);
+    
+    setHistory(prev => [...prev, { command: '', component: <div className="text-blue">Opening Database...</div>, isBoot: false }]);
+    await wait(400);
+
+    setMultiverseState('active');
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -322,6 +362,9 @@ const Terminal = () => {
           isBoot: false 
         }]);
         setTimeout(() => runEasterEggSequence(parsed), 250);
+        return;
+      } else if (parsed === 'multiverse') {
+        runMultiverseSequence(trimmed);
         return;
       } else if (parsed === 'not_found') {
         outputComponent = (
@@ -378,7 +421,7 @@ const Terminal = () => {
   return (
     <section className="portfolio-section terminal-section" id="terminal" ref={terminalRef}>
       <div className="section-container terminal-container">
-        <div className="terminal-window">
+        <div className={`terminal-window ${multiverseState === 'active' ? 'mv-expanded' : ''}`}>
           
           {/* Simple Easter Egg Layer */}
           <div className="protocol-layer">
@@ -400,10 +443,20 @@ const Terminal = () => {
             <div className="term-btn term-close"></div>
             <div className="term-btn term-min"></div>
             <div className="term-btn term-max"></div>
-            <div className="term-title">guest@shelvaaathithyan:~</div>
+            <div className="term-title">
+              {multiverseState === 'active' ? 'MULTIVERSE DATABASE' : 'guest@shelvaaathithyan:~'}
+            </div>
           </div>
           
           <div className="terminal-body" ref={bodyRef} onClick={handleBodyClick}>
+            {multiverseState === 'active' ? (
+              <MultiverseDatabase onClose={() => {
+                setMultiverseState('idle');
+                setHistory(prev => [...prev, { command: '', component: <div className="status-green" style={{marginTop: '1rem'}}>Multiverse session terminated. Restoring Earth-616 console...</div>, isBoot: false }]);
+                setTimeout(() => { if(inputRef.current) inputRef.current.focus(); }, 100);
+              }} />
+            ) : (
+              <>
             
             <div className="terminal-history-container">
               {history.map((entry, idx) => (
@@ -442,6 +495,8 @@ const Terminal = () => {
               </div>
             )}
             
+              </>
+            )}
           </div>
         </div>
       </div>

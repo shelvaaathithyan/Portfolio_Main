@@ -201,11 +201,9 @@ const Hero = ({ onOpenSimulation }) => {
             <div className="orbit-badge badge-1" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
               <img src="/react logo.png" alt="React" decoding="async" loading="lazy" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(97, 218, 251, 0.4))' }} />
             </div>
-            {!isMobile && (
-              <div className="orbit-badge badge-2" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
-                <img src="/node logo.png" alt="Node.js" decoding="async" loading="lazy" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(104, 160, 99, 0.4))' }} />
-              </div>
-            )}
+            <div className="orbit-badge badge-2" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
+              <img src="/node logo.png" alt="Node.js" decoding="async" loading="lazy" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(104, 160, 99, 0.4))' }} />
+            </div>
             {!isMobile && (
               <div className="orbit-badge badge-3" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0, backdropFilter: 'none' }}>
                 <img src="/mongodb-removebg-preview.png" alt="MongoDB" decoding="async" loading="lazy" style={{ width: '70px', height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 0 15px rgba(71, 162, 72, 0.4))' }} />

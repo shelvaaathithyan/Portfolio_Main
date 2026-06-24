@@ -317,6 +317,31 @@
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    padding-top: 100px; /* Reduced from 160px to keep content in view */
+  }
+
+  .profile-photo-wrapper {
+    width: 180px;
+    height: 180px;
+    box-shadow: 0 0 20px rgba(59,130,246,0.15);
+    border-radius: 50%;
+  }
+
+  .hero-greeting {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+  }
+
+  .hero-title {
+    margin-bottom: 12px;
+  }
+
+  .hero-typing-container {
+    margin-bottom: 1rem;
+  }
+
   .hero-cta-group {
     flex-wrap: wrap;
     gap: 12px;
@@ -340,4 +365,27 @@
     min-width: 220px;
     max-width: 280px;
   }
+
+  /* Orbit layout for mobile */
+  .profile-orbit-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .orbit-badge img {
+    opacity: 0.35;
+    transform: scale(0.7);
+    filter: blur(0.5px);
+  }
+
+  /* Specific close orbit positioning for mobile */
+  .badge-1 { top: 15%; left: 10%; animation: floatBadgeMobile 4s ease-in-out infinite 0s; }
+  .badge-2 { top: -5%; right: 25%; animation: floatBadgeMobile 4.5s ease-in-out infinite 1s; }
+  .badge-4 { top: 55%; left: 35%; animation: floatBadgeMobile 4.2s ease-in-out infinite 0.5s; }
+  .badge-5 { bottom: 0%; left: 5%; animation: floatBadgeMobile 4.8s ease-in-out infinite 1.5s; }
+}
+
+@keyframes floatBadgeMobile {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.02); }
 }

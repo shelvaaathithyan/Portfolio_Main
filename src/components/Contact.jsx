@@ -32,7 +32,7 @@ const filmData = [
   {
     id: 4,
     img: "/del.jpeg",
-    title: "PSG TECH : National Science Expo",
+    title: "National Science Expo",
     subtitle: "Mayoor School,Noida"
   }
 ];

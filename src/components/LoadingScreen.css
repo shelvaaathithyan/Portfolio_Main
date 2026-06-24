@@ -4,115 +4,36 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 1s ease-in-out, filter 1s ease-in-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.loading-container.fade-out {
-  opacity: 0;
-  filter: blur(10px);
-  transform: scale(1.05); 
   pointer-events: none;
+  background-color: transparent;
 }
 
-.vortex-canvas {
+.black-curtain {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  pointer-events: none;
+  background-color: #000000;
+  z-index: 0;
 }
 
-.absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-.glitch-wrapper {
+.gradient-orb {
   position: relative;
+  z-index: 1;
   width: 120px;
   height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 50%;
-}
-
-/* Phase 5: Core Pulse Activation */
-.core-pulse-active {
-  animation: core-pulse 4.5s infinite ease-in-out;
-}
-
-@keyframes core-pulse {
-  0%   { transform: scale(1); box-shadow: 0 0 40px rgba(77, 163, 255, 0.05); }
-  50%  { transform: scale(1.015); box-shadow: 0 0 80px rgba(77, 163, 255, 0.15); }
-  100% { transform: scale(1); box-shadow: 0 0 40px rgba(77, 163, 255, 0.05); }
-}
-
-.spider-logo {
-  width: 100%;
-  height: 100%;
-  background-image: url('/logo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: brightness(0) invert(1);
-  opacity: 1; 
-  position: relative;
-}
-
-/* Phase 4: Pre-Materialization state */
-.pre-materialize {
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 1) 0%, rgba(184, 225, 255, 0.9) 30%, rgba(126, 195, 255, 0.6) 60%, rgba(77, 163, 255, 0) 100%);
+  box-shadow: 
+    0 0 60px 20px rgba(77, 163, 255, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.8);
+  filter: blur(4px);
   opacity: 0;
-  transform: scale(0.9);
-  filter: brightness(0) invert(1) blur(8px);
-}
-
-.loading-text {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 4px;
-  font-weight: 500;
-  display: flex;
-}
-
-.slogan-char {
-  opacity: 0;
-  transform: translateY(4px);
-  display: inline-block;
-}
-
-.glow-text {
-  text-shadow: 0 0 10px rgba(110, 184, 255, 0.3);
-}
-
-.loading-text sup {
-  font-size: 0.6em;
-  vertical-align: super;
-}
-
-@media (max-width: 600px) {
-  .glitch-wrapper {
-    width: 80px;
-    height: 80px;
-  }
-  .loading-text {
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
+  transform: scale(0.8);
+  will-change: transform, opacity;
 }

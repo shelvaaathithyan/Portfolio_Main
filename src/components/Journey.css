@@ -202,7 +202,21 @@
 
 @media (max-width: 768px) {
   .journey-stats-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .journey-stat-card {
+    height: auto;
+    min-height: 100px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .journey-stat-value, .journey-stat-label {
+    white-space: normal;
+    word-wrap: break-word;
   }
   .journey-timeline-stack {
     padding-left: 30px;
@@ -221,5 +235,6 @@
   }
   .journey-card {
     padding: 1.5rem;
+    height: auto;
   }
 }

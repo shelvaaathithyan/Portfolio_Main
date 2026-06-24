@@ -398,11 +398,12 @@
   }
 
   .orbit-badge img {
-    opacity: 0.35;
-    transform: scale(0.65);
-    filter: blur(0.5px);
+    opacity: 0.85;
+    transform: scale(0.9);
     width: 100% !important;
     height: 100% !important;
+    /* Adding a subtle generic glow that stacks with the inline colored glow for extra pop */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
   }
 
   /* Symmetrical 6-Point Orbit (Radius ~110px) */
@@ -438,7 +439,7 @@
 @media (max-width: 380px) {
   /* Reduce badge size and radius even more */
   .orbit-badge img {
-    transform: scale(0.55);
+    transform: scale(0.75);
   }
   .badge-2 { top: calc(50% - 85px); left: 50%; }
   .badge-4 { top: calc(50% + 85px); left: 50%; }

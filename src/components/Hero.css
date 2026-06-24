@@ -318,28 +318,40 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: 100px; /* Reduced from 160px to keep content in view */
+    padding-top: 80px; /* Reduced further to pull content up */
+  }
+
+  .hero-left {
+    padding-top: 1rem; /* Pull text up closer to image */
   }
 
   .profile-photo-wrapper {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     box-shadow: 0 0 20px rgba(59,130,246,0.15);
     border-radius: 50%;
   }
 
   .hero-greeting {
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-size: 1.2rem;
+    margin-top: 10px; /* Reduced from 20px */
+    margin-bottom: 4px;
+    font-size: 1.1rem;
   }
 
   .hero-title {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    font-size: clamp(2.2rem, 8vw, 3rem);
   }
 
   .hero-typing-container {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    height: 2.2rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero-cta-group {
@@ -368,24 +380,75 @@
 
   /* Orbit layout for mobile */
   .profile-orbit-container {
-    width: 280px;
-    height: 280px;
+    width: 260px; /* Reduced to fit tighter orbit */
+    height: 260px;
+    margin: 0 auto;
+  }
+
+  .orbit-badge {
+    /* Center the badges relative to the container for easier absolute positioning */
+    transform-origin: center;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -25px; /* Offset half width */
+    margin-top: -25px; /* Offset half height */
   }
 
   .orbit-badge img {
     opacity: 0.35;
-    transform: scale(0.7);
+    transform: scale(0.65);
     filter: blur(0.5px);
+    width: 100% !important;
+    height: 100% !important;
   }
 
-  /* Specific close orbit positioning for mobile */
-  .badge-1 { top: 15%; left: 10%; animation: floatBadgeMobile 4s ease-in-out infinite 0s; }
-  .badge-2 { top: -5%; right: 25%; animation: floatBadgeMobile 4.5s ease-in-out infinite 1s; }
-  .badge-4 { top: 55%; left: 35%; animation: floatBadgeMobile 4.2s ease-in-out infinite 0.5s; }
-  .badge-5 { bottom: 0%; left: 5%; animation: floatBadgeMobile 4.8s ease-in-out infinite 1.5s; }
+  /* Symmetrical 6-Point Orbit (Radius ~110px) */
+  /* Top Center (Node.js - badge-2) */
+  .badge-2 { top: calc(50% - 110px); left: 50%; animation: floatBadgeMobile 4s ease-in-out infinite 0s; }
+  
+  /* Bottom Center (AI/ML - badge-4) */
+  .badge-4 { top: calc(50% + 110px); left: 50%; animation: floatBadgeMobile 4.2s ease-in-out infinite 0.5s; }
+  
+  /* Upper Left (React - badge-1) */
+  .badge-1 { top: calc(50% - 55px); left: calc(50% - 95px); animation: floatBadgeMobile 4.5s ease-in-out infinite 1s; }
+  
+  /* Upper Right (Firebase - badge-6) */
+  .badge-6 { top: calc(50% - 55px); left: calc(50% + 95px); animation: floatBadgeMobile 4.8s ease-in-out infinite 1.5s; }
+  
+  /* Lower Left (Python - badge-5) */
+  .badge-5 { top: calc(50% + 55px); left: calc(50% - 95px); animation: floatBadgeMobile 4.3s ease-in-out infinite 0.8s; }
+  
+  /* Lower Right (MongoDB - badge-3) */
+  .badge-3 { top: calc(50% + 55px); left: calc(50% + 95px); animation: floatBadgeMobile 4.6s ease-in-out infinite 1.2s; }
+}
+
+@media (max-width: 430px) {
+  /* Reduce orbit radius to ~95px to keep badges in viewport */
+  .badge-2 { top: calc(50% - 95px); left: 50%; }
+  .badge-4 { top: calc(50% + 95px); left: 50%; }
+  .badge-1 { top: calc(50% - 47px); left: calc(50% - 82px); }
+  .badge-6 { top: calc(50% - 47px); left: calc(50% + 82px); }
+  .badge-5 { top: calc(50% + 47px); left: calc(50% - 82px); }
+  .badge-3 { top: calc(50% + 47px); left: calc(50% + 82px); }
+}
+
+@media (max-width: 380px) {
+  /* Reduce badge size and radius even more */
+  .orbit-badge img {
+    transform: scale(0.55);
+  }
+  .badge-2 { top: calc(50% - 85px); left: 50%; }
+  .badge-4 { top: calc(50% + 85px); left: 50%; }
+  .badge-1 { top: calc(50% - 42px); left: calc(50% - 74px); }
+  .badge-6 { top: calc(50% - 42px); left: calc(50% + 74px); }
+  .badge-5 { top: calc(50% + 42px); left: calc(50% - 74px); }
+  .badge-3 { top: calc(50% + 42px); left: calc(50% + 74px); }
 }
 
 @keyframes floatBadgeMobile {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.02); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }

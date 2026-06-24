@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -39,9 +39,10 @@ const Navbar = () => {
 
   useGSAP(() => {
     if (isMobileMenuOpen) {
-      // Animate mobile drawer opening
+      // Animate mobile drawer opening with fade + slide
       gsap.to(mobileDrawerRef.current, {
         y: '0%',
+        opacity: 1,
         duration: 0.6,
         ease: 'power3.out'
       });
@@ -51,13 +52,35 @@ const Navbar = () => {
         { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.2, ease: 'power2.out' }
       );
     } else {
-      // Animate drawer closing
+      // Animate drawer closing with fade + slide
       gsap.to(mobileDrawerRef.current, {
         y: '-100%',
+        opacity: 0,
         duration: 0.5,
         ease: 'power3.in'
       });
     }
+  }, [isMobileMenuOpen]);
+
+  // Accessibility: Handle ESC key and body scroll lock
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isMobileMenuOpen]);
 
   const toggleMenu = () => {
@@ -109,7 +132,13 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer (Slides from top) */}
-      <div ref={mobileDrawerRef} className="mobile-drawer">
+      <div 
+        ref={mobileDrawerRef} 
+        className="mobile-drawer"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setIsMobileMenuOpen(false);
+        }}
+      >
         <div className="mobile-nav-links">
           {navItems.map((item, index) => (
             <a 

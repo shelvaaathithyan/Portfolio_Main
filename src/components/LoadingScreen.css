@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000; /* Pure black for cinematic effect */
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,8 +15,9 @@
 
 .loading-container.fade-out {
   opacity: 0;
-  filter: blur(20px);
-  transform: scale(1.1); /* Smooth cinematic zoom through the core */
+  filter: blur(10px);
+  transform: scale(1.05); 
+  pointer-events: none;
 }
 
 .vortex-canvas {
@@ -26,6 +27,7 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .absolute-center {
@@ -34,9 +36,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-}
-
-.loading-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,6 +49,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+}
+
+/* Phase 5: Core Pulse Activation */
+.core-pulse-active {
+  animation: core-pulse 4.5s infinite ease-in-out;
+}
+
+@keyframes core-pulse {
+  0%   { transform: scale(1); box-shadow: 0 0 40px rgba(77, 163, 255, 0.05); }
+  50%  { transform: scale(1.015); box-shadow: 0 0 80px rgba(77, 163, 255, 0.15); }
+  100% { transform: scale(1); box-shadow: 0 0 40px rgba(77, 163, 255, 0.05); }
 }
 
 .spider-logo {
@@ -59,72 +70,35 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* Base state: white/inverted to match energy */
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
-  opacity: 0; /* Handled by GSAP */
+  filter: brightness(0) invert(1);
+  opacity: 1; 
   position: relative;
 }
 
-/* Glitch Pseudo-elements */
-.glitch-effect::before,
-.glitch-effect::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: inherit;
-  background-size: inherit;
-  background-repeat: inherit;
-  background-position: inherit;
-  opacity: 0.8;
-  z-index: -1;
-}
-
-.glitch-effect::before {
-  left: 3px;
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
-  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
-}
-
-.glitch-effect::after {
-  left: -3px;
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
-  animation: glitch-anim-2 3s infinite linear alternate-reverse;
-}
-
-/* Aggressive slice and shift keyframes for scanline/glitch effect */
-@keyframes glitch-anim-1 {
-  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
-  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
-  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
-  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
-  80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
-  100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); }
-}
-
-@keyframes glitch-anim-2 {
-  0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 1px); }
-  20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, -1px); }
-  40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, 2px); }
-  60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, -2px); }
-  80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, 1px); }
-  100% { clip-path: inset(5% 0 80% 0); transform: translate(-1px, -1px); }
+/* Phase 4: Pre-Materialization state */
+.pre-materialize {
+  opacity: 0;
+  transform: scale(0.9);
+  filter: brightness(0) invert(1) blur(8px);
 }
 
 .loading-text {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 18px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 4px;
   font-weight: 500;
-  opacity: 0; /* Handled by GSAP */
+  display: flex;
 }
 
-/* Glowing text to match the bright core */
+.slogan-char {
+  opacity: 0;
+  transform: translateY(4px);
+  display: inline-block;
+}
+
 .glow-text {
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.4);
+  text-shadow: 0 0 10px rgba(110, 184, 255, 0.3);
 }
 
 .loading-text sup {

@@ -273,7 +273,7 @@ const Terminal = () => {
     
     // Initial Setup
     gsap.set('.protocol-layer', { opacity: 1 });
-    gsap.set('.easter-egg-wrapper', { opacity: 0, scale: 0.98, y: 0, x: 0 });
+    gsap.set('.easter-egg-wrapper', { opacity: 0, scale: 0.8, filter: 'blur(8px)' });
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -281,11 +281,17 @@ const Terminal = () => {
       }
     });
 
-    // Reveal GIF with scale and opacity
-    tl.to('.easter-egg-wrapper', { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 0);
+    // Reveal GIF smoothly
+    tl.to('.easter-egg-wrapper', { 
+      opacity: 1, 
+      scale: 1, 
+      filter: 'blur(0px)',
+      duration: 0.6, 
+      ease: "power3.out" 
+    }, 0);
 
     // Fade out everything after 5 seconds total
-    tl.to('.easter-egg-wrapper', { opacity: 0, scale: 0.98, duration: 0.5 }, 5.0)
+    tl.to('.easter-egg-wrapper', { opacity: 0, scale: 0.8, filter: 'blur(4px)', duration: 0.5 }, 5.0)
       .to('.protocol-layer', { opacity: 0, duration: 0.5 }, 5.1);
   };
 
@@ -315,7 +321,7 @@ const Terminal = () => {
           component: null, 
           isBoot: false 
         }]);
-        runEasterEggSequence(parsed);
+        setTimeout(() => runEasterEggSequence(parsed), 250);
         return;
       } else if (parsed === 'not_found') {
         outputComponent = (
@@ -378,7 +384,14 @@ const Terminal = () => {
           <div className="protocol-layer">
             <div className={`easter-egg-wrapper ${easterEggType || ''}`}>
               <div className="easter-egg-gif-container">
-                {easterEggType && <img src={`/${easterEggType}gif.gif`} alt="Core" className="easter-egg-core-hologram" />}
+                {easterEggType && (
+                  <img 
+                    src={`/${easterEggType}gif.gif`} 
+                    alt="Core" 
+                    className="easter-egg-core-hologram" 
+                    onError={() => console.error(`${easterEggType} GIF failed to load`)}
+                  />
+                )}
               </div>
             </div>
           </div>

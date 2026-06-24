@@ -8,25 +8,69 @@ const LoadingScreen = ({ onComplete }) => {
   const canvasRef = useRef(null);
   const logoRef = useRef(null);
   const textRef = useRef(null);
+  
+  // Track readiness
+  const minDurationReached = useRef(false);
+  const assetsLoaded = useRef(false);
+  const isCompleteTriggered = useRef(false);
 
-  // Animation state object for GSAP to tween smoothly
+  const checkCompletion = () => {
+    if (minDurationReached.current && assetsLoaded.current && !isCompleteTriggered.current) {
+      isCompleteTriggered.current = true;
+      setIsFadingOut(true);
+      setTimeout(() => {
+        if (onComplete) onComplete();
+      }, 1000); // 1s cinematic fade out
+    }
+  };
+
+  useEffect(() => {
+    // Phase 7 minimum duration hold (approx 5.5s total timeline duration)
+    // The timeline triggers checkCompletion exactly when it's ready.
+    
+    // Preload critical assets
+    const criticalImages = [
+      '/logo.png',
+      '/spidergif.gif',
+      '/csklogo.jpeg',
+      '/marvel.png',
+      '/thalapathy.png',
+      '/spidermangame.jpg',
+      '/ironmanmain.jpg',
+      '/badminton.png',
+      '/lego.png'
+    ];
+
+    let loadedCount = 0;
+    
+    const handleImageLoad = () => {
+      loadedCount++;
+      if (loadedCount >= criticalImages.length) {
+        assetsLoaded.current = true;
+        checkCompletion();
+      }
+    };
+
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.onload = handleImageLoad;
+      img.onerror = handleImageLoad; 
+      img.src = src;
+    });
+
+  }, []);
+
+  // Anim state object for GSAP to control the Canvas rendering loop
   const animState = useRef({
-    particleOpacity: 0,
-    speed: 0.002,
-    pull: 0,
-    radiusMultiplier: 1,
-    explosionVelocity: 0,
-    coreOpacity: 0,
-    logoScale: 1,
-    logoOpacity: 0,
-    textOpacity: 0
+    convergence: 0,
+    silhouetteAlpha: 0,
+    absorption: 0
   });
 
   useGSAP(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     
-    // Set canvas size and handle resizing
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -34,136 +78,224 @@ const LoadingScreen = ({ onComplete }) => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Initialize 400 vortex particles
-    const particleCount = 400;
+    // --- ORCHESTRATED TIMELINE ---
+    const tl = gsap.timeline({
+      onComplete: () => {
+        minDurationReached.current = true;
+        checkCompletion();
+      }
+    });
+
+    // Phase 1: 0 - 2s (Infinite Tunnel Running Normally, do nothing to vars)
+
+    // Phase 2: 2.0s - 3.0s (Particle Convergence)
+    tl.to(animState.current, { convergence: 1, duration: 1.0, ease: "power2.inOut" }, 2.0);
+
+    // Phase 3: 3.0s - 3.5s (Spider Silhouette Emerges Faintly)
+    tl.to(animState.current, { silhouetteAlpha: 0.3, duration: 0.5, ease: "power1.inOut" }, 3.0);
+
+    // Phase 4 Part A: 3.4s - 3.5s (Particle Absorption Burst - Sucks inward)
+    // Starting slightly before logo reveals
+    tl.to(animState.current, { absorption: 1, duration: 0.2, ease: "power4.in" }, 3.4);
+
+    // Phase 4 Part B: 3.5s - 4.3s (Logo Materialization)
+    tl.to(logoRef.current, { 
+      opacity: 1, 
+      scale: 1, 
+      filter: "brightness(0) invert(1) blur(0px)", 
+      duration: 0.8, 
+      ease: "power3.out" 
+    }, 3.5);
+
+    // Phase 6: 4.3s - 4.9s (Slogan Reveal)
+    tl.to(".slogan-char", {
+      opacity: 1,
+      y: 0,
+      duration: 0.12,
+      stagger: 0.08,
+      ease: "power2.out"
+    }, 4.3);
+
+    // Phase 7: Timeline completes ~5.3s, firing checkCompletion which holds for 1s then fades.
+
+    // --- INFINITE DATA TUNNEL ENGINE ---
     const particles = [];
+    const particleCount = 200; 
+    const fov = 400; 
+
     for (let i = 0; i < particleCount; i++) {
       particles.push({
-        angle: Math.random() * Math.PI * 2,
-        distance: Math.random() * Math.max(canvas.width, canvas.height) + 50,
-        baseSpeed: Math.random() * 0.8 + 0.2,
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.5
+        x: (Math.random() - 0.5) * window.innerWidth * 2.5,
+        y: (Math.random() - 0.5) * window.innerHeight * 2.5,
+        z: Math.random() * 2000,
+        speed: Math.random() * 2 + 1, 
+        baseSize: Math.random() * 1.5 + 0.5,
+        layer: Math.floor(Math.random() * 4),
+        // Angle for mathematical polar clustering
+        angle: Math.random() * Math.PI * 2
       });
     }
 
-    // High-performance canvas animation loop
     let animationFrameId;
+
     const render = () => {
+      ctx.fillStyle = `rgba(0, 0, 0, 0.3)`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
       const state = animState.current;
 
-      // Dark background with slight transparency to create light trails
-      ctx.fillStyle = `rgba(0, 0, 0, 0.15)`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      if (state.particleOpacity > 0 || state.explosionVelocity > 0) {
-        particles.forEach(p => {
-          // Update particle position based on vortex properties
-          p.angle += state.speed * p.baseSpeed;
-          p.distance -= state.pull * p.distance;
-          
-          if (state.explosionVelocity > 0) {
-            p.distance += state.explosionVelocity * p.baseSpeed;
-          }
-
-          const currentDist = p.distance * state.radiusMultiplier;
-          const x = cx + Math.cos(p.angle) * currentDist;
-          const y = cy + Math.sin(p.angle) * currentDist;
-
-          // Draw individual particle (electric blue)
-          ctx.beginPath();
-          ctx.arc(x, y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(59, 130, 246, ${p.alpha * state.particleOpacity})`;
-          ctx.fill();
-
-          // Connect nearby particles for a "web-like" energy effect
-          if (Math.random() > 0.95 && currentDist < 300) {
-            const connectP = particles[Math.floor(Math.random() * particleCount)];
-            const cx2 = cx + Math.cos(connectP.angle) * connectP.distance * state.radiusMultiplier;
-            const cy2 = cy + Math.sin(connectP.angle) * connectP.distance * state.radiusMultiplier;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(cx2, cy2);
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * state.particleOpacity})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      }
-
-      // Draw the bright core during collapse and explode phases
-      if (state.coreOpacity > 0) {
-        const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 200);
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${state.coreOpacity})`);
-        gradient.addColorStop(0.1, `rgba(59, 130, 246, ${state.coreOpacity * 0.9})`);
-        gradient.addColorStop(1, `rgba(0, 0, 0, 0)`);
+      for (let i = 0; i < particleCount; i++) {
+        const p = particles[i];
         
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 200, 0, Math.PI * 2);
-        ctx.fill();
-      }
+        // Move particle forward
+        let currentSpeed = p.speed * 4;
+        
+        // Phase 2: Slow down center particles during convergence
+        if (state.convergence > 0) {
+          currentSpeed = currentSpeed * (1 - (state.convergence * 0.8));
+        }
+        
+        p.z -= currentSpeed;
+        
+        // Rotation
+        const angleRot = 0.0005;
+        const nx = p.x * Math.cos(angleRot) - p.y * Math.sin(angleRot);
+        const ny = p.x * Math.sin(angleRot) + p.y * Math.cos(angleRot);
+        p.x = nx;
+        p.y = ny;
 
-      // Sync React element styles manually for better performance during GSAP tweening
-      if (logoRef.current) {
-        logoRef.current.style.opacity = state.logoOpacity;
-        logoRef.current.style.transform = `scale(${state.logoScale})`;
-      }
-      if (textRef.current) {
-        textRef.current.style.opacity = state.textOpacity;
+        if (p.z <= 1) {
+          p.z = 2000;
+          p.x = (Math.random() - 0.5) * window.innerWidth * 2.5;
+          p.y = (Math.random() - 0.5) * window.innerHeight * 2.5;
+          p.angle = Math.random() * Math.PI * 2;
+        }
+
+        let targetX = p.x;
+        let targetY = p.y;
+
+        // Phase 2/3: Mathematical Spider Silhouette Convergence
+        // A polar curve that roughly creates an 8-legged central core
+        if (state.convergence > 0 && p.layer >= 2) { 
+          // Only pull foreground layers to form silhouette
+          const r = 40 + 30 * Math.abs(Math.sin(p.angle * 4)); 
+          const idealX = r * Math.cos(p.angle) * (p.z / fov); // scale up based on depth so it matches screen size
+          const idealY = r * Math.sin(p.angle) * (p.z / fov);
+          
+          targetX = p.x + (idealX - p.x) * state.convergence;
+          targetY = p.y + (idealY - p.y) * state.convergence;
+        }
+
+        // Phase 4: Absorption Burst (Suck into exact center)
+        if (state.absorption > 0) {
+          targetX = targetX + (0 - targetX) * state.absorption;
+          targetY = targetY + (0 - targetY) * state.absorption;
+        }
+
+        const scale = fov / p.z;
+        const x2d = cx + targetX * scale;
+        const y2d = cy + targetY * scale;
+
+        let alpha = Math.min(1, (2000 - p.z) / 800); 
+        if (p.z < 200) {
+          alpha = p.z / 200; 
+        }
+
+        // Phase 3: Enhance alpha for the silhouette
+        if (state.silhouetteAlpha > 0 && p.layer >= 2 && state.absorption < 1) {
+          alpha = Math.max(alpha, state.silhouetteAlpha);
+        }
+
+        const colors = [
+          `rgba(77, 163, 255, ${alpha * 0.3})`,
+          `rgba(110, 184, 255, ${alpha * 0.5})`,
+          `rgba(159, 208, 255, ${alpha * 0.7})`,
+          `rgba(255, 255, 255, ${alpha})`
+        ];
+
+        // Draw particle
+        // Fade out entirely during absorption burst so logo takes over smoothly
+        const renderAlpha = Math.max(0, 1 - (state.absorption * 1.5));
+        
+        if (renderAlpha > 0) {
+          ctx.globalAlpha = renderAlpha;
+          ctx.fillStyle = colors[p.layer];
+          ctx.beginPath();
+          ctx.arc(x2d, y2d, p.baseSize * scale, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
+        }
+
+        // Neural Network Connections
+        if (p.z > 100 && p.z < 1000 && state.absorption < 0.5) {
+          for (let j = i + 1; j < particleCount; j++) {
+            const p2 = particles[j];
+            if (p2.z > 100 && p2.z < 1000) {
+              const dx = targetX - p2.x; // approximate distance
+              const dy = targetY - p2.y;
+              const dz = p.z - p2.z;
+              const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+              
+              if (dist < 120) {
+                const scale2 = fov / p2.z;
+                // If the second particle is also converging, we should approximate its target too
+                let targetX2 = p2.x;
+                let targetY2 = p2.y;
+                if (state.convergence > 0 && p2.layer >= 2) {
+                  const r2 = 40 + 30 * Math.abs(Math.sin(p2.angle * 4)); 
+                  const idealX2 = r2 * Math.cos(p2.angle) * (p2.z / fov);
+                  const idealY2 = r2 * Math.sin(p2.angle) * (p2.z / fov);
+                  targetX2 = p2.x + (idealX2 - p2.x) * state.convergence;
+                  targetY2 = p2.y + (idealY2 - p2.y) * state.convergence;
+                }
+
+                const x2d2 = cx + targetX2 * scale2;
+                const y2d2 = cy + targetY2 * scale2;
+                
+                ctx.globalAlpha = renderAlpha;
+                ctx.strokeStyle = `rgba(77, 163, 255, ${0.05 * alpha})`;
+                ctx.lineWidth = 0.5 * scale;
+                ctx.beginPath();
+                ctx.moveTo(x2d, y2d);
+                ctx.lineTo(x2d2, y2d2);
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+              }
+            }
+          }
+        }
       }
 
       animationFrameId = requestAnimationFrame(render);
     };
+    
     render();
-
-    // The Orchestrated GSAP Timeline (Total Duration: ~6 seconds)
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setIsFadingOut(true);
-        setTimeout(() => {
-          onComplete(); // Reveal main portfolio after 1s fade-out
-        }, 1000);
-      }
-    });
-
-    // Stage 1: Spider Appear with Glitch & Text Reveal (0s - 1.5s)
-    tl.to(animState.current, { logoOpacity: 1, duration: 1.5, ease: "power1.inOut" }, 0);
-    tl.to(animState.current, { textOpacity: 1, duration: 1.5, ease: "power1.inOut" }, 0.5);
-
-    // Stage 2: Energy Buildup & Vortex Formation (1.5s - 3.5s)
-    tl.to(animState.current, { particleOpacity: 1, duration: 2, ease: "power2.inOut" }, 1.5);
-    tl.to(animState.current, { speed: 0.04, duration: 2, ease: "power2.in" }, 1.5);
-
-    // Stage 3: Vortex Acceleration & Inward Pull (3.5s - 4.8s)
-    tl.to(animState.current, { speed: 0.2, pull: 0.02, duration: 1.3, ease: "power3.in" }, 3.5);
-    tl.to(logoRef.current, { filter: "brightness(2) invert(1) drop-shadow(0 0 25px #3B82F6)", duration: 1.3 }, 3.5);
-
-    // Stage 4: Transformation & Collapse (4.8s - 5.2s)
-    tl.to(animState.current, { pull: 0.2, radiusMultiplier: 0.05, logoScale: 0, coreOpacity: 1, duration: 0.4, ease: "power4.in" }, 4.8);
-    tl.to(animState.current, { textOpacity: 0, duration: 0.2 }, 4.8);
-
-    // Stage 5: Portfolio Reveal / Explode (5.2s - 5.7s)
-    tl.to(animState.current, { explosionVelocity: 60, coreOpacity: 0, particleOpacity: 0.8, duration: 0.5, ease: "power2.out" }, 5.2);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [onComplete]);
+  }, []);
 
   return (
     <div className={`loading-container ${isFadingOut ? 'fade-out' : ''}`}>
       <canvas ref={canvasRef} className="vortex-canvas" />
-      <div className="loading-content absolute-center">
-        <div className="glitch-wrapper">
-          {/* Using a div with background-image instead of <img> to support CSS pseudo-elements for the glitch effect */}
-          <div ref={logoRef} className="spider-logo glitch-effect" />
+      <div className="absolute-center">
+        <div className="glitch-wrapper core-pulse-active">
+          <div ref={logoRef} className="spider-logo pre-materialize" />
         </div>
         <div ref={textRef} className="loading-text glow-text">
-          w / G<sup>P</sup> &#8658; G<sup>R</sup>
+          <span className="slogan-char">W</span>
+          <span className="slogan-char">&nbsp;</span>
+          <span className="slogan-char">/</span>
+          <span className="slogan-char">&nbsp;</span>
+          <span className="slogan-char">G<sup>P</sup></span>
+          <span className="slogan-char">&nbsp;</span>
+          <span className="slogan-char">&#8658;</span>
+          <span className="slogan-char">&nbsp;</span>
+          <span className="slogan-char">G<sup>R</sup></span>
         </div>
       </div>
     </div>

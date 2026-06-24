@@ -7,6 +7,7 @@ import Terminal from './Terminal';
 import Skills from './Skills';
 import Projects from './Projects';
 import Contact from './Contact';
+import SideQuests from './SideQuests';
 import Footer from './Footer';
 import StickySectionNumbers from './StickySectionNumbers';
 
@@ -22,6 +23,7 @@ const MainScreen = () => {
       <FeaturedProject />
       <Projects />
       <Contact />
+      <SideQuests />
       <Footer />
     </div>
   );

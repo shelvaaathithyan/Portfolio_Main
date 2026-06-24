@@ -213,7 +213,7 @@ const Terminal = () => {
 
   const handleBodyClick = () => {
     if (inputRef.current && bootState === 'ready') {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
     }
   };
 
@@ -249,7 +249,7 @@ const Terminal = () => {
       
       await wait(500);
       setBootState('ready');
-      if (inputRef.current) inputRef.current.focus();
+      if (inputRef.current) inputRef.current.focus({ preventScroll: true });
     };
   }, { scope: terminalRef });
 
@@ -418,7 +418,6 @@ const Terminal = () => {
                   className="term-cli-input"
                   spellCheck="false"
                   autoComplete="off"
-                  autoFocus
                 />
               </div>
             )}

@@ -1,0 +1,66 @@
+.side-quests-section {
+  width: 100%;
+  padding: 1rem 0;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-quests-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.side-quests-heading {
+  font-family: var(--font-major);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.side-quests-marquee {
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  position: relative;
+  /* Soft fade edges */
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.side-quests-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.side-quest-img {
+  width: 70px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+  cursor: crosshair;
+}
+
+.side-quest-img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.08);
+  box-shadow: 0 0 12px var(--hover-glow);
+}

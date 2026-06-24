@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { useGSAP } from '@gsap/react';
-import { FiDownload, FiMail, FiMapPin, FiBriefcase, FiCheckCircle } from 'react-icons/fi';
+import { FiDownload, FiMail, FiMapPin, FiBriefcase, FiCheckCircle, FiPlay } from 'react-icons/fi';
 import NeuralSphere from './NeuralSphere';
 import { useMagnetic } from '../hooks/useMagnetic';
 import ResumeModal from './ResumeModal';
@@ -10,7 +10,7 @@ import './Hero.css';
 
 gsap.registerPlugin(TextPlugin);
 
-const Hero = () => {
+const Hero = ({ onOpenSimulation }) => {
   const heroRef = useRef(null);
   const primaryBtnRef = useMagnetic();
   const secondaryBtnRef = useMagnetic();
@@ -163,6 +163,15 @@ const Hero = () => {
             <button className="cta-btn secondary-btn" ref={secondaryBtnRef} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
               <FiMail className="btn-icon" />
               Get In Touch
+            </button>
+            <button 
+              className="cta-btn simulation-btn" 
+              onClick={onOpenSimulation}
+              onMouseEnter={(e) => gsap.to(e.currentTarget, { scale: 1.03, duration: 0.2 })}
+              onMouseLeave={(e) => gsap.to(e.currentTarget, { scale: 1, duration: 0.2 })}
+            >
+              <FiPlay className="btn-icon" />
+              Simulate Collaboration
             </button>
           </div>
         </div>

@@ -1,0 +1,285 @@
+.sim-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  opacity: 0;
+  display: none;
+  backdrop-filter: blur(10px);
+}
+
+.sim-close-icon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: transparent;
+  border: none;
+  color: #adb5bd;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 10px;
+}
+
+.sim-close-icon:hover {
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.sim-content-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  position: relative;
+}
+
+.sim-stage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.sim-title {
+  color: #adb5bd;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.sim-label {
+  color: #888;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.sim-scenario p, .sim-candidate p {
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.sim-status {
+  color: #10b981;
+  font-family: 'Fira Code', monospace;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.sim-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sim-checklist-item {
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.sim-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sim-progress-bar {
+  height: 4px;
+  background: #10b981;
+  transition: width 1s ease-in-out, background-color 1s ease, filter 1s ease;
+  border-radius: 2px;
+}
+
+.sim-progress-text {
+  color: #adb5bd;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  min-width: 40px;
+}
+
+.sim-continue-btn {
+  opacity: 0;
+  transform: translateY(20px);
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+.sim-primary-btn {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: #3b82f6;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.sim-primary-btn:hover {
+  background: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  color: #fff;
+}
+
+.sim-result-content {
+  max-width: 700px;
+}
+
+.sim-result-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sim-result-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sim-text-primary {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.sim-text-secondary {
+  color: #adb5bd;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.sim-strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.sim-strength-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sim-strength-icon {
+  color: #10b981;
+}
+
+.sim-disclaimer {
+  color: #888;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 2rem 0;
+  font-style: italic;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sim-action-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.sim-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.sim-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.sim-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sim-btn-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+}
+
+.sim-btn-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .sim-result-content {
+    padding-top: 80px;
+  }
+  
+  .sim-result-stack {
+    gap: 24px; /* Reduced vertical spacing */
+  }
+
+  .sim-strengths-grid {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on mobile as requested */
+  }
+
+  .sim-disclaimer {
+    max-width: 90%;
+    margin: 24px auto 16px auto;
+    font-size: 14px;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .sim-action-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .sim-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sim-close-icon {
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -9,9 +9,11 @@ import Spotlight from './components/Spotlight';
 import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
 import CommandPalette from './components/CommandPalette';
+import CollaborationSimulation from './components/CollaborationSimulation';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isSimulationOpen, setIsSimulationOpen] = useState(false);
 
   if (isLoading) {
     return <LoadingScreen onComplete={() => setIsLoading(false)} />;
@@ -24,8 +26,9 @@ function App() {
       <ScrollProgress />
       <Navbar />
       <CommandPalette />
+      <CollaborationSimulation isOpen={isSimulationOpen} onClose={() => setIsSimulationOpen(false)} />
       <Routes>
-        <Route path="/" element={<MainScreen />} />
+        <Route path="/" element={<MainScreen onOpenSimulation={() => setIsSimulationOpen(true)} />} />
       </Routes>
     </BrowserRouter>
   );

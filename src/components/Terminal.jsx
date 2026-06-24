@@ -176,6 +176,7 @@ const parseCommand = (rawInput) => {
   if (input === 'ironman') return 'ironman';
   if (input === 'thor') return 'thor';
   if (input === 'multiverse') return 'multiverse';
+  if (input === 'simulate' || input === 'collaborate') return 'simulate';
   
   // Fuzzy match
   if (input.includes('visionbite')) return 'visionbite';
@@ -195,7 +196,7 @@ const parseCommand = (rawInput) => {
   return 'not_found';
 };
 
-const Terminal = () => {
+const Terminal = ({ onOpenSimulation }) => {
   const terminalRef = useRef(null);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
@@ -435,6 +436,27 @@ const Terminal = () => {
         return;
       } else if (parsed === 'multiverse') {
         runMultiverseSequence(trimmed);
+        return;
+      } else if (parsed === 'simulate') {
+        setCmdHistory(prev => [...prev, trimmed]);
+        setInput('');
+        
+        // Output initialization sequence
+        const runSimSequence = async () => {
+          const wait = ms => new Promise(r => setTimeout(r, ms));
+          setHistory(prev => [...prev, { command: trimmed, component: null, isBoot: false }]);
+          await wait(300);
+          setHistory(prev => [...prev, { command: '', component: <div className="text-blue">Initializing Collaboration Engine...</div>, isBoot: false }]);
+          await wait(500);
+          setHistory(prev => [...prev, { command: '', component: <div>Loading Candidate Profile...</div>, isBoot: false }]);
+          await wait(500);
+          setHistory(prev => [...prev, { command: '', component: <div>Running Career Projection...</div>, isBoot: false }]);
+          await wait(600);
+          setHistory(prev => [...prev, { command: '', component: <div className="status-green">Launching Simulation...</div>, isBoot: false }]);
+          await wait(800);
+          if (onOpenSimulation) onOpenSimulation();
+        };
+        runSimSequence();
         return;
       } else if (parsed === 'not_found') {
         outputComponent = (

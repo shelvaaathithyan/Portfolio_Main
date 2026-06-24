@@ -11,14 +11,14 @@ import SideQuests from './SideQuests';
 import Footer from './Footer';
 import StickySectionNumbers from './StickySectionNumbers';
 
-const MainScreen = () => {
+const MainScreen = ({ onOpenSimulation }) => {
   return (
     <div className="main-layout" style={{ position: 'relative', pointerEvents: 'auto', zIndex: 1 }}>
       <StickySectionNumbers />
-      <Hero />
+      <Hero onOpenSimulation={onOpenSimulation} />
       <About />
       <Journey />
-      <Terminal />
+      <Terminal onOpenSimulation={onOpenSimulation} />
       <Skills />
       <FeaturedProject />
       <Projects />

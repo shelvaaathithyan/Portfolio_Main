@@ -307,12 +307,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+    justify-content: center;
+    justify-items: center;
   }
 
   .about-stat-item {
     height: auto;
     white-space: normal;
     word-wrap: break-word;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .about-stat-item:nth-child(3) {

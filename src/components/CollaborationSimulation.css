@@ -243,6 +243,11 @@
 }
 
 @media (max-width: 768px) {
+  .sim-modal-overlay {
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.98);
+  }
+
   .sim-result-content {
     padding-top: 80px;
   }

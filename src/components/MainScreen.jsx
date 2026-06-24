@@ -10,6 +10,7 @@ import Contact from './Contact';
 import SideQuests from './SideQuests';
 import Footer from './Footer';
 import StickySectionNumbers from './StickySectionNumbers';
+import LazyMount from './LazyMount';
 
 const MainScreen = ({ onOpenSimulation }) => {
   return (
@@ -20,10 +21,16 @@ const MainScreen = ({ onOpenSimulation }) => {
       <Journey />
       <Terminal onOpenSimulation={onOpenSimulation} />
       <Skills />
-      <FeaturedProject />
-      <Projects />
+      <LazyMount>
+        <FeaturedProject />
+      </LazyMount>
+      <LazyMount>
+        <Projects />
+      </LazyMount>
       <Contact />
-      <SideQuests />
+      <LazyMount>
+        <SideQuests />
+      </LazyMount>
       <Footer />
     </div>
   );

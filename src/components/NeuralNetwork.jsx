@@ -39,8 +39,10 @@ const NeuralNetwork = () => {
     resizeCanvas();
     
     // Node configuration
-    const numNodes = Math.floor(Math.random() * (40 - 25 + 1) + 25); // 25-40 nodes
-    const maxConnectionDistance = 200;
+    const isMobile = window.innerWidth < 768;
+    const baseNumNodes = Math.floor(Math.random() * (40 - 25 + 1) + 25); // 25-40 nodes
+    const numNodes = isMobile ? Math.floor(baseNumNodes / 2) : baseNumNodes;
+    const maxConnectionDistance = isMobile ? 150 : 200;
     const baseNodeOpacity = 0.08;
     const baseLineOpacity = 0.05;
     

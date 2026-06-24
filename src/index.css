@@ -88,3 +88,10 @@ body {
 .btn-dark:hover {
   background: #333;
 }
+
+@media (max-width: 768px) {
+  .mobile-optimized-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+  }
+}

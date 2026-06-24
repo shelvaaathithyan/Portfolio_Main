@@ -20,6 +20,15 @@ const COMMANDS = {
         <div>resume</div><div>clear</div>
         <div>help</div>
       </div>
+      
+      <div style={{ marginTop: '1.5rem', marginBottom: '1rem', color: '#3b82f6', fontWeight: 'bold' }}>━━━━━━━━━━━━━━━━━━</div>
+      <div style={{ color: '#adb5bd', marginBottom: '0.5rem' }}>Hidden Protocols</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="classified-cmd">spider</div>
+        <div className="classified-cmd">ironman</div>
+        <div className="classified-cmd">thor</div>
+      </div>
+      <div style={{ marginTop: '1rem', color: '#3b82f6', fontWeight: 'bold' }}>━━━━━━━━━━━━━━━━━━</div>
     </div>
   ),
   whoami: () => (
@@ -134,12 +143,6 @@ const COMMANDS = {
       <div><span className="text-blue" style={{ fontWeight: 'bold' }}>GitHub:</span> github.com/shelvaaathithyan</div>
     </div>
   ),
-  secret: () => (
-    <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <div className="status-green">Developer Mode Activated 🚀</div>
-      <div style={{ color: '#adb5bd' }}>Currently building: LoCoML @ IIIT Hyderabad</div>
-    </div>
-  ),
   sudo_hire: () => (
     <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <div className="status-green" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>Access Granted ✅</div>
@@ -155,8 +158,12 @@ const parseCommand = (rawInput) => {
   if (!input) return null;
   
   // Exact match
-  if (COMMANDS[input] || input === 'clear' || input === 'resume') return input;
+  if (COMMANDS[input]) return input;
+  if (input === 'clear' || input === 'resume') return input;
   if (input === 'sudo hire shelvaaathithyan') return 'sudo_hire';
+  if (input === 'spider') return 'spider';
+  if (input === 'ironman') return 'ironman';
+  if (input === 'thor') return 'thor';
   
   // Fuzzy match
   if (input.includes('visionbite')) return 'visionbite';
@@ -186,6 +193,16 @@ const Terminal = () => {
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [easterEggType, setEasterEggType] = useState(null);
+  const [scanBars, setScanBars] = useState([
+    { label: "AI ENGINEERING", value: 95, current: 0 },
+    { label: "RESEARCH", value: 93, current: 0 },
+    { label: "INNOVATION", value: 96, current: 0 },
+    { label: "AUTOMATION", value: 92, current: 0 }
+  ]);
+  const typewriterRef = useRef(null);
+  const initTextRef = useRef(null);
+  const syncValueRef = useRef(null);
 
   // Auto scroll to bottom
   useEffect(() => {
@@ -194,9 +211,8 @@ const Terminal = () => {
     }
   }, [history, bootState, input]);
 
-  // Focus input when clicking anywhere in terminal body
   const handleBodyClick = () => {
-    if (bootState === 'ready' && inputRef.current) {
+    if (inputRef.current && bootState === 'ready') {
       inputRef.current.focus();
     }
   };
@@ -252,13 +268,34 @@ const Terminal = () => {
     }
   }, { scope: terminalRef, dependencies: [history.length] });
 
+  const runEasterEggSequence = (type) => {
+    setEasterEggType(type);
+    
+    // Initial Setup
+    gsap.set('.protocol-layer', { opacity: 1 });
+    gsap.set('.easter-egg-wrapper', { opacity: 0, scale: 0.98, y: 0, x: 0 });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setEasterEggType(null);
+      }
+    });
+
+    // Reveal GIF with scale and opacity
+    tl.to('.easter-egg-wrapper', { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 0);
+
+    // Fade out everything after 5 seconds total
+    tl.to('.easter-egg-wrapper', { opacity: 0, scale: 0.98, duration: 0.5 }, 5.0)
+      .to('.protocol-layer', { opacity: 0, duration: 0.5 }, 5.1);
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const trimmed = input.trim();
-      if (!trimmed) return;
+      if (!input.trim()) return;
 
-      const parsed = parseCommand(trimmed);
+      const trimmed = input.trim();
+      const parsed = parseCommand(input);
       let outputComponent = null;
 
       if (parsed === 'clear') {
@@ -270,6 +307,16 @@ const Terminal = () => {
       } else if (parsed === 'resume') {
         window.open('/Shelvaaathithyan_Resume.pdf', '_blank');
         outputComponent = <div className="status-green" style={{ marginBottom: '1rem' }}>Downloading Resume...</div>;
+      } else if (parsed === 'spider' || parsed === 'ironman' || parsed === 'thor') {
+        setCmdHistory(prev => [...prev, trimmed]);
+        setInput('');
+        setHistory(prev => [...prev, { 
+          command: trimmed, 
+          component: null, 
+          isBoot: false 
+        }]);
+        runEasterEggSequence(parsed);
+        return;
       } else if (parsed === 'not_found') {
         outputComponent = (
           <div style={{ marginBottom: '1rem' }}>
@@ -288,19 +335,21 @@ const Terminal = () => {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (cmdHistory.length > 0) {
-        const nextIdx = historyIndex < cmdHistory.length - 1 ? historyIndex + 1 : historyIndex;
-        setHistoryIndex(nextIdx);
-        setInput(cmdHistory[cmdHistory.length - 1 - nextIdx]);
+        const newIndex = historyIndex === -1 ? cmdHistory.length - 1 : Math.max(0, historyIndex - 1);
+        setHistoryIndex(newIndex);
+        setInput(cmdHistory[newIndex]);
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (historyIndex > 0) {
-        const nextIdx = historyIndex - 1;
-        setHistoryIndex(nextIdx);
-        setInput(cmdHistory[cmdHistory.length - 1 - nextIdx]);
-      } else if (historyIndex === 0) {
-        setHistoryIndex(-1);
-        setInput('');
+      if (historyIndex !== -1) {
+        const newIndex = historyIndex + 1;
+        if (newIndex >= cmdHistory.length) {
+          setHistoryIndex(-1);
+          setInput('');
+        } else {
+          setHistoryIndex(newIndex);
+          setInput(cmdHistory[newIndex]);
+        }
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
@@ -324,6 +373,16 @@ const Terminal = () => {
     <section className="portfolio-section terminal-section" id="terminal" ref={terminalRef}>
       <div className="section-container terminal-container">
         <div className="terminal-window">
+          
+          {/* Simple Easter Egg Layer */}
+          <div className="protocol-layer">
+            <div className={`easter-egg-wrapper ${easterEggType || ''}`}>
+              <div className="easter-egg-gif-container">
+                {easterEggType && <img src={`/${easterEggType}gif.gif`} alt="Core" className="easter-egg-core-hologram" />}
+              </div>
+            </div>
+          </div>
+
           <div className="terminal-header">
             <div className="term-btn term-close"></div>
             <div className="term-btn term-min"></div>
@@ -333,17 +392,19 @@ const Terminal = () => {
           
           <div className="terminal-body" ref={bodyRef} onClick={handleBodyClick}>
             
-            {history.map((entry, idx) => (
-              <div key={idx} className={`history-entry-${idx}`}>
-                <div className="term-line" style={{ display: 'flex' }}>
-                  <PromptString />
-                  <span className="term-input" style={{ marginLeft: '8px' }}>{entry.command}</span>
+            <div className="terminal-history-container">
+              {history.map((entry, idx) => (
+                <div key={idx} className={`history-entry-${idx}`}>
+                  <div className="term-line" style={{ display: 'flex' }}>
+                    <PromptString />
+                    <span className="term-input" style={{ marginLeft: '8px' }}>{entry.command}</span>
+                  </div>
+                  <div className="term-output-wrapper">
+                    {entry.component}
+                  </div>
                 </div>
-                <div className="term-output-wrapper">
-                  {entry.component}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             {bootState === 'ready' && (
               <div className="term-active-line" style={{ display: 'flex', alignItems: 'center' }}>

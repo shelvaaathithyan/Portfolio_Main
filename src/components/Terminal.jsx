@@ -203,6 +203,7 @@ const Terminal = () => {
   const [bootState, setBootState] = useState('idle'); // idle, booting, ready
   const [history, setHistory] = useState([]);
   const [input, setInput] = useState('');
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [easterEggType, setEasterEggType] = useState(null);
@@ -213,6 +214,9 @@ const Terminal = () => {
     { label: "INNOVATION", value: 96, current: 0 },
     { label: "AUTOMATION", value: 92, current: 0 }
   ]);
+  const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const suggestions = ['help', 'resume', 'multiverse', 'visionbite', 'repora', 'skills'];
+
   const typewriterRef = useRef(null);
   const initTextRef = useRef(null);
   const syncValueRef = useRef(null);
@@ -228,6 +232,7 @@ const Terminal = () => {
     if (inputRef.current && bootState === 'ready') {
       inputRef.current.focus({ preventScroll: true });
     }
+    if (!hasInteracted) setHasInteracted(true);
   };
 
   useGSAP(() => {
@@ -280,6 +285,70 @@ const Terminal = () => {
       }
     }
   }, { scope: terminalRef, dependencies: [history.length] });
+
+  // Terminal Discovery Animation (Idle Pulse & Rotating Suggestions)
+  useGSAP(() => {
+    let pulseTimeline;
+    let suggestionTimeline;
+    
+    if (bootState === 'ready' && !hasInteracted) {
+      // Pulse Animation
+      pulseTimeline = gsap.timeline({ repeat: -1, repeatDelay: 5 });
+      
+      pulseTimeline.to('.term-discovery-pulse', {
+        scale: 1.8,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        onStart: () => {
+          gsap.set('.term-discovery-pulse', { opacity: 0.3, scale: 0 });
+          
+          // Animate Prompt text
+          gsap.to('.term-active-line .term-user, .term-active-line .term-prompt', {
+            color: '#4dffb8', // slightly brighter green
+            textShadow: '0 0 8px rgba(77, 255, 184, 0.4)',
+            duration: 0.2, // 0.2s yoyo = 0.4s total
+            yoyo: true,
+            repeat: 1
+          });
+
+          // Cursor enhancement
+          gsap.to('.term-cursor-glow', {
+            opacity: 1,
+            scale: 1.2,
+            duration: 0.2,
+            yoyo: true,
+            repeat: 1
+          });
+        }
+      });
+
+      // Rotating Command Suggestions
+      suggestionTimeline = gsap.timeline({ repeat: -1 });
+      
+      suggestionTimeline.to('.term-suggestion-text', {
+        opacity: 0,
+        y: -4,
+        duration: 0.35,
+        ease: 'power2.out',
+        delay: 2.15, // Total 2.5s cycle (2.15 + 0.35)
+        onComplete: () => {
+          setSuggestionIndex(prev => (prev + 1) % suggestions.length);
+          gsap.set('.term-suggestion-text', { y: 4 });
+        }
+      }).to('.term-suggestion-text', {
+        opacity: 1,
+        y: 0,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+    }
+
+    return () => {
+      if (pulseTimeline) pulseTimeline.kill();
+      if (suggestionTimeline) suggestionTimeline.kill();
+    };
+  }, { scope: terminalRef, dependencies: [bootState, hasInteracted] });
 
   const runEasterEggSequence = (type) => {
     setEasterEggType(type);
@@ -336,6 +405,7 @@ const Terminal = () => {
   };
 
   const handleKeyDown = (e) => {
+    if (!hasInteracted) setHasInteracted(true);
     if (e.key === 'Enter') {
       e.preventDefault();
       if (!input.trim()) return;
@@ -475,16 +545,33 @@ const Terminal = () => {
             {bootState === 'ready' && (
               <div className="term-active-line" style={{ display: 'flex', alignItems: 'center' }}>
                 <PromptString />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="term-cli-input"
-                  spellCheck="false"
-                  autoComplete="off"
-                />
+                <div style={{ position: 'relative', flexGrow: 1, display: 'flex', alignItems: 'center', marginLeft: '8px' }}>
+                  {!hasInteracted && (
+                    <>
+                      <div className="term-discovery-pulse"></div>
+                      <div className="term-cursor-glow"></div>
+                    </>
+                  )}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                      if (!hasInteracted) setHasInteracted(true);
+                    }}
+                    onKeyDown={handleKeyDown}
+                    className="term-cli-input"
+                    spellCheck="false"
+                    autoComplete="off"
+                    style={{ position: 'relative', zIndex: 2 }}
+                  />
+                  {!hasInteracted && !input && (
+                    <div className="term-suggestion" style={{ position: 'absolute', left: '12px', pointerEvents: 'none', color: 'rgba(59, 130, 246, 0.6)', display: 'flex', alignItems: 'center', height: '100%', zIndex: 1 }}>
+                      Try: <span className="term-suggestion-text" style={{ marginLeft: '4px', display: 'inline-block' }}>{suggestions[suggestionIndex]}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
             

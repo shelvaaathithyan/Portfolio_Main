@@ -8,18 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Footer = () => {
   const footerRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.from(footerRef.current, {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: 'top 95%',
-        toggleActions: 'play none none reverse'
-      }
-    });
-  }, { scope: footerRef });
+  // Removed GSAP animation to ensure footer is always visible
 
   return (
     <footer ref={footerRef} style={{

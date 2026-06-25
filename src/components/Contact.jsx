@@ -75,6 +75,12 @@ const filmData = [
     img: "/tradic.jpeg",
     title: "Tradic '22",
     subtitle: "Sri Sai Ranganathan Engineering College"
+  },
+  {
+    id: 11,
+    img: "/smart bin.jpeg",
+    title: "Codissia Science Expo",
+    subtitle: "Smart Bin V1"
   }
 ];
 

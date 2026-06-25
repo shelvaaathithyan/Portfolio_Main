@@ -3,7 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useGSAP } from '@gsap/react';
-import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
+import { FiLinkedin, FiGithub, FiInstagram } from 'react-icons/fi';
+import { SiLeetcode } from 'react-icons/si';
 import { HiPencil } from 'react-icons/hi';
 import './Contact.css';
 import './SectionStyles.css';
@@ -200,14 +201,17 @@ const Contact = () => {
             </h2>
             
             <div className="contact-buttons">
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shelvaaathithyan@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-btn email-btn">
-                <FiMail className="contact-icon" /> Email Me
+              <a href="https://www.linkedin.com/in/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-icon-btn linkedin-btn">
+                <FiLinkedin size={22} />
               </a>
-              <a href="https://www.linkedin.com/in/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-btn linkedin-btn">
-                <FiLinkedin className="contact-icon" /> LinkedIn
+              <a href="https://github.com/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-icon-btn github-btn">
+                <FiGithub size={22} />
               </a>
-              <a href="https://github.com/shelvaaathithyan" target="_blank" rel="noopener noreferrer" className="contact-btn github-btn">
-                <FiGithub className="contact-icon" /> GitHub
+              <a href="https://www.instagram.com/shelvaaathithyan.vk?igsh=MXFvNGQyZmk3bm9nNA==" target="_blank" rel="noopener noreferrer" className="contact-icon-btn instagram-btn">
+                <FiInstagram size={22} />
+              </a>
+              <a href="https://leetcode.com/u/shelvaleet/" target="_blank" rel="noopener noreferrer" className="contact-icon-btn leetcode-btn">
+                <SiLeetcode size={22} />
               </a>
             </div>
           </div>

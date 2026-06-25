@@ -263,6 +263,22 @@
   margin-top: 5px;
 }
 
+.glow-word {
+  animation: pulseGlowText 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes pulseGlowText {
+  0%, 100% {
+    color: var(--text-secondary);
+    text-shadow: none;
+  }
+  50% {
+    color: rgba(125, 211, 252, 1);
+    text-shadow: 0 0 10px rgba(125, 211, 252, 0.8);
+  }
+}
+
 .svg-graph-container {
   position: absolute;
   top: 80px;

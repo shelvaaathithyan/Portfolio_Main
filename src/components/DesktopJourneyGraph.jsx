@@ -100,8 +100,8 @@ const DesktopJourneyGraph = () => {
     <div className="desktop-journey-graph" ref={containerRef}>
       
       <div className="graph-instructions">
-        <span className="key-text text-blue text-sm">INTERACTIVE EVOLUTION GRAPH</span>
-        <p>Hover over milestones to view achievements</p>
+        <span className="key-text text-blue text-sm">EVOLUTION GRAPH!!</span>
+        <p><span className="glow-word">Hover</span> over years to view achievements</p>
       </div>
 
       <div className="svg-graph-container">

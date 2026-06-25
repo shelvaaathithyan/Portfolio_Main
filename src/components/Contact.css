@@ -33,50 +33,80 @@
   flex-wrap: wrap;
 }
 
-.contact-btn {
+.contact-icon-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  border-radius: 40px;
-  font-size: 1.05rem;
-  font-weight: 600;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #adb5bd;
   text-decoration: none;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.contact-btn:hover {
-  transform: translateY(-5px);
+.contact-icon-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
-.email-btn {
-  background: #fff;
-  color: #000;
+.contact-icon-btn svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.email-btn:hover {
-  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+.contact-icon-btn:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  color: #fff;
 }
 
-.linkedin-btn {
+.contact-icon-btn:hover svg {
+  transform: scale(1.15);
+}
+
+/* Brand specific hover fills */
+.linkedin-btn:hover::before {
   background: #0077b5;
-  color: #fff;
+  opacity: 1;
 }
-
 .linkedin-btn:hover {
-  box-shadow: 0 15px 30px rgba(0, 119, 181, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 119, 181, 0.4);
 }
 
-.github-btn {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
+.github-btn:hover::before {
+  background: #2b3137;
+  opacity: 1;
 }
-
 .github-btn:hover {
-  background: rgba(255,255,255,0.15);
-  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+.instagram-btn:hover::before {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  opacity: 1;
+}
+.instagram-btn:hover {
+  box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
+}
+
+.leetcode-btn:hover::before {
+  background: #ffa116;
+  opacity: 1;
+}
+.leetcode-btn:hover {
+  color: #000; /* Dark icon for contrast against orange */
+  box-shadow: 0 10px 25px rgba(255, 161, 22, 0.4);
 }
 
 /* Right Side: Film Strip Gallery */

@@ -12,7 +12,7 @@ const capabilitiesData = {
   frontend: {
     id: 'frontend',
     title: "Frontend Development",
-    summary: "React • JavaScript",
+    summary: "React • JavaScript • HTML • CSS",
     description: "Building responsive web applications and modern interactive experiences.",
     tech: ["React", "JavaScript", "HTML", "CSS", "GSAP"],
     mobileStack: "React • JavaScript • HTML • CSS",
@@ -30,18 +30,18 @@ const capabilitiesData = {
   aiml: {
     id: 'aiml',
     title: "AI / ML Engineering",
-    summary: "Python • OpenCV",
+    summary: "Python • OpenCV • YoLo",
     description: "Creating intelligent systems using computer vision, automation, and machine learning.",
-    tech: ["Python", "OpenCV", "Machine Learning"],
-    mobileStack: "Python • OpenCV",
+    tech: ["Python", "OpenCV", "Machine Learning", "YoLo"],
+    mobileStack: "Python • OpenCV • YoLo",
     size: "medium"
   },
   databases: {
     id: 'databases',
     title: "Databases",
-    summary: "MongoDB • Firebase",
+    summary: "MongoDB • Firebase • SQL",
     description: "Architecting scalable data storage, real-time sync, and robust data models.",
-    tech: ["MongoDB", "MySQL", "Firebase"],
+    tech: ["MongoDB", "MySQL", "Firebase", "SQL"],
     mobileStack: "MongoDB • Firebase • SQL",
     size: "medium"
   }

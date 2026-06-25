@@ -1,263 +1,217 @@
 import React, { useState, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './DesktopJourneyGraph.css';
-import SectionWatermark from './SectionWatermark';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const journeyNodes = [
-  {
-    year: '2017',
-    x: 5, y: 85, // small rise
-    size: 'small',
-    achievements: [
-      { title: "Ideathon-Hackathon Registration", desc: "Registered for the Ideathon-Hackathon conducted by SNS College of Engineering." },
-      { title: "Smart Snacky Initiated", desc: "Started developing Smart Snacky." }
-    ]
-  },
-  {
-    year: '2018',
-    x: 15, y: 65, // sharp upward jump
-    size: 'large',
-    achievements: [
-      { title: "Smart Snacky Completed", desc: "Completed Smart Snacky." },
-      { title: "Ideathon-Hackathon Winner", desc: "Won the Ideathon-Hackathon." },
-      { title: "Singapore Visit", desc: "Visited Singapore as a recognition reward for the competition victory." },
-      { title: "Tech Interest Sparked", desc: "Developed a strong interest in Computer Science and Technology." },
-      { title: "Social Impact Vision", desc: "Decided to build technology that could create social impact." }
-    ]
-  },
-  {
-    year: '2019',
-    x: 25, y: 35, // large growth spike
-    size: 'xlarge',
-    achievements: [
-      { title: "Forge KCT Training", desc: "Attended IoT Training Program conducted by Forge KCT." },
-      { title: "SmartBin V1", desc: "Developed SmartBin V1 and presented it at the Science Expo in CODISSIA." },
-      { title: "Science Expo Failure", desc: "Did not win, but the experience became a major motivation." },
-      { title: "SmartBin V2", desc: "Developed SmartBin V2." },
-      { title: "CBSE National Selection", desc: "Selected from the State Level CBSE National Science Exhibition to National Level in Noida." },
-      { title: "SmartBin V3", desc: "Developed SmartBin V3." },
-      { title: "IWMA 2nd Prize", desc: "Presented SmartBin V3 to IWMA. Won 2nd Prize." },
-      { title: "₹10,000 Cash Award", desc: "Received ₹10,000 cash award." }
-    ]
-  },
-  {
-    year: '2020',
-    x: 35, y: 35, // plateau
-    size: 'medium',
-    achievements: [
-      { title: "Continuous Learning", desc: "Developed multiple IoT mini projects and continued learning embedded systems." }
-    ]
-  },
-  {
-    year: '2021',
-    x: 45, y: 28, // moderate rise
-    size: 'medium',
-    achievements: [
-      { title: "Diploma Started", desc: "Joined PSG Polytechnic College." }
-    ]
-  },
-  {
-    year: '2022',
-    x: 55, y: 25, // small rise
-    size: 'medium',
-    achievements: [
-      { title: "Symposiums", desc: "Participated in multiple college symposiums and technical events." },
-      { title: "KitKat Internship", desc: "Completed internship at KitKat Software Technologies." }
-    ]
-  },
-  {
-    year: '2023',
-    x: 65, y: 18, // noticeable rise
-    size: 'large',
-    achievements: [
-      { title: "Freelancer League Internship", desc: "Internship at Freelancer League." },
-      { title: "ApartiBot Initiated", desc: "Started development of ApartiBot as Final Year Project." }
-    ]
-  },
-  {
-    year: '2024',
-    x: 75, y: 10, // strong rise
-    size: 'large',
-    achievements: [
-      { title: "Achievement Award", desc: "Received Achievement Award." },
-      { title: "Diploma Graduated", desc: "Graduated from PSG Polytechnic College." },
-      { title: "B.E. CSE Started", desc: "Joined PSG College of Technology for B.E. Computer Science Engineering (AI & ML)." },
-      { title: "CSEA Member", desc: "Became a member of the Computer Science and Engineering Association (CSEA)." }
-    ]
-  },
-  {
-    year: '2025',
-    x: 85, y: -2, // very strong rise
-    size: 'xlarge',
-    achievements: [
-      { title: "Infinitum 2025 Organizer", desc: "Part of Infinitum 2025 Organizing Team." },
-      { title: "Portfolio V1", desc: "Developed Portfolio Version 1." },
-      { title: "Domain Coordinator", desc: "Promoted as Embedded Systems & IoT Domain Coordinator in CSEA." },
-      { title: "Oblivion 2025 Hackathon", desc: "Participated in Oblivion 2025, a 24-hour Hackathon at SNS College of Technology." },
-      { title: "Neptune Built", desc: "Developed Neptune, a mental health monitoring and management application. Achieved Runner-Up position." },
-      { title: "Repora Initiated", desc: "Started development of Repora." },
-      { title: "AI Consortium Volunteer", desc: "Volunteered for PSG Tech AI Consortium Event." }
-    ]
-  },
-  {
-    year: '2026',
-    x: 95, y: -15, // highest peak
-    size: 'xxlarge',
-    achievements: [
-      { title: "VisionBite Initiated", desc: "Started development of VisionBite." },
-      { title: "Freelance Project", desc: "Received first client project for a Bangle E-Commerce Website." },
-      { title: "SERC IIIT Hyderabad", desc: "Research Intern at SCRC, IIIT Hyderabad." }
-    ]
-  }
+// Using a 1200x600 viewBox for the graph
+const nodesData = [
+  { year: 2017, x: 50, y: 480, size: 'small', label: "Small rise" },
+  { year: 2018, x: 150, y: 350, size: 'large', label: "Sharp rise" },
+  { year: 2019, x: 250, y: 150, size: 'extra-large', label: "Major spike" },
+  { year: 2020, x: 380, y: 250, size: 'small', label: "Plateau / Challenge Dip" },
+  { year: 2021, x: 500, y: 200, size: 'medium', label: "Moderate rise" },
+  { year: 2022, x: 620, y: 180, size: 'small', label: "Small rise" },
+  { year: 2023, x: 740, y: 120, size: 'medium', label: "Noticeable rise" },
+  { year: 2024, x: 860, y: 70, size: 'large', label: "Strong rise" },
+  { year: 2025, x: 980, y: 30, size: 'large', label: "Very strong rise" },
+  { year: 2026, x: 1100, y: 10, size: 'extra-large', label: "Highest peak" }
 ];
 
-// Helper to construct a smooth bezier path through coordinates
-const generateSmoothPath = (points) => {
+// Helper to generate a smooth bezier curve through points
+const generateBezierPath = (points) => {
   if (points.length === 0) return '';
   let path = `M ${points[0].x} ${points[0].y}`;
+  
   for (let i = 0; i < points.length - 1; i++) {
-    const p0 = points[i];
-    const p1 = points[i + 1];
-    const cp1x = p0.x + (p1.x - p0.x) / 2;
-    const cp1y = p0.y;
-    const cp2x = p0.x + (p1.x - p0.x) / 2;
-    const cp2y = p1.y;
-    path += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p1.x} ${p1.y}`;
+    const current = points[i];
+    const next = points[i + 1];
+    
+    // Control points for a smooth horizontal-ish flow
+    const cp1X = current.x + (next.x - current.x) * 0.5;
+    const cp1Y = current.y;
+    const cp2X = current.x + (next.x - current.x) * 0.5;
+    const cp2Y = next.y;
+    
+    path += ` C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${next.x} ${next.y}`;
   }
   return path;
 };
 
+// Milestone Content
+const achievements = {
+  2017: [
+    "Registered for Ideathon-Hackathon (SNS College)",
+    "Started developing Smart Snacky"
+  ],
+  2018: [
+    "Completed Smart Snacky",
+    "Won Ideathon-Hackathon",
+    "Singapore Recognition Visit",
+    "Developed deep interest in Tech",
+    "Decided to build social impact tech"
+  ],
+  2019: [
+    "Forge KCT IoT Training",
+    "SmartBin V1",
+    "Science Expo Failure (Motivation)",
+    "SmartBin V2",
+    "CBSE National Selection",
+    "SmartBin V3",
+    "IWMA 2nd Prize",
+    "₹10,000 Cash Award"
+  ],
+  2020: [
+    "Developed IoT mini projects",
+    "Continued embedded systems learning"
+  ],
+  2021: [
+    "Joined PSG Polytechnic College"
+  ],
+  2022: [
+    "Participated in multiple symposiums",
+    "Internship at KitKat Software Technologies"
+  ],
+  2023: [
+    "Internship at Freelancer League",
+    "Started ApartiBot (Final Year Project)"
+  ],
+  2024: [
+    "Received Achievement Award",
+    "Graduated from PSG Polytechnic College",
+    "Joined PSG College of Technology (AI & ML)",
+    "Joined Computer Science & Engineering Association (CSEA)"
+  ],
+  2025: [
+    "Infinitum 2025 Organizing Team",
+    "Developed Portfolio Version 1",
+    "Promoted to Embedded & IoT Domain Coordinator (CSEA)",
+    "Participated in Oblivion 2025 (24hr Hackathon)",
+    "Developed Neptune (Mental Health App)",
+    "Runner-Up at Oblivion 2025",
+    "Started development of Repora",
+    "Volunteered for PSG Tech AI Consortium"
+  ],
+  2026: [
+    "Started development of VisionBite",
+    "First client project (Bangle E-Commerce)",
+    "Research Intern at SCRC, IIIT Hyderabad"
+  ]
+};
+
 const DesktopJourneyGraph = () => {
-  const sectionRef = useRef(null);
-  const graphRef = useRef(null);
-  const [hoveredYear, setHoveredYear] = useState(null);
+  const [activeYear, setActiveYear] = useState(null);
+  const containerRef = useRef(null);
+  const pathString = generateBezierPath(nodesData);
 
   useGSAP(() => {
-    // Animate the main path drawing in
-    gsap.fromTo('.graph-path-main',
-      { strokeDasharray: 2000, strokeDashoffset: 2000 },
-      {
-        strokeDashoffset: 0,
-        duration: 3,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 60%',
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
       }
-    );
-
-    // Animate nodes popping in
-    gsap.fromTo('.journey-graph-node',
-      { scale: 0, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'back.out(2)',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 60%',
-        }
-      }
-    );
-
-    // Continuous pulse traveling along the path
-    gsap.to('.graph-path-pulse', {
-      strokeDashoffset: -2000,
-      duration: 6,
-      ease: 'none',
-      repeat: -1
     });
 
-  }, { scope: sectionRef });
+    // Animate the path drawing itself from left to right
+    tl.from('.journey-base-path', {
+      strokeDasharray: 2000,
+      strokeDashoffset: 2000,
+      duration: 2,
+      ease: 'power2.inOut'
+    })
+    // Animate nodes popping in
+    .from('.journey-year-node', {
+      scale: 0,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'back.out(1.5)'
+    }, "-=1.5")
+    // Animate particles fading in
+    .from('.journey-particle-field', {
+      opacity: 0,
+      scale: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: 'power1.out'
+    }, "-=1.5");
 
-  const activeData = journeyNodes.find(n => n.year === hoveredYear);
-  const pathString = generateSmoothPath(journeyNodes);
+    // Continuous Pulse animation traveling along the path
+    gsap.to('.journey-energy-pulse', {
+      strokeDashoffset: -1000,
+      duration: 8,
+      repeat: -1,
+      ease: 'none'
+    });
+  }, { scope: containerRef });
+
+  const handleNodeEnter = (year) => {
+    setActiveYear(year);
+  };
+
+  const handleNodeLeave = () => {
+    setActiveYear(null);
+  };
 
   return (
-    <div className="desktop-journey-graph" ref={sectionRef}>
+    <div className="desktop-journey-graph" ref={containerRef}>
+      <svg viewBox="0 0 1200 600" className="journey-svg" preserveAspectRatio="xMidYMid meet">
+        {/* Base Glow Line */}
+        <path 
+          d={pathString} 
+          className="journey-base-path"
+        />
+        {/* Animated Pulse Line */}
+        <path 
+          d={pathString} 
+          className="journey-energy-pulse"
+        />
 
-      <SectionWatermark number="02" title="JOURNEY" />
-
-      <div className="journey-hero-header">
-        <h2 className="section-title key-text text-white">THE JOURNEY</h2>
-        <p className="journey-subtitle">A timeline of growth, failures, learning, leadership, innovation, and achievements.</p>
-      </div>
-
-      <div className="journey-graph-container" ref={graphRef}>
-
-        {/* SVG Graph Layer */}
-        <svg
-          className="journey-svg-layer"
-          viewBox="0 -30 100 140"
-          preserveAspectRatio="none"
-        >
-          {/* Main glowing path */}
-          <path
-            className="graph-path-main"
-            d={pathString}
-            fill="none"
+        {/* Floating Particles (decorative) */}
+        {nodesData.map((node, i) => (
+          <circle 
+            key={`particle-${i}`} 
+            cx={node.x} 
+            cy={node.y} 
+            r="40" 
+            className="journey-particle-field"
           />
-          {/* Energy pulse path */}
-          <path
-            className="graph-path-pulse"
-            d={pathString}
-            fill="none"
-          />
-        </svg>
+        ))}
+      </svg>
 
-        {/* HTML Nodes Layer */}
-        {journeyNodes.map((node) => (
-          <div
+      <div className="journey-nodes-layer">
+        {nodesData.map((node) => (
+          <div 
             key={node.year}
-            className={`journey-graph-node size-${node.size} ${hoveredYear === node.year ? 'active' : ''}`}
-            style={{
-              left: `${node.x}%`,
-              top: `${((node.y + 30) / 140) * 100}%`
-            }}
-            onMouseEnter={() => setHoveredYear(node.year)}
-            onMouseLeave={() => setHoveredYear(null)}
+            className={`journey-year-node size-${node.size} ${activeYear === node.year ? 'active' : ''}`}
+            style={{ left: `${(node.x / 1200) * 100}%`, top: `${(node.y / 600) * 100}%` }}
+            onMouseEnter={() => handleNodeEnter(node.year)}
+            onMouseLeave={handleNodeLeave}
           >
             <div className="node-core"></div>
             <div className="node-year-label">{node.year}</div>
-
-            {/* Particles that appear on hover */}
-            {hoveredYear === node.year && (
-              <div className="node-particles">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className={`particle p-${i}`}></div>
-                ))}
-              </div>
-            )}
           </div>
         ))}
+      </div>
 
-        {/* Floating Achievement Panel */}
-        <div className={`achievement-panel-container ${hoveredYear ? 'visible' : ''}`}>
-          {activeData && (
-            <div className="achievement-panel">
-              <h3 className="panel-year-title">{activeData.year}</h3>
-              <div className="panel-achievements-list">
-                {activeData.achievements.map((ach, idx) => (
-                  <div key={idx} className="achievement-item">
-                    <div className="achievement-bullet"></div>
-                    <div className="achievement-content">
-                      <div className="achievement-title">{ach.title}</div>
-                      <div className="achievement-desc">{ach.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
+      {/* Interactive Floating Achievement Panel */}
+      <div className={`achievement-panel ${activeYear ? 'visible' : ''}`}>
+        {activeYear && (
+          <div className="achievement-content">
+            <h3 className="achievement-year">{activeYear}</h3>
+            <ul className="achievement-list">
+              {achievements[activeYear].map((item, idx) => (
+                <li key={idx}>
+                  <span className="bullet-dot"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

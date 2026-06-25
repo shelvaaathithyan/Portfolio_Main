@@ -30,7 +30,7 @@ const Hero = ({ onOpenSimulation }) => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     // 1. Navbar slides from top (already handled in Navbar component independently, but we can delay hero)
-
+    
     // 2. Hero titles and content reveal
     tl.from('.hero-left > *', {
       y: 30,
@@ -39,12 +39,12 @@ const Hero = ({ onOpenSimulation }) => {
       stagger: 0.15,
       delay: 0.5 // Wait for navbar
     })
-      // 3. Profile card floats in
-      .from('.hero-right', {
-        x: 50,
-        opacity: 0,
-        duration: 1
-      }, "-=0.5");
+    // 3. Profile card floats in
+    .from('.hero-right', {
+      x: 50,
+      opacity: 0,
+      duration: 1
+    }, "-=0.5");
 
     // Continuous floating animation for the profile card container (only on desktop)
     if (window.innerWidth >= 768) {
@@ -59,7 +59,7 @@ const Hero = ({ onOpenSimulation }) => {
 
     // Typing Animation Sequence
     const masterTextTl = gsap.timeline({ repeat: -1 });
-
+    
     titles.forEach((title) => {
       // Type out
       masterTextTl.to(textRef.current, {
@@ -67,14 +67,14 @@ const Hero = ({ onOpenSimulation }) => {
         text: title,
         ease: "none"
       })
-        // Pause
-        .to({}, { duration: 2 })
-        // Erase
-        .to(textRef.current, {
-          duration: Math.max(0.5, title.length * 0.03),
-          text: "",
-          ease: "none"
-        });
+      // Pause
+      .to({}, {duration: 2})
+      // Erase
+      .to(textRef.current, {
+        duration: Math.max(0.5, title.length * 0.03),
+        text: "",
+        ease: "none"
+      });
     });
 
   }, { scope: heroRef });
@@ -88,7 +88,7 @@ const Hero = ({ onOpenSimulation }) => {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-
+    
     const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg tilt
     const rotateY = ((x - centerX) / centerX) * 10;
 
@@ -112,16 +112,16 @@ const Hero = ({ onOpenSimulation }) => {
   };
 
   const [isMobile, setIsMobile] = useState(false);
-
+  
   React.useEffect(() => {
     setIsMobile(window.innerWidth < 768);
   }, []);
 
   return (
-    <section className="hero-section" ref={heroRef}>
+    <section className="hero-section" data-section="hero" ref={heroRef}>
       <NeuralSphere />
       <div className="hero-container" style={{ position: 'relative', zIndex: 10 }}>
-
+        
         {/* Left Content */}
         <div className="hero-left">
           <div className="hero-greeting key-text">Hello there.</div>
@@ -172,8 +172,8 @@ const Hero = ({ onOpenSimulation }) => {
               <FiMail className="btn-icon" />
               Get In Touch
             </button>
-            <button
-              className="cta-btn simulation-btn"
+            <button 
+              className="cta-btn simulation-btn" 
               onClick={onOpenSimulation}
               onMouseEnter={(e) => gsap.to(e.currentTarget, { scale: 1.03, duration: 0.2 })}
               onMouseLeave={(e) => gsap.to(e.currentTarget, { scale: 1, duration: 0.2 })}
@@ -186,8 +186,8 @@ const Hero = ({ onOpenSimulation }) => {
 
         {/* Right Content - Profile Orbit Container */}
         <div className="hero-right">
-          <div
-            className="profile-orbit-container"
+          <div 
+            className="profile-orbit-container" 
             ref={profileCardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -220,7 +220,7 @@ const Hero = ({ onOpenSimulation }) => {
         </div>
 
       </div>
-
+      
       {isResumeModalOpen && <ResumeModal onClose={() => setIsResumeModalOpen(false)} />}
     </section>
   );

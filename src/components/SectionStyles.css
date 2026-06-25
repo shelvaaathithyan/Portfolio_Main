@@ -25,37 +25,34 @@
   position: relative;
 }
 
-.section-watermark {
+.section-number-bg {
   position: absolute;
   top: 50%;
-  left: 30px;
+  left: 0;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  z-index: 0;
   pointer-events: none;
-  opacity: 0;
+  z-index: 0;
 }
 
-.watermark-number {
+.bg-num {
   font-family: var(--font-major);
-  font-size: clamp(220px, 18vw, 420px);
+  font-size: clamp(120px, 15vw, 240px);
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.06);
+  letter-spacing: -8px;
+  color: rgba(125, 211, 252, 0.05);
   line-height: 0.8;
-  z-index: 1;
+  margin-bottom: -10px;
 }
 
-.watermark-text {
-  font-family: var(--font-major);
-  font-size: clamp(32px, 2vw, 48px);
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.12);
-  letter-spacing: 0.25em;
-  white-space: nowrap;
-  margin-left: 80px;
-  margin-top: 20px;
-  z-index: 2;
+.bg-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: rgba(125, 211, 252, 0.15);
+  margin-left: 10px;
 }
 
 /* About Specific */

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './StickySectionNumbers.css';
 
 const SECTION_REGISTRY = [
+  { id: 'hero', hidden: true },
   { id: 'about', num: '01', title: 'ABOUT' },
   { id: 'journey', num: '02', title: 'JOURNEY' },
   { id: 'terminal', num: '03', title: 'TERMINAL' },
@@ -80,7 +81,7 @@ const StickySectionNumbers = () => {
 
   return (
     <div className="sticky-section-numbers">
-      {SECTION_REGISTRY.map((sec) => (
+      {SECTION_REGISTRY.filter(sec => !sec.hidden).map((sec) => (
         <div 
           key={sec.id} 
           className={`sticky-number-container ${activeSection === sec.id ? 'active' : ''}`}

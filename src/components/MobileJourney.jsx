@@ -4,12 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FiGlobe, FiAward, FiDollarSign, FiSmartphone, FiBookOpen, FiCpu, FiTarget } from 'react-icons/fi';
 import './Journey.css';
-import './SectionStyles.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const MobileJourney = () => {
-  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
 
   const statsData = [
     { value: "5+", label: "Major Achievements" },
@@ -137,59 +136,55 @@ const MobileJourney = () => {
       start: 'top 90%'
     });
 
-  }, { scope: sectionRef });
+  }, { scope: containerRef });
 
   return (
-    <div className="portfolio-section journey-section" data-section="journey" ref={sectionRef}>
-      <div className="section-container">
-        <h2 className="section-title key-text text-white" style={{ textAlign: 'center', marginBottom: '2rem' }}>The Journey</h2>
-        
-        {/* Statistics Row */}
-        <div className="journey-stats-row">
-          {statsData.map((stat, i) => (
-            <div className="journey-stat-card" key={i}>
-              <div className="journey-stat-value text-blue key-text">{stat.value}</div>
-              <div className="journey-stat-label">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+    <div ref={containerRef}>
+      {/* Statistics Row */}
+      <div className="journey-stats-row">
+        {statsData.map((stat, i) => (
+          <div className="journey-stat-card" key={i}>
+            <div className="journey-stat-value text-blue key-text">{stat.value}</div>
+            <div className="journey-stat-label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
 
-        {/* Timeline Stack */}
-        <div className="journey-timeline-stack">
-          <div className="journey-line-static"></div>
-          
-          {timelineData.map((data, index) => (
-            <div className={`journey-item-stacked ${data.highlight ? 'highlighted' : ''}`} key={index}>
-              <div className="journey-node-wrapper">
-                <div className="journey-node" style={{ opacity: 0, transform: 'scale(0)' }}>
-                  {data.icon}
-                </div>
+      {/* Timeline Stack */}
+      <div className="journey-timeline-stack">
+        <div className="journey-line-static"></div>
+        
+        {timelineData.map((data, index) => (
+          <div className={`journey-item-stacked ${data.highlight ? 'highlighted' : ''}`} key={index}>
+            <div className="journey-node-wrapper">
+              <div className="journey-node" style={{ opacity: 0, transform: 'scale(0)' }}>
+                {data.icon}
               </div>
-              
-              <div className={`journey-card ${data.isResearch ? 'research-card' : ''}`} style={{ opacity: 0, transform: data.isResearch ? 'translateX(50px)' : 'translateY(30px)' }}>
-                <div className="journey-card-header">
-                  <span className="journey-year-tag key-text text-blue">{data.year}</span>
-                  {data.badge && (
-                    <span className="journey-badge">{data.badge}</span>
-                  )}
-                </div>
-                <h3 className="journey-card-title">{data.title}</h3>
-                <h4 className="journey-card-institution">{data.institution}</h4>
-                {data.desc.split('\n\n').map((para, pIdx) => (
-                  <p key={pIdx} className="journey-card-desc">{para}</p>
-                ))}
-                
-                {data.tags && (
-                  <div className="journey-tags-container">
-                    {data.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="journey-tag">{tag}</span>
-                    ))}
-                  </div>
+            </div>
+            
+            <div className={`journey-card ${data.isResearch ? 'research-card' : ''}`} style={{ opacity: 0, transform: data.isResearch ? 'translateX(50px)' : 'translateY(30px)' }}>
+              <div className="journey-card-header">
+                <span className="journey-year-tag key-text text-blue">{data.year}</span>
+                {data.badge && (
+                  <span className="journey-badge">{data.badge}</span>
                 )}
               </div>
+              <h3 className="journey-card-title">{data.title}</h3>
+              <h4 className="journey-card-institution">{data.institution}</h4>
+              {data.desc.split('\n\n').map((para, pIdx) => (
+                <p key={pIdx} className="journey-card-desc">{para}</p>
+              ))}
+              
+              {data.tags && (
+                <div className="journey-tags-container">
+                  {data.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="journey-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

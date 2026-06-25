@@ -5,7 +5,6 @@ import { useGSAP } from '@gsap/react';
 import './Terminal.css';
 import './SectionStyles.css';
 import MultiverseDatabase from './MultiverseDatabase';
-import SectionWatermark from './SectionWatermark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +13,7 @@ const COMMANDS = {
     <div className="term-help-container">
       <div className="help-title">COMMAND DATABASE</div>
       <div className="help-divider">────────────────────────────────</div>
-
+      
       <div className="help-section-header" style={{ color: '#8A8A8A' }}>CORE COMMANDS</div>
       <div className="help-grid">
         <div className="help-cmd core">whoami</div><div className="help-cmd core">skills</div>
@@ -37,7 +36,7 @@ const COMMANDS = {
       <div className="help-status-header" style={{ color: '#00D4AA', marginBottom: '8px' }}>STATUS:</div>
       <div style={{ color: '#4DA3FF', marginBottom: '4px' }}>13 COMMANDS AVAILABLE</div>
       <div style={{ color: '#FF4D4D', marginBottom: '16px' }}>4 HIDDEN PROTOCOLS DETECTED</div>
-
+      
       <div style={{ color: '#00D4AA', display: 'flex', alignItems: 'center' }}>
         SYSTEM STATUS: ONLINE <span className="help-cursor">█</span>
       </div>
@@ -168,7 +167,7 @@ const COMMAND_KEYS = Object.keys(COMMANDS).filter(k => k !== 'role' && k !== 'st
 const parseCommand = (rawInput) => {
   const input = rawInput.toLowerCase().trim();
   if (!input) return null;
-
+  
   // Exact match
   if (COMMANDS[input]) return input;
   if (input === 'clear' || input === 'resume') return input;
@@ -178,7 +177,7 @@ const parseCommand = (rawInput) => {
   if (input === 'thor') return 'thor';
   if (input === 'multiverse') return 'multiverse';
   if (input === 'simulate' || input === 'collaborate') return 'simulate';
-
+  
   // Fuzzy match
   if (input.includes('visionbite')) return 'visionbite';
   if (input.includes('repora')) return 'repora';
@@ -193,7 +192,7 @@ const parseCommand = (rawInput) => {
   if (input.includes('help')) return 'help';
   if (input.includes('resume') || input.includes('cv')) return 'resume';
   if (input.includes('clear') || input.includes('clean')) return 'clear';
-
+  
   return 'not_found';
 };
 
@@ -201,7 +200,7 @@ const Terminal = ({ onOpenSimulation }) => {
   const terminalRef = useRef(null);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
-
+  
   const [bootState, setBootState] = useState('idle'); // idle, booting, ready
   const [history, setHistory] = useState([]);
   const [input, setInput] = useState('');
@@ -239,7 +238,7 @@ const Terminal = ({ onOpenSimulation }) => {
 
   useGSAP(() => {
     let triggered = false;
-
+    
     ScrollTrigger.create({
       trigger: terminalRef.current,
       start: 'top 75%',
@@ -255,18 +254,18 @@ const Terminal = ({ onOpenSimulation }) => {
 
     const runBootSequence = async () => {
       const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
+      
       const bootCmds = [
         { cmd: 'whoami', key: 'whoami' },
         { cmd: 'role', key: 'role' },
         { cmd: 'status', key: 'status' }
       ];
-
+      
       for (const item of bootCmds) {
         await wait(600); // simulate typing delay
         setHistory(prev => [...prev, { command: item.cmd, component: COMMANDS[item.key](), isBoot: true }]);
       }
-
+      
       await wait(500);
       setBootState('ready');
       if (inputRef.current) inputRef.current.focus({ preventScroll: true });
@@ -292,11 +291,11 @@ const Terminal = ({ onOpenSimulation }) => {
   useGSAP(() => {
     let pulseTimeline;
     let suggestionTimeline;
-
+    
     if (bootState === 'ready' && !hasInteracted) {
       // Pulse Animation
       pulseTimeline = gsap.timeline({ repeat: -1, repeatDelay: 5 });
-
+      
       pulseTimeline.to('.term-discovery-pulse', {
         scale: 1.8,
         opacity: 0,
@@ -304,7 +303,7 @@ const Terminal = ({ onOpenSimulation }) => {
         ease: 'power2.out',
         onStart: () => {
           gsap.set('.term-discovery-pulse', { opacity: 0.3, scale: 0 });
-
+          
           // Animate Prompt text
           gsap.to('.term-active-line .term-user, .term-active-line .term-prompt', {
             color: '#4dffb8', // slightly brighter green
@@ -327,7 +326,7 @@ const Terminal = ({ onOpenSimulation }) => {
 
       // Rotating Command Suggestions
       suggestionTimeline = gsap.timeline({ repeat: -1 });
-
+      
       suggestionTimeline.to('.term-suggestion-text', {
         opacity: 0,
         y: -4,
@@ -354,7 +353,7 @@ const Terminal = ({ onOpenSimulation }) => {
 
   const runEasterEggSequence = (type) => {
     setEasterEggType(type);
-
+    
     // Initial Setup
     gsap.set('.protocol-layer', { opacity: 1 });
     gsap.set('.easter-egg-wrapper', { opacity: 0, scale: 0.8, filter: 'blur(8px)' });
@@ -366,12 +365,12 @@ const Terminal = ({ onOpenSimulation }) => {
     });
 
     // Reveal GIF smoothly
-    tl.to('.easter-egg-wrapper', {
-      opacity: 1,
-      scale: 1,
+    tl.to('.easter-egg-wrapper', { 
+      opacity: 1, 
+      scale: 1, 
       filter: 'blur(0px)',
-      duration: 0.6,
-      ease: "power3.out"
+      duration: 0.6, 
+      ease: "power3.out" 
     }, 0);
 
     // Fade out everything after 5 seconds total
@@ -384,22 +383,22 @@ const Terminal = ({ onOpenSimulation }) => {
     setInput('');
     setHistory(prev => [...prev, { command: cmdString, component: null, isBoot: false }]);
     setMultiverseState('booting');
-
+    
     const wait = ms => new Promise(r => setTimeout(r, ms));
-
+    
     await wait(200);
     setHistory(prev => [...prev, { command: '', component: <div className="text-blue">ACCESSING MULTIVERSE DATABASE...</div>, isBoot: false }]);
     await wait(600);
-
+    
     setHistory(prev => [...prev, { command: '', component: <div>Establishing Quantum Link... <span className="status-green">[██████████████] 100%</span></div>, isBoot: false }]);
     await wait(600);
-
+    
     setHistory(prev => [...prev, { command: '', component: <div>Scanning Alternate Timelines... <span className="status-green">[██████████████] 100%</span></div>, isBoot: false }]);
     await wait(600);
-
+    
     setHistory(prev => [...prev, { command: '', component: <div className="text-blue">5 TIMELINES DETECTED</div>, isBoot: false }]);
     await wait(600);
-
+    
     setHistory(prev => [...prev, { command: '', component: <div className="text-blue">Opening Database...</div>, isBoot: false }]);
     await wait(400);
 
@@ -428,10 +427,10 @@ const Terminal = ({ onOpenSimulation }) => {
       } else if (parsed === 'spider' || parsed === 'ironman' || parsed === 'thor') {
         setCmdHistory(prev => [...prev, trimmed]);
         setInput('');
-        setHistory(prev => [...prev, {
-          command: trimmed,
-          component: null,
-          isBoot: false
+        setHistory(prev => [...prev, { 
+          command: trimmed, 
+          component: null, 
+          isBoot: false 
         }]);
         setTimeout(() => runEasterEggSequence(parsed), 250);
         return;
@@ -441,7 +440,7 @@ const Terminal = ({ onOpenSimulation }) => {
       } else if (parsed === 'simulate') {
         setCmdHistory(prev => [...prev, trimmed]);
         setInput('');
-
+        
         // Output initialization sequence
         const runSimSequence = async () => {
           const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -513,19 +512,18 @@ const Terminal = ({ onOpenSimulation }) => {
 
   return (
     <section className="portfolio-section terminal-section" id="terminal" data-section="terminal" ref={terminalRef}>
-      <SectionWatermark number="03" title="TERMINAL" />
       <div className="section-container terminal-container">
         <div className={`terminal-window ${multiverseState === 'active' ? 'mv-expanded' : ''}`}>
-
+          
           {/* Simple Easter Egg Layer */}
           <div className="protocol-layer">
             <div className={`easter-egg-wrapper ${easterEggType || ''}`}>
               <div className="easter-egg-gif-container">
                 {easterEggType && (
-                  <img
-                    src={`/${easterEggType}gif.gif`}
-                    alt="Core"
-                    className="easter-egg-core-hologram"
+                  <img 
+                    src={`/${easterEggType}gif.gif`} 
+                    alt="Core" 
+                    className="easter-egg-core-hologram" 
                     onError={() => console.error(`${easterEggType} GIF failed to load`)}
                   />
                 )}
@@ -541,71 +539,71 @@ const Terminal = ({ onOpenSimulation }) => {
               {multiverseState === 'active' ? 'MULTIVERSE DATABASE' : 'guest@shelvaaathithyan:~'}
             </div>
           </div>
-
+          
           <div className="terminal-body" ref={bodyRef} onClick={handleBodyClick}>
             {multiverseState === 'active' ? (
               <MultiverseDatabase onClose={() => {
                 setMultiverseState('idle');
-                setHistory(prev => [...prev, { command: '', component: <div className="status-green" style={{ marginTop: '1rem' }}>Multiverse session terminated. Restoring Earth-616 console...</div>, isBoot: false }]);
-                setTimeout(() => { if (inputRef.current) inputRef.current.focus(); }, 100);
+                setHistory(prev => [...prev, { command: '', component: <div className="status-green" style={{marginTop: '1rem'}}>Multiverse session terminated. Restoring Earth-616 console...</div>, isBoot: false }]);
+                setTimeout(() => { if(inputRef.current) inputRef.current.focus(); }, 100);
               }} />
             ) : (
               <>
-
-                <div className="terminal-history-container">
-                  {history.map((entry, idx) => (
-                    <div key={idx} className={`history-entry-${idx}`}>
-                      <div className="term-line" style={{ display: 'flex' }}>
-                        <PromptString />
-                        <span className="term-input" style={{ marginLeft: '8px' }}>{entry.command}</span>
-                      </div>
-                      <div className="term-output-wrapper">
-                        {entry.component}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {bootState === 'ready' && (
-                  <div className="term-active-line" style={{ display: 'flex', alignItems: 'center' }}>
-                    <PromptString />
-                    <div style={{ position: 'relative', flexGrow: 1, display: 'flex', alignItems: 'center', marginLeft: '8px' }}>
-                      {!hasInteracted && (
-                        <>
-                          <div className="term-discovery-pulse"></div>
-                          <div className="term-cursor-glow"></div>
-                        </>
-                      )}
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => {
-                          setInput(e.target.value);
-                          if (!hasInteracted) setHasInteracted(true);
-                        }}
-                        onKeyDown={handleKeyDown}
-                        className="term-cli-input"
-                        spellCheck="false"
-                        autoComplete="off"
-                        style={{ position: 'relative', zIndex: 2 }}
-                      />
-                      {!hasInteracted && !input && (
-                        <div className="term-suggestion" style={{ position: 'absolute', left: '12px', pointerEvents: 'none', color: 'rgba(59, 130, 246, 0.6)', display: 'flex', alignItems: 'center', height: '100%', zIndex: 1 }}>
-                          Try: <span className="term-suggestion-text" style={{ marginLeft: '4px', display: 'inline-block' }}>{suggestions[suggestionIndex]}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {bootState !== 'ready' && (
+            
+            <div className="terminal-history-container">
+              {history.map((entry, idx) => (
+                <div key={idx} className={`history-entry-${idx}`}>
                   <div className="term-line" style={{ display: 'flex' }}>
                     <PromptString />
-                    <span className="term-cursor" style={{ marginLeft: '8px' }}></span>
+                    <span className="term-input" style={{ marginLeft: '8px' }}>{entry.command}</span>
                   </div>
-                )}
+                  <div className="term-output-wrapper">
+                    {entry.component}
+                  </div>
+                </div>
+              ))}
+            </div>
 
+            {bootState === 'ready' && (
+              <div className="term-active-line" style={{ display: 'flex', alignItems: 'center' }}>
+                <PromptString />
+                <div style={{ position: 'relative', flexGrow: 1, display: 'flex', alignItems: 'center', marginLeft: '8px' }}>
+                  {!hasInteracted && (
+                    <>
+                      <div className="term-discovery-pulse"></div>
+                      <div className="term-cursor-glow"></div>
+                    </>
+                  )}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                      if (!hasInteracted) setHasInteracted(true);
+                    }}
+                    onKeyDown={handleKeyDown}
+                    className="term-cli-input"
+                    spellCheck="false"
+                    autoComplete="off"
+                    style={{ position: 'relative', zIndex: 2 }}
+                  />
+                  {!hasInteracted && !input && (
+                    <div className="term-suggestion" style={{ position: 'absolute', left: '12px', pointerEvents: 'none', color: 'rgba(59, 130, 246, 0.6)', display: 'flex', alignItems: 'center', height: '100%', zIndex: 1 }}>
+                      Try: <span className="term-suggestion-text" style={{ marginLeft: '4px', display: 'inline-block' }}>{suggestions[suggestionIndex]}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {bootState !== 'ready' && (
+              <div className="term-line" style={{ display: 'flex' }}>
+                <PromptString />
+                <span className="term-cursor" style={{ marginLeft: '8px' }}></span>
+              </div>
+            )}
+            
               </>
             )}
           </div>

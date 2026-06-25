@@ -274,8 +274,8 @@
     text-shadow: none;
   }
   50% {
-    color: rgba(125, 211, 252, 1);
-    text-shadow: 0 0 10px rgba(125, 211, 252, 0.8);
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
   }
 }
 

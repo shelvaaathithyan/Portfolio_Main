@@ -10,8 +10,9 @@ const quests = [
   { id: 4, src: '/marvel.png', alt: 'Marvel', glow: 'rgba(255, 0, 0, 0.4)' },
   { id: 5, src: '/ironmanmain.jpg', alt: 'Iron Man', glow: 'rgba(0, 255, 255, 0.4)' },
   { id: 6, src: '/thalapathy.png', alt: 'Movies', glow: 'rgba(255, 0, 0, 0.4)' },
-  { id: 7, src: '/spidermangame.jpg', alt: 'Gaming', glow: 'rgba(0, 0, 255, 0.4)' },
-  { id: 8, src: '/msd.jpeg', alt: 'MS Dhoni', glow: 'rgba(255, 255, 0, 0.4)' }
+  { id: 7, src: '/thalapathy2.png', alt: 'Movies 2', glow: 'rgba(255, 0, 0, 0.4)' },
+  { id: 8, src: '/spidermangame.jpg', alt: 'Gaming', glow: 'rgba(0, 0, 255, 0.4)' },
+  { id: 9, src: '/msd.jpeg', alt: 'MS Dhoni', glow: 'rgba(255, 255, 0, 0.4)' }
 ];
 
 // Duplicate to allow seamless scroll

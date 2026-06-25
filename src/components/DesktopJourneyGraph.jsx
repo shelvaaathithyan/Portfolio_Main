@@ -15,42 +15,42 @@ const graphData = [
   },
   {
     year: 2019, x: 250, y: 150, title: 'Major Spike',
-    direction: 'vertical', offset: 'center',
+    direction: 'diagonal-down-right', offset: 'center',
     milestones: ["IoT Training", "SmartBin V1-V3", "IWMA 2nd Prize"]
   },
   {
     year: 2020, x: 350, y: 150, title: 'Plateau & Learning',
-    direction: 'vertical', offset: 'right',
+    direction: 'diagonal-down-right',
     milestones: ["IoT Mini Projects", "Embedded Systems"]
   },
   {
     year: 2021, x: 450, y: 130, title: 'Academic Shift',
-    direction: 'vertical', offset: 'left',
+    direction: 'diagonal-down-right',
     milestones: ["PSG Polytechnic"]
   },
   {
     year: 2022, x: 550, y: 110, title: 'Industry Exposure',
-    direction: 'vertical', offset: 'center',
+    direction: 'diagonal-down-right',
     milestones: ["College Symposiums", "KitKat Internship"]
   },
   {
     year: 2023, x: 650, y: 80, title: 'Noticeable Rise',
-    direction: 'vertical', offset: 'right',
+    direction: 'diagonal-down-right',
     milestones: ["Freelancer Internship", "ApartiBot"]
   },
   {
     year: 2024, x: 750, y: 50, title: 'Strong Rise',
-    direction: 'vertical', offset: 'left',
+    direction: 'diagonal-down-right',
     milestones: ["Achievement Award", "Graduation", "B.E CSE AI & ML", "CSEA Member"]
   },
   {
     year: 2025, x: 850, y: 30, title: 'Very Strong Rise',
-    direction: 'vertical', offset: 'center',
+    direction: 'diagonal-down-right',
     milestones: ["Infinitum Team", "Portfolio V1", "CSEA Coordinator", "Neptune Runner-Up", "Repora", "AI Consortium"]
   },
   {
     year: 2026, x: 950, y: 10, title: 'Highest Peak',
-    direction: 'vertical', offset: 'right',
+    direction: 'diagonal-down-right',
     milestones: ["VisionBite", "Client E-Commerce", "SCRC Research Intern"]
   }
 ];
@@ -142,7 +142,7 @@ const DesktopJourneyGraph = () => {
               <div className="node-year key-text">{data.year}</div>
 
               {isActive && (
-                <div className={`node-expansion direction-${data.direction} offset-${data.offset || 'none'}`}>
+                <div className={`node-expansion direction-${data.direction}`}>
                   <div className="expansion-connector"></div>
                   <div className="expansion-milestones">
                     {displayMilestones.map((m, idx) => (

@@ -15,7 +15,7 @@ import StickySectionNumbers from './StickySectionNumbers';
 const MainScreen = ({ onOpenSimulation }) => {
   return (
     <div className="main-layout" style={{ position: 'relative', pointerEvents: 'auto', zIndex: 1 }}>
-      <StickySectionNumbers />
+
       <Hero onOpenSimulation={onOpenSimulation} />
       <About />
       <Journey />

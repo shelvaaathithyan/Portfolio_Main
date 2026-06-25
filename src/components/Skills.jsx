@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import PixelGlobe from './PixelGlobe';
+import SectionWatermark from './SectionWatermark';
 import './Skills.css';
 import './SectionStyles.css';
 
@@ -84,29 +85,29 @@ const Skills = () => {
         }
       });
 
-      tl.fromTo('.network-line', 
+      tl.fromTo('.network-line',
         { strokeDasharray: 500, strokeDashoffset: 500 },
         { strokeDashoffset: 0, duration: 1.5, ease: 'power2.out', stagger: 0.1 }
       )
-      .fromTo('.domain-node',
-        { opacity: 0, scale: 0 },
-        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.5)' },
-        "-=1.0"
-      )
-      .fromTo('.node-content',
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 },
-        "-=0.6"
-      );
+        .fromTo('.domain-node',
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.5)' },
+          "-=1.0"
+        )
+        .fromTo('.node-content',
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 },
+          "-=0.6"
+        );
     } else if (showCards) {
       // Phase 3: Capability Reveal
       gsap.fromTo('.mobile-card',
         { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.6, 
-          stagger: 0.1, 
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
           ease: 'power2.out'
         }
       );
@@ -126,13 +127,13 @@ const Skills = () => {
   };
 
   const handleClick = (nodeId) => {
-    if (isMobile) return; 
+    if (isMobile) return;
     if (activeNodeId !== nodeId) {
       setActiveNodeId(nodeId);
       setPulseActive(nodeId);
       setTimeout(() => {
         if (pulseActive === nodeId) setPulseActive(null);
-      }, 1000); 
+      }, 1000);
     }
   };
 
@@ -159,37 +160,38 @@ const Skills = () => {
     });
 
     // Step 1 & 2: Dot scales and glow expands
-    tl.to('.center-tap-dot', { 
-      scale: 1.2, 
-      boxShadow: '0 0 20px 5px rgba(255,255,255,0.8)', 
-      duration: 0.15 
+    tl.to('.center-tap-dot', {
+      scale: 1.2,
+      boxShadow: '0 0 20px 5px rgba(255,255,255,0.8)',
+      duration: 0.15
     })
-    // Step 3 & 4: Arrow and text fade out
-    .to(['.mobile-press-arrow', '.press-me-text'], { 
-      opacity: 0, 
-      duration: 0.2 
-    }, "+=0")
-    // Step 5: Globe fades and scales down
-    .to('.mobile-globe-wrapper', { 
-      scale: 0.8, 
-      opacity: 0, 
-      duration: 0.3 
-    }, "+=0");
+      // Step 3 & 4: Arrow and text fade out
+      .to(['.mobile-press-arrow', '.press-me-text'], {
+        opacity: 0,
+        duration: 0.2
+      }, "+=0")
+      // Step 5: Globe fades and scales down
+      .to('.mobile-globe-wrapper', {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.3
+      }, "+=0");
   };
 
   const activeData = activeNodeId ? capabilitiesData[activeNodeId] : null;
 
   return (
     <section className="portfolio-section skills-section" id="capabilities" data-section="capabilities" ref={sectionRef}>
+      <SectionWatermark number="04" title="CAPABILITIES" />
       <div className="section-container skills-container">
-        
+
         <div className="capabilities-header">
           <h2 className="section-title key-text text-white">Capabilities</h2>
           <p className="cap-subtitle">Technologies powering intelligent systems.</p>
         </div>
 
         <div className="dna-explorer" ref={containerRef}>
-          
+
           {!isMobile && (
             <div className="globe-container" style={{ transform: globePulse ? 'translate(-50%, -50%) scale(1.05)' : 'translate(-50%, -50%) scale(1)', transition: 'transform 0.3s ease' }}>
               <PixelGlobe active={activeNodeId !== null || hoverNodeId !== null} isMobile={false} />
@@ -205,21 +207,21 @@ const Skills = () => {
                       const isActive = activeNodeId === node.id;
                       const isHover = hoverNodeId === node.id;
                       return (
-                        <line 
+                        <line
                           key={`line-${node.id}`}
-                          className={`network-line ${isActive ? 'line-active' : ''} ${isHover && !isActive ? 'line-hover' : ''}`} 
-                          x1="400" y1="250" 
-                          x2={node.x} y2={node.y} 
+                          className={`network-line ${isActive ? 'line-active' : ''} ${isHover && !isActive ? 'line-hover' : ''}`}
+                          x1="400" y1="250"
+                          x2={node.x} y2={node.y}
                         />
                       )
                     })}
-                    
+
                     {nodesConfig.map(node => (
-                      <line 
+                      <line
                         key={`pulse-${node.id}`}
-                        className={`network-pulse-line ${pulseActive === node.id ? 'pulsing' : ''}`} 
-                        x1="400" y1="250" 
-                        x2={node.x} y2={node.y} 
+                        className={`network-pulse-line ${pulseActive === node.id ? 'pulsing' : ''}`}
+                        x1="400" y1="250"
+                        x2={node.x} y2={node.y}
                       />
                     ))}
                   </svg>
@@ -230,9 +232,9 @@ const Skills = () => {
                     const isActive = activeNodeId === node.id;
                     const isHover = hoverNodeId === node.id;
                     const isDimmed = activeNodeId !== null && activeNodeId !== node.id;
-                    
+
                     return (
-                      <div 
+                      <div
                         key={node.id}
                         className={`domain-node node-${node.id} size-${capabilitiesData[node.id].size} ${isActive ? 'active' : ''} ${isDimmed ? 'dimmed' : ''}`}
                         style={{ transform: `translate(${node.x - 400}px, ${node.y - 250}px) ${isHover || isActive ? 'scale(1.08)' : 'scale(1)'}` }}
@@ -259,7 +261,7 @@ const Skills = () => {
                       <h3>{activeData.title}</h3>
                       <div className="info-panel-tech-simple">
                         {activeData.tech.map((t, idx) => (
-                           <span key={idx} className="tech-item">{t}</span>
+                          <span key={idx} className="tech-item">{t}</span>
                         ))}
                       </div>
                     </>

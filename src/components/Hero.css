@@ -5,7 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 160px 2rem 2rem 2rem; /* Increased top padding for breathing room */
+  padding: 160px 2rem 2rem 2rem;
+  /* Increased top padding for breathing room */
   position: relative;
   overflow: hidden;
 }
@@ -27,7 +28,8 @@
   flex-direction: column;
   align-items: flex-start;
   max-width: 600px;
-  padding-top: 3rem; /* Push text block down slightly to align headline center with sphere center */
+  padding-top: 3rem;
+  /* Push text block down slightly to align headline center with sphere center */
 }
 
 .hero-greeting {
@@ -45,7 +47,7 @@
   letter-spacing: 2px;
   margin-bottom: 1.5rem;
   color: #ffffff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
 }
@@ -55,7 +57,8 @@
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  height: 3rem; /* Fixed height to prevent layout jump */
+  height: 3rem;
+  /* Fixed height to prevent layout jump */
 }
 
 .cursor {
@@ -66,7 +69,9 @@
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero-description {
@@ -91,10 +96,10 @@
   gap: 10px;
   font-size: 0.95rem;
   color: #adb5bd;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   padding: 8px 16px;
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   width: fit-content;
 }
 
@@ -115,7 +120,7 @@
 .stats-divider {
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   margin: 10px 0;
 }
 
@@ -180,7 +185,9 @@
 }
 
 @keyframes shineSweep {
-  100% { left: 200%; }
+  100% {
+    left: 200%;
+  }
 }
 
 .primary-btn:hover {
@@ -189,9 +196,9 @@
 }
 
 .secondary-btn {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
@@ -230,7 +237,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform-style: preserve-3d; /* For mouse tilt */
+  transform-style: preserve-3d;
+  /* For mouse tilt */
 }
 
 .profile-photo-wrapper {
@@ -247,11 +255,11 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255, 255, 255, 0.3);
   font-family: var(--font-major);
   font-size: 1.5rem;
   letter-spacing: 2px;
@@ -261,29 +269,65 @@
 .orbit-badge {
   position: absolute;
   padding: 8px 16px;
-  background: rgba(20,20,20,0.6);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   font-size: 0.85rem;
   color: #ffffff;
   font-weight: 500;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   /* Default position relative to center */
   transform-origin: center;
 }
 
 /* Position the badges manually around the photo for a premium floating look */
-.badge-1 { top: 5%; left: 20%; animation: floatBadge 4s ease-in-out infinite 0s; }
-.badge-2 { top: -5%; right: 20%; animation: floatBadge 4.5s ease-in-out infinite 1s; }
-.badge-3 { top: 40%; right: -10%; animation: floatBadge 5s ease-in-out infinite 2s; }
-.badge-4 { bottom: -5%; right: 30%; animation: floatBadge 4.2s ease-in-out infinite 0.5s; }
-.badge-5 { bottom: 10%; left: 0%; animation: floatBadge 4.8s ease-in-out infinite 1.5s; }
-.badge-6 { top: 40%; left: -10%; animation: floatBadge 4.6s ease-in-out infinite 2.5s; }
+.badge-1 {
+  top: 5%;
+  left: 20%;
+  animation: floatBadge 4s ease-in-out infinite 0s;
+}
+
+.badge-2 {
+  top: -5%;
+  right: 20%;
+  animation: floatBadge 4.5s ease-in-out infinite 1s;
+}
+
+.badge-3 {
+  top: 40%;
+  right: -10%;
+  animation: floatBadge 5s ease-in-out infinite 2s;
+}
+
+.badge-4 {
+  bottom: -5%;
+  right: 30%;
+  animation: floatBadge 4.2s ease-in-out infinite 0.5s;
+}
+
+.badge-5 {
+  bottom: 10%;
+  left: 0%;
+  animation: floatBadge 4.8s ease-in-out infinite 1.5s;
+}
+
+.badge-6 {
+  top: 40%;
+  left: -10%;
+  animation: floatBadge 4.6s ease-in-out infinite 2.5s;
+}
 
 @keyframes floatBadge {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.05); }
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
 }
 
 @media (max-width: 992px) {
@@ -292,19 +336,19 @@
     text-align: center;
     gap: 2rem;
   }
-  
+
   .hero-left {
     align-items: center;
   }
-  
+
   .hero-description {
     text-align: center;
   }
-  
+
   .hero-status-list {
     align-items: center;
   }
-  
+
   .hero-typing-container {
     justify-content: center;
   }
@@ -318,22 +362,25 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: 80px; /* Reduced further to pull content up */
+    padding-top: 80px;
+    /* Reduced further to pull content up */
   }
 
   .hero-left {
-    padding-top: 1rem; /* Pull text up closer to image */
+    padding-top: 1rem;
+    /* Pull text up closer to image */
   }
 
   .profile-photo-wrapper {
     width: 160px;
     height: 160px;
-    box-shadow: 0 0 20px rgba(59,130,246,0.15);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
     border-radius: 50%;
   }
 
   .hero-greeting {
-    margin-top: 10px; /* Reduced from 20px */
+    margin-top: 10px;
+    /* Reduced from 20px */
     margin-bottom: 4px;
     font-size: 1.1rem;
   }
@@ -368,7 +415,8 @@
     justify-content: center;
   }
 
-  .primary-btn, .secondary-btn {
+  .primary-btn,
+  .secondary-btn {
     width: calc(50% - 8px);
   }
 
@@ -380,9 +428,11 @@
 
   /* Orbit layout for mobile */
   .profile-orbit-container {
-    width: 260px; /* Reduced to fit tighter orbit */
+    width: 260px;
+    /* Reduced to fit tighter orbit */
     height: 260px;
-    margin: 70px auto 0; /* Pushed down 70px to avoid navbar collision */
+    margin: 70px auto 0;
+    /* Pushed down 70px to avoid navbar collision */
   }
 
   .orbit-badge {
@@ -393,8 +443,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -25px; /* Offset half width */
-    margin-top: -25px; /* Offset half height */
+    margin-left: -25px;
+    /* Offset half width */
+    margin-top: -25px;
+    /* Offset half height */
   }
 
   .orbit-badge img {
@@ -408,48 +460,128 @@
 
   /* Symmetrical 6-Point Orbit (Radius ~110px) */
   /* Top Center (Node.js - badge-2) */
-  .badge-2 { top: calc(50% - 110px); left: 50%; animation: floatBadgeMobile 4s ease-in-out infinite 0s; }
-  
+  .badge-2 {
+    top: calc(50% - 110px);
+    left: 50%;
+    animation: floatBadgeMobile 4s ease-in-out infinite 0s;
+  }
+
   /* Bottom Center (AI/ML - badge-4) */
-  .badge-4 { top: calc(50% + 110px); left: 50%; animation: floatBadgeMobile 4.2s ease-in-out infinite 0.5s; }
-  
+  .badge-4 {
+    top: calc(50% + 110px);
+    left: 50%;
+    animation: floatBadgeMobile 4.2s ease-in-out infinite 0.5s;
+  }
+
   /* Upper Left (React - badge-1) */
-  .badge-1 { top: calc(50% - 55px); left: calc(50% - 95px); animation: floatBadgeMobile 4.5s ease-in-out infinite 1s; }
-  
+  .badge-1 {
+    top: calc(50% - 55px);
+    left: calc(50% - 95px);
+    animation: floatBadgeMobile 4.5s ease-in-out infinite 1s;
+  }
+
   /* Upper Right (Firebase - badge-6) */
-  .badge-6 { top: calc(50% - 55px); left: calc(50% + 95px); animation: floatBadgeMobile 4.8s ease-in-out infinite 1.5s; }
-  
+  .badge-6 {
+    top: calc(50% - 55px);
+    left: calc(50% + 95px);
+    animation: floatBadgeMobile 4.8s ease-in-out infinite 1.5s;
+  }
+
   /* Lower Left (Python - badge-5) */
-  .badge-5 { top: calc(50% + 55px); left: calc(50% - 95px); animation: floatBadgeMobile 4.3s ease-in-out infinite 0.8s; }
-  
+  .badge-5 {
+    top: calc(50% + 55px);
+    left: calc(50% - 95px);
+    animation: floatBadgeMobile 4.3s ease-in-out infinite 0.8s;
+  }
+
   /* Lower Right (MongoDB - badge-3) */
-  .badge-3 { top: calc(50% + 55px); left: calc(50% + 95px); animation: floatBadgeMobile 4.6s ease-in-out infinite 1.2s; }
+  .badge-3 {
+    top: calc(50% + 55px);
+    left: calc(50% + 95px);
+    animation: floatBadgeMobile 4.6s ease-in-out infinite 1.2s;
+  }
 }
 
 @media (max-width: 430px) {
+
   /* Reduce orbit radius to ~95px to keep badges in viewport */
-  .badge-2 { top: calc(50% - 95px); left: 50%; }
-  .badge-4 { top: calc(50% + 95px); left: 50%; }
-  .badge-1 { top: calc(50% - 47px); left: calc(50% - 82px); }
-  .badge-6 { top: calc(50% - 47px); left: calc(50% + 82px); }
-  .badge-5 { top: calc(50% + 47px); left: calc(50% - 82px); }
-  .badge-3 { top: calc(50% + 47px); left: calc(50% + 82px); }
+  .badge-2 {
+    top: calc(50% - 95px);
+    left: 50%;
+  }
+
+  .badge-4 {
+    top: calc(50% + 95px);
+    left: 50%;
+  }
+
+  .badge-1 {
+    top: calc(50% - 47px);
+    left: calc(50% - 82px);
+  }
+
+  .badge-6 {
+    top: calc(50% - 47px);
+    left: calc(50% + 82px);
+  }
+
+  .badge-5 {
+    top: calc(50% + 47px);
+    left: calc(50% - 82px);
+  }
+
+  .badge-3 {
+    top: calc(50% + 47px);
+    left: calc(50% + 82px);
+  }
 }
 
 @media (max-width: 380px) {
+
   /* Reduce badge size and radius even more */
   .orbit-badge img {
     transform: scale(0.75);
   }
-  .badge-2 { top: calc(50% - 85px); left: 50%; }
-  .badge-4 { top: calc(50% + 85px); left: 50%; }
-  .badge-1 { top: calc(50% - 42px); left: calc(50% - 74px); }
-  .badge-6 { top: calc(50% - 42px); left: calc(50% + 74px); }
-  .badge-5 { top: calc(50% + 42px); left: calc(50% - 74px); }
-  .badge-3 { top: calc(50% + 42px); left: calc(50% + 74px); }
+
+  .badge-2 {
+    top: calc(50% - 85px);
+    left: 50%;
+  }
+
+  .badge-4 {
+    top: calc(50% + 85px);
+    left: 50%;
+  }
+
+  .badge-1 {
+    top: calc(50% - 42px);
+    left: calc(50% - 74px);
+  }
+
+  .badge-6 {
+    top: calc(50% - 42px);
+    left: calc(50% + 74px);
+  }
+
+  .badge-5 {
+    top: calc(50% + 42px);
+    left: calc(50% - 74px);
+  }
+
+  .badge-3 {
+    top: calc(50% + 42px);
+    left: calc(50% + 74px);
+  }
 }
 
 @keyframes floatBadgeMobile {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }

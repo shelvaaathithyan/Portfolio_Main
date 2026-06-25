@@ -3,8 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
-import './Contact.css';
 import './SectionStyles.css';
+import './Contact.css';
+import SectionWatermark from './SectionWatermark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,16 +76,17 @@ const Contact = () => {
 
   return (
     <section className="portfolio-section contact-section" id="contact" data-section="contact" ref={sectionRef}>
+      <SectionWatermark number="06" title="CONTACT" />
       <div className="section-container contact-container">
-        
+
         <div className="contact-layout">
-          
+
           {/* Left Side: Contact Info */}
           <div className="contact-left-content">
             <h2 className="contact-mega-title key-text text-white">
-              Let's Build<br/>Something Great<br/>Together
+              Let's Build<br />Something Great<br />Together
             </h2>
-            
+
             <div className="contact-buttons">
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shelvaaathithyan@gmail.com" target="_blank" rel="noopener noreferrer" className="contact-btn email-btn">
                 <FiMail className="contact-icon" /> Email Me
@@ -100,9 +102,9 @@ const Contact = () => {
 
           {/* Right Side: Film Strip Gallery */}
           <div className="contact-gallery">
-            
+
             <div className="film-strip-container">
-              
+
               <div className="film-reel" ref={reelRef}>
                 {filmData.map((data, index) => (
                   <div className="film-frame" key={`${data.id}-${index}`}>
@@ -120,7 +122,7 @@ const Contact = () => {
           </div>
 
         </div>
-        
+
       </div>
     </section>
   );

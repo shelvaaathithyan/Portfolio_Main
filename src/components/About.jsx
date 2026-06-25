@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import './SectionStyles.css';
+import SectionWatermark from './SectionWatermark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,9 +27,10 @@ const About = () => {
 
   return (
     <section className="portfolio-section about-section" id="about" data-section="about" ref={sectionRef}>
+      <SectionWatermark number="01" title="ABOUT" />
       <div className="section-container about-container">
         <h2 className="section-title key-text text-white">About Me</h2>
-        
+
         <div className="about-content">
           <h3 className="about-subtitle text-blue">Who I Am?</h3>
           <p className="about-text">

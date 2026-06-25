@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FaGithub } from 'react-icons/fa';
 import './SectionStyles.css';
+import SectionWatermark from './SectionWatermark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,9 +72,10 @@ const Projects = () => {
 
   return (
     <section className="portfolio-section projects-section" id="projects" data-section="projects" ref={sectionRef}>
-      <div className="section-container">
+      <SectionWatermark number="05" title="PROJECTS" />
+      <div className="section-container projects-container">
         <h2 className="section-title key-text text-white">Featured Projects</h2>
-        
+
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div className="project-card" key={index}>
@@ -97,13 +99,13 @@ const Projects = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Explore More Button */}
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '6rem', paddingBottom: '1rem', width: '100%', clear: 'both', position: 'relative' }}>
-          <a 
-            href="https://github.com/shelvaaathithyan?tab=repositories" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://github.com/shelvaaathithyan?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-outline explore-more-btn"
           >
             <FaGithub size={20} /> Explore More

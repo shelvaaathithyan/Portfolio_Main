@@ -4,86 +4,54 @@ import { useGSAP } from '@gsap/react';
 
 const graphData = [
   {
-    year: 2017, x: 50, y: 350, size: 'small', title: 'Early Steps',
-    milestones: [
-      "Registered for the Ideathon-Hackathon conducted by SNS College of Engineering.",
-      "Started developing Smart Snacky."
-    ]
+    year: 2017, x: 50, y: 350, title: 'Early Steps',
+    direction: 'horizontal',
+    milestones: ["Ideathon Registration", "Smart Snacky Dev"]
   },
   {
-    year: 2018, x: 150, y: 280, size: 'large', title: 'First Recognition',
-    milestones: [
-      "Completed Smart Snacky.",
-      "Won the Ideathon-Hackathon.",
-      "Visited Singapore as a recognition reward.",
-      "Developed a strong interest in Computer Science.",
-      "Decided to build technology for social impact."
-    ]
+    year: 2018, x: 150, y: 280, title: 'First Recognition',
+    direction: 'horizontal',
+    milestones: ["Smart Snacky Complete", "Ideathon Winner", "Singapore Visit", "Social Impact Focus"]
   },
   {
-    year: 2019, x: 250, y: 150, size: 'extra-large', title: 'Major Spike',
-    milestones: [
-      "Attended IoT Training Program (Forge KCT).",
-      "SmartBin V1 at Science Expo in CODISSIA.",
-      "SmartBin V2 - State Level CBSE National Selection.",
-      "SmartBin V3.",
-      "IWMA 2nd Prize & ₹10,000 cash award."
-    ]
+    year: 2019, x: 250, y: 150, title: 'Major Spike',
+    direction: 'vertical', offset: 'center',
+    milestones: ["IoT Training", "SmartBin V1-V3", "IWMA 2nd Prize"]
   },
   {
-    year: 2020, x: 350, y: 150, size: 'small', title: 'Plateau & Learning',
-    milestones: [
-      "Developed multiple IoT mini projects.",
-      "Continued learning embedded systems."
-    ]
+    year: 2020, x: 350, y: 150, title: 'Plateau & Learning',
+    direction: 'vertical', offset: 'right',
+    milestones: ["IoT Mini Projects", "Embedded Systems"]
   },
   {
-    year: 2021, x: 450, y: 130, size: 'medium', title: 'Academic Shift',
-    milestones: [
-      "Joined PSG Polytechnic College."
-    ]
+    year: 2021, x: 450, y: 130, title: 'Academic Shift',
+    direction: 'vertical', offset: 'left',
+    milestones: ["PSG Polytechnic"]
   },
   {
-    year: 2022, x: 550, y: 110, size: 'medium', title: 'Industry Exposure',
-    milestones: [
-      "Participated in multiple college symposiums and events.",
-      "Completed internship at KitKat Software Technologies."
-    ]
+    year: 2022, x: 550, y: 110, title: 'Industry Exposure',
+    direction: 'vertical', offset: 'center',
+    milestones: ["College Symposiums", "KitKat Internship"]
   },
   {
-    year: 2023, x: 650, y: 80, size: 'large', title: 'Noticeable Rise',
-    milestones: [
-      "Internship at Freelancer League.",
-      "Started development of ApartiBot as Final Year Project."
-    ]
+    year: 2023, x: 650, y: 80, title: 'Noticeable Rise',
+    direction: 'vertical', offset: 'right',
+    milestones: ["Freelancer Internship", "ApartiBot"]
   },
   {
-    year: 2024, x: 750, y: 50, size: 'large', title: 'Strong Rise',
-    milestones: [
-      "Received Achievement Award.",
-      "Graduated from PSG Polytechnic College.",
-      "Joined PSG College of Technology for B.E. CSE (AI & ML).",
-      "Became a member of CSEA."
-    ]
+    year: 2024, x: 750, y: 50, title: 'Strong Rise',
+    direction: 'vertical', offset: 'left',
+    milestones: ["Achievement Award", "Graduation", "B.E CSE AI & ML", "CSEA Member"]
   },
   {
-    year: 2025, x: 850, y: 30, size: 'extra-large', title: 'Very Strong Rise',
-    milestones: [
-      "Infinitum 2025 Organizing Team.",
-      "Developed Portfolio Version 1.",
-      "Promoted as Embedded Systems & IoT Domain Coordinator in CSEA.",
-      "Oblivion 2025 Hackathon Runner-Up (Neptune App).",
-      "Started development of Repora.",
-      "Volunteered for PSG Tech AI Consortium Event."
-    ]
+    year: 2025, x: 850, y: 30, title: 'Very Strong Rise',
+    direction: 'vertical', offset: 'center',
+    milestones: ["Infinitum Team", "Portfolio V1", "CSEA Coordinator", "Neptune Runner-Up", "Repora", "AI Consortium"]
   },
   {
-    year: 2026, x: 950, y: 10, size: 'extra-large', title: 'Highest Peak',
-    milestones: [
-      "Started development of VisionBite.",
-      "Received first client project for a Bangle E-Commerce Website.",
-      "Research Intern at SCRC, IIIT Hyderabad."
-    ]
+    year: 2026, x: 950, y: 10, title: 'Highest Peak',
+    direction: 'vertical', offset: 'right',
+    milestones: ["VisionBite", "Client E-Commerce", "SCRC Research Intern"]
   }
 ];
 
@@ -102,10 +70,11 @@ const generateBezierPath = (points) => {
 
 const DesktopJourneyGraph = () => {
   const containerRef = useRef(null);
-  const [activeYear, setActiveYear] = useState(null);
+  const [hoveredYear, setHoveredYear] = useState(null);
+  const [lockedYear, setLockedYear] = useState(null);
 
+  const activeYear = hoveredYear || lockedYear;
   const pathString = generateBezierPath(graphData);
-  const activeData = graphData.find(d => d.year === activeYear);
 
   useGSAP(() => {
     // Initial draw animation of the path
@@ -152,41 +121,48 @@ const DesktopJourneyGraph = () => {
         </svg>
 
         {/* HTML Overlay Nodes */}
-        {graphData.map((data) => (
-          <div 
-            key={data.year}
-            className={`graph-node-wrapper ${activeYear === data.year ? 'active' : ''}`}
-            style={{ left: `${(data.x / 1000) * 100}%`, top: `${(data.y / 400) * 100}%` }}
-            onMouseEnter={() => setActiveYear(data.year)}
-            onMouseLeave={() => setActiveYear(null)}
-          >
-            <div className="node-halo"></div>
-            <div className="node-core">
-              <div className="node-dot"></div>
-            </div>
-            <div className="node-year key-text">{data.year}</div>
-          </div>
-        ))}
-      </div>
+        {graphData.map((data) => {
+          const isActive = activeYear === data.year;
+          const displayMilestones = data.milestones.slice(0, 4);
+          const hasMore = data.milestones.length > 4;
 
-      {/* Floating Achievement Panel */}
-      <div className={`achievement-panel-container ${activeData ? 'visible' : ''}`}>
-        {activeData && (
-          <div className="achievement-panel">
-            <div className="panel-header">
-              <span className="panel-year key-text text-blue">{activeData.year}</span>
-              <span className="panel-title">{activeData.title}</span>
+          return (
+            <div 
+              key={data.year}
+              className={`graph-node-wrapper ${isActive ? 'active' : ''}`}
+              style={{ left: `${(data.x / 1000) * 100}%`, top: `${(data.y / 400) * 100}%` }}
+              onMouseEnter={() => setHoveredYear(data.year)}
+              onMouseLeave={() => setHoveredYear(null)}
+              onClick={() => setLockedYear(lockedYear === data.year ? null : data.year)}
+            >
+              <div className="node-halo"></div>
+              <div className="node-core">
+                <div className="node-dot"></div>
+              </div>
+              <div className="node-year key-text">{data.year}</div>
+
+              {isActive && (
+                <div className={`node-expansion direction-${data.direction} offset-${data.offset || 'none'}`}>
+                  <div className="expansion-connector"></div>
+                  <div className="expansion-milestones">
+                    {displayMilestones.map((m, idx) => (
+                      <div className="expansion-item" key={idx} style={{ '--i': idx }}>
+                        <div className="item-dot"></div>
+                        <span className="item-text">{m}</span>
+                      </div>
+                    ))}
+                    {hasMore && (
+                      <div className="expansion-item" style={{ '--i': 4 }}>
+                        <div className="item-dot"></div>
+                        <span className="item-text">+{data.milestones.length - 4} More</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-            <ul className="milestone-list">
-              {activeData.milestones.map((milestone, idx) => (
-                <li key={idx} className="milestone-item">
-                  <span className="milestone-bullet"></span>
-                  {milestone}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+          );
+        })}
       </div>
 
     </div>

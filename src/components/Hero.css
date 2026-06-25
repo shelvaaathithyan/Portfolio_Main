@@ -382,7 +382,7 @@
   .profile-orbit-container {
     width: 260px; /* Reduced to fit tighter orbit */
     height: 260px;
-    margin: 0 auto;
+    margin: 70px auto 0; /* Pushed down 70px to avoid navbar collision */
   }
 
   .orbit-badge {

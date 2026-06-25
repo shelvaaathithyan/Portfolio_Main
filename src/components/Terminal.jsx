@@ -511,7 +511,7 @@ const Terminal = ({ onOpenSimulation }) => {
   );
 
   return (
-    <section className="portfolio-section terminal-section" id="terminal" ref={terminalRef}>
+    <section className="portfolio-section terminal-section" id="terminal" data-section="terminal" ref={terminalRef}>
       <div className="section-container terminal-container">
         <div className={`terminal-window ${multiverseState === 'active' ? 'mv-expanded' : ''}`}>
           

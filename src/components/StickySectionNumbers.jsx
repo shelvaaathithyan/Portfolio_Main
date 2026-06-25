@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './StickySectionNumbers.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const sections = [
+const SECTION_REGISTRY = [
   { id: 'about', num: '01', title: 'ABOUT' },
   { id: 'journey', num: '02', title: 'JOURNEY' },
   { id: 'terminal', num: '03', title: 'TERMINAL' },
-  { id: 'skills', num: '04', title: 'SKILLS' },
-  { id: 'featured', num: '05', title: 'PROJECT SPOTLIGHT' },
+  { id: 'capabilities', num: '04', title: 'CAPABILITIES' },
+  { id: 'projects', num: '05', title: 'PROJECTS' },
   { id: 'contact', num: '06', title: 'CONTACT' }
 ];
 
@@ -18,39 +14,73 @@ const StickySectionNumbers = () => {
   const [activeSection, setActiveSection] = useState(null);
 
   useEffect(() => {
-    // We create a ScrollTrigger for each section to update the active state
-    sections.forEach((sec) => {
-      const element = document.getElementById(sec.id);
-      if (element) {
-        ScrollTrigger.create({
-          trigger: element,
-          start: sec.id === 'contact' ? "top 75%" : "top 50%",
-          end: "bottom 50%",
-          onEnter: () => setActiveSection(sec.id),
-          onEnterBack: () => setActiveSection(sec.id),
-          onLeave: () => {
-            // Only clear if we are leaving the last section or scrolling up past first
-            if (sec.id === 'contact') setActiveSection(null);
-          },
-          onLeaveBack: () => {
-            if (sec.id === 'about') setActiveSection(null);
-          }
+    let animationFrameId = null;
+    let lastScrollY = window.scrollY;
+
+    const calculateClosestSection = () => {
+      // Find all DOM elements matching our registered sections
+      const sectionElements = Array.from(document.querySelectorAll('[data-section]'))
+        .filter(el => SECTION_REGISTRY.some(sec => sec.id === el.getAttribute('data-section')));
+
+      if (sectionElements.length === 0) return;
+
+      const viewportCenter = window.innerHeight / 2;
+      
+      let closestDistance = Infinity;
+      let closestSectionId = null;
+      
+      // Temporary debug array
+      const debugDistances = [];
+
+      sectionElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const sectionCenter = rect.top + (rect.height / 2);
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        const id = el.getAttribute('data-section');
+        
+        debugDistances.push({ id, distance: Math.round(distance), height: Math.round(rect.height) });
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSectionId = id;
+        }
+      });
+
+      if (closestSectionId && closestSectionId !== activeSection) {
+        setActiveSection(closestSectionId);
+      }
+      
+      // Temporary debug output as requested
+      console.table(debugDistances);
+    };
+
+    const handleScroll = () => {
+      // Throttle calculation via requestAnimationFrame
+      if (Math.abs(window.scrollY - lastScrollY) > 10) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(() => {
+          calculateClosestSection();
+          lastScrollY = window.scrollY;
         });
       }
-    });
+    };
+
+    // Calculate once on mount
+    calculateClosestSection();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', calculateClosestSection, { passive: true });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', calculateClosestSection);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
-  }, []);
-
-  if (!activeSection) return null;
-
-  const currentSec = sections.find(s => s.id === activeSection);
+  }, [activeSection]);
 
   return (
     <div className="sticky-section-numbers">
-      {sections.map((sec) => (
+      {SECTION_REGISTRY.map((sec) => (
         <div 
           key={sec.id} 
           className={`sticky-number-container ${activeSection === sec.id ? 'active' : ''}`}

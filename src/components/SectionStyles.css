@@ -25,6 +25,36 @@
   position: relative;
 }
 
+.section-number-bg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-num {
+  font-family: var(--font-major);
+  font-size: clamp(120px, 15vw, 240px);
+  font-weight: 900;
+  letter-spacing: -8px;
+  color: rgba(125, 211, 252, 0.05);
+  line-height: 0.8;
+  margin-bottom: -10px;
+}
+
+.bg-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: rgba(125, 211, 252, 0.15);
+  margin-left: 10px;
+}
+
 /* About Specific */
 .about-content {
   max-width: 800px;

@@ -70,8 +70,7 @@ const Projects = () => {
   }, { scope: sectionRef });
 
   return (
-    <section className="portfolio-section projects-section" id="projects" ref={sectionRef}>
-      
+    <section className="portfolio-section projects-section" id="projects" data-section="projects" ref={sectionRef}>
       <div className="section-container">
         <h2 className="section-title key-text text-white">Featured Projects</h2>
         

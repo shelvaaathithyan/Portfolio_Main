@@ -45,7 +45,7 @@ const FeaturedProject = () => {
   }, { scope: sectionRef });
 
   return (
-    <section className="portfolio-section fp-section" id="featured" ref={sectionRef}>
+    <section className="portfolio-section fp-section" id="featured" data-section="projects" ref={sectionRef}>
       
       <div className="section-container fp-container">
         <div className="fp-header">

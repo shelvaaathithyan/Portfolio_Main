@@ -9,8 +9,8 @@ import Projects from './Projects';
 import Contact from './Contact';
 import SideQuests from './SideQuests';
 import Footer from './Footer';
-import StickySectionNumbers from './StickySectionNumbers';
 import LazyMount from './LazyMount';
+import StickySectionNumbers from './StickySectionNumbers';
 
 const MainScreen = ({ onOpenSimulation }) => {
   return (

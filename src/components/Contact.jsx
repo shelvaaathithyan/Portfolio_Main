@@ -74,8 +74,7 @@ const Contact = () => {
   }, { scope: sectionRef });
 
   return (
-    <section className="portfolio-section contact-section" id="contact" ref={sectionRef}>
-      
+    <section className="portfolio-section contact-section" id="contact" data-section="contact" ref={sectionRef}>
       <div className="section-container contact-container">
         
         <div className="contact-layout">

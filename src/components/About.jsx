@@ -25,8 +25,7 @@ const About = () => {
   }, { scope: sectionRef });
 
   return (
-    <section className="portfolio-section about-section" id="about" ref={sectionRef}>
-      
+    <section className="portfolio-section about-section" id="about" data-section="about" ref={sectionRef}>
       <div className="section-container about-container">
         <h2 className="section-title key-text text-white">About Me</h2>
         

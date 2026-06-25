@@ -140,8 +140,7 @@ const Journey = () => {
   }, { scope: sectionRef });
 
   return (
-    <section className="portfolio-section journey-section" id="journey" ref={sectionRef}>
-      
+    <section className="portfolio-section journey-section" id="journey" data-section="journey" ref={sectionRef}>
       <div className="section-container">
         <h2 className="section-title key-text text-white" style={{ textAlign: 'center', marginBottom: '2rem' }}>The Journey</h2>
         

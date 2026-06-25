@@ -405,7 +405,7 @@
   flex-direction: column;
   gap: 10px;
   width: max-content;
-  max-width: 180px;
+  max-width: 340px;
   position: absolute;
   padding-top: 12px; /* 12px gap from connector */
 }
@@ -443,7 +443,7 @@
   left: 30px; /* exactly at connector end */
 }
 
-/* Diagonal Down-Right (2019-2026) */
+/* Diagonal Down-Right (2019-2023) */
 .node-expansion.direction-diagonal-down-right {
   top: calc(50% + 10px);
   left: calc(50% + 10px);
@@ -465,6 +465,33 @@
   left: 42.4px; /* 60 * cos(45) */
 }
 
+/* Diagonal Down-Left (2024-2026) */
+.node-expansion.direction-diagonal-down-left {
+  top: calc(50% + 10px);
+  right: calc(50% + 10px);
+}
+.node-expansion.direction-diagonal-down-left .expansion-connector {
+  height: 2px;
+  width: 0px;
+  top: 0;
+  right: 0;
+  transform-origin: right center;
+  transform: rotate(-45deg); /* down-left */
+  transition: width 0.15s ease-out;
+}
+.graph-node-wrapper.active .node-expansion.direction-diagonal-down-left .expansion-connector {
+  width: 60px;
+}
+.node-expansion.direction-diagonal-down-left .expansion-milestones {
+  top: 42.4px;
+  right: 42.4px;
+  padding-top: 125px; /* Moved up by 35px for better visual balance while maintaining safe clearance */
+}
+.node-expansion.direction-diagonal-down-left .expansion-milestones::before {
+  left: auto;
+  right: 0; /* mirrored rail */
+}
+
 /* Milestone Items & Animations */
 .expansion-item {
   position: relative;
@@ -473,6 +500,13 @@
   padding-left: 15px; /* space from rail */
   opacity: 0;
   transform: translateX(-5px);
+}
+
+.node-expansion.direction-diagonal-down-left .expansion-item {
+  padding-left: 0;
+  padding-right: 15px;
+  flex-direction: row-reverse;
+  transform: translateX(5px);
 }
 
 .graph-node-wrapper.active .expansion-item {
@@ -489,7 +523,7 @@
 
 .item-dot {
   position: absolute;
-  top: 6px; /* visually centered with first line of text */
+  top: 10px; /* visually centered with first line of text for 14px font and 1.8 lh */
   left: -1.5px; /* 4px dot on 1px rail */
   width: 4px;
   height: 4px;
@@ -499,10 +533,19 @@
   flex-shrink: 0;
 }
 
+.node-expansion.direction-diagonal-down-left .item-dot {
+  left: auto;
+  right: -1.5px;
+}
+
 .item-text {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.85);
+  font-family: 'Inter', 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
   white-space: normal;
-  line-height: 1.4;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  text-align: justify;
+  text-wrap: pretty;
 }

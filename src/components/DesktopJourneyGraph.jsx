@@ -4,54 +4,54 @@ import { useGSAP } from '@gsap/react';
 
 const graphData = [
   {
-    year: 2017, x: 50, y: 350, title: 'Early Steps',
+    year: 2017, x: 50, y: 350, title: 'The Spark',
     direction: 'horizontal',
-    milestones: ["Ideathon Registration", "Smart Snacky Dev"]
+    milestones: ["A random registration for an Ideathon-Hackathon at SNS College of Engineering unknowingly changed the direction of my life. While developing Smart Snacky, I experienced the excitement of turning ideas into reality and discovered the joy of building technology."]
   },
   {
-    year: 2018, x: 150, y: 280, title: 'First Recognition',
+    year: 2018, x: 150, y: 280, title: 'The First Win',
     direction: 'horizontal',
-    milestones: ["Smart Snacky Complete", "Ideathon Winner", "Singapore Visit", "Social Impact Focus"]
+    milestones: ["Smart Snacky reached completion and went on to win the Ideathon-Hackathon. The opportunity to visit Singapore as a recognition of that achievement opened my eyes to a bigger world. This was the year I developed a genuine passion for Computer Science and decided to build technology that could create meaningful impact."]
   },
   {
-    year: 2019, x: 250, y: 150, title: 'Major Spike',
+    year: 2019, x: 250, y: 150, title: 'Learning Through Failure & Growth',
     direction: 'diagonal-down-right', offset: 'center',
-    milestones: ["IoT Training", "SmartBin V1-V3", "IWMA 2nd Prize"]
+    milestones: ["Curiosity led me to the Forge KCT IoT Training Program, where I entered the world of connected devices. SmartBin V1 faced setbacks at the Science Expo, but that disappointment became fuel for improvement. SmartBin evolved through multiple iterations, eventually reaching the CBSE National Science Exhibition and earning recognition from IWMA with a ₹10,000 award. This year taught me that growth comes from persistence, not perfection."]
   },
   {
-    year: 2020, x: 350, y: 150, title: 'Plateau & Learning',
+    year: 2020, x: 350, y: 150, title: 'Experimentation Phase',
     direction: 'diagonal-down-right',
-    milestones: ["IoT Mini Projects", "Embedded Systems"]
+    milestones: ["With every project, my confidence grew. I spent the year building numerous IoT solutions, exploring embedded systems, sensors, and automation. It was a period of experimentation that strengthened my technical foundation and curiosity."]
   },
   {
-    year: 2021, x: 450, y: 130, title: 'Academic Shift',
+    year: 2021, x: 450, y: 130, title: 'A New Academic Journey',
     direction: 'diagonal-down-right',
-    milestones: ["PSG Polytechnic"]
+    milestones: ["Joining PSG Polytechnic marked the beginning of a new chapter. Surrounded by opportunities to learn and grow, I focused on strengthening my engineering fundamentals and preparing myself for bigger challenges ahead."]
   },
   {
-    year: 2022, x: 550, y: 110, title: 'Industry Exposure',
+    year: 2022, x: 550, y: 110, title: 'Discovering the Industry',
     direction: 'diagonal-down-right',
-    milestones: ["College Symposiums", "KitKat Internship"]
+    milestones: ["College symposiums, competitions, and my internship at KitKat Software Technologies exposed me to the professional world for the first time. Beyond technical skills, I learned communication, teamwork, and how technology operates outside the classroom."]
   },
   {
-    year: 2023, x: 650, y: 80, title: 'Noticeable Rise',
+    year: 2023, x: 650, y: 80, title: 'Building Something Bigger',
     direction: 'diagonal-down-right',
-    milestones: ["Freelancer Internship", "ApartiBot"]
+    milestones: ["My internship at Freelancer League provided valuable industry experience, while ApartiBot became my most ambitious project yet. This year transformed me from someone who learned technology into someone who actively built solutions with it."]
   },
   {
-    year: 2024, x: 750, y: 50, title: 'Strong Rise',
-    direction: 'diagonal-down-right',
-    milestones: ["Achievement Award", "Graduation", "B.E CSE AI & ML", "CSEA Member"]
+    year: 2024, x: 750, y: 50, title: 'Stepping Into the Next Level',
+    direction: 'diagonal-down-left',
+    milestones: ["Receiving an Achievement Award, graduating from PSG Polytechnic, and joining PSG College of Technology for B.E. CSE (AI & ML) marked a major transition in my journey. Becoming a member of CSEA opened new doors for leadership, collaboration, and growth."]
   },
   {
-    year: 2025, x: 850, y: 30, title: 'Very Strong Rise',
-    direction: 'diagonal-down-right',
-    milestones: ["Infinitum Team", "Portfolio V1", "CSEA Coordinator", "Neptune Runner-Up", "Repora", "AI Consortium"]
+    year: 2025, x: 850, y: 30, title: 'Leadership & Innovation',
+    direction: 'diagonal-down-left',
+    milestones: ["This year was defined by responsibility and impact. From organizing Infinitum 2025 and launching my first portfolio to becoming the Embedded Systems & IoT Domain Coordinator at CSEA, I embraced leadership opportunities. The development of Repora and securing Runner-Up at Oblivion 2025 with Neptune reflected my growing confidence in building meaningful products and leading teams."]
   },
   {
-    year: 2026, x: 950, y: 10, title: 'Highest Peak',
-    direction: 'diagonal-down-right',
-    milestones: ["VisionBite", "Client E-Commerce", "SCRC Research Intern"]
+    year: 2026, x: 950, y: 10, title: 'Turning Passion Into Profession',
+    direction: 'diagonal-down-left',
+    milestones: ["VisionBite, my first client project, and my research internship at SCRC IIIT Hyderabad marked the transition from student projects to professional impact. The ideas that began as curiosity years ago were now becoming real-world solutions, research contributions, and opportunities to create value through technology."]
   }
 ];
 

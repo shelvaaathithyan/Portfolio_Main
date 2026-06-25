@@ -26,7 +26,13 @@ const About = () => {
 
   return (
     <section className="portfolio-section about-section" id="about" data-section="about" ref={sectionRef}>
-      <div className="section-container about-container">
+      {/* 01 ABOUT Background Marker */}
+      <div className="section-marker">
+        <div className="bg-num" style={{ zIndex: 1, opacity: 0.05 }}>01</div>
+        <div className="bg-title" style={{ zIndex: 2, opacity: 0.12 }}>ABOUT</div>
+      </div>
+
+      <div className="section-container about-container section-content" style={{ zIndex: 10, position: 'relative' }}>
         <h2 className="section-title key-text text-white">About Me</h2>
         
         <div className="about-content">

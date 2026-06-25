@@ -3,10 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { FiGlobe, FiAward, FiDollarSign, FiSmartphone, FiBookOpen, FiCpu, FiTarget } from 'react-icons/fi';
-import './Journey.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
+// This is the exact existing implementation preserved for mobile
 const MobileJourney = () => {
   const containerRef = useRef(null);
 
@@ -139,8 +137,7 @@ const MobileJourney = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef}>
-      {/* Statistics Row */}
+    <div className="mobile-journey-wrapper" ref={containerRef}>
       <div className="journey-stats-row">
         {statsData.map((stat, i) => (
           <div className="journey-stat-card" key={i}>
@@ -150,7 +147,6 @@ const MobileJourney = () => {
         ))}
       </div>
 
-      {/* Timeline Stack */}
       <div className="journey-timeline-stack">
         <div className="journey-line-static"></div>
         

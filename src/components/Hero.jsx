@@ -118,7 +118,7 @@ const Hero = ({ onOpenSimulation }) => {
   }, []);
 
   return (
-    <section className="hero-section" data-section="hero" ref={heroRef}>
+    <section className="hero-section" ref={heroRef}>
       <NeuralSphere />
       <div className="hero-container" style={{ position: 'relative', zIndex: 10 }}>
         

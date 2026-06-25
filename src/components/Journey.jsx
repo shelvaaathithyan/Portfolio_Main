@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import MobileJourney from './MobileJourney';
 import DesktopJourneyGraph from './DesktopJourneyGraph';
+import './Journey.css';
 import './SectionStyles.css';
 
 const Journey = () => {
@@ -10,6 +11,8 @@ const Journey = () => {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
+    // Execute once on mount to handle hydration mismatches
+    setIsMobile(window.innerWidth < 768);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 

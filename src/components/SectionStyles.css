@@ -55,6 +55,29 @@
   margin-left: 10px;
 }
 
+/* Section Marker Background Layout (Desktop) */
+@media (min-width: 769px) {
+  .section-marker {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  .section-content {
+    padding-left: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-marker {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    pointer-events: none;
+  }
+}
+
 /* About Specific */
 .about-content {
   max-width: 800px;

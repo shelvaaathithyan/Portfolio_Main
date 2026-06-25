@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './StickySectionNumbers.css';
 
 const SECTION_REGISTRY = [
-  { id: 'hero', hidden: true },
   { id: 'about', num: '01', title: 'ABOUT' },
   { id: 'journey', num: '02', title: 'JOURNEY' },
   { id: 'terminal', num: '03', title: 'TERMINAL' },
@@ -19,6 +18,12 @@ const StickySectionNumbers = () => {
     let lastScrollY = window.scrollY;
 
     const calculateClosestSection = () => {
+      // Hide section numbers when viewing the Hero section (top of page)
+      if (window.scrollY < window.innerHeight * 0.4) {
+        if (activeSection !== null) setActiveSection(null);
+        return;
+      }
+
       // Find all DOM elements matching our registered sections
       const sectionElements = Array.from(document.querySelectorAll('[data-section]'))
         .filter(el => SECTION_REGISTRY.some(sec => sec.id === el.getAttribute('data-section')));
@@ -81,7 +86,7 @@ const StickySectionNumbers = () => {
 
   return (
     <div className="sticky-section-numbers">
-      {SECTION_REGISTRY.filter(sec => !sec.hidden).map((sec) => (
+      {SECTION_REGISTRY.map((sec) => (
         <div 
           key={sec.id} 
           className={`sticky-number-container ${activeSection === sec.id ? 'active' : ''}`}

@@ -155,13 +155,15 @@ const DesktopJourneyGraph = () => {
         {graphData.map((data) => (
           <div 
             key={data.year}
-            className={`graph-node-wrapper size-${data.size} ${activeYear === data.year ? 'active' : ''}`}
+            className={`graph-node-wrapper ${activeYear === data.year ? 'active' : ''}`}
             style={{ left: `${(data.x / 1000) * 100}%`, top: `${(data.y / 400) * 100}%` }}
             onMouseEnter={() => setActiveYear(data.year)}
             onMouseLeave={() => setActiveYear(null)}
           >
-            <div className="node-core"></div>
-            <div className="node-glow"></div>
+            <div className="node-halo"></div>
+            <div className="node-core">
+              <div className="node-dot"></div>
+            </div>
             <div className="node-year key-text">{data.year}</div>
           </div>
         ))}

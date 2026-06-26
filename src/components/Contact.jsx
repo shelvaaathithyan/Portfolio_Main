@@ -105,6 +105,12 @@ const filmData = [
     img: "/presentiwma.jpeg",
     title: "Presented Smart Bin V3",
     subtitle: "IWMA Science Expo"
+  },
+  {
+    id: 16,
+    img: "/infinitumorg.png",
+    title: "Infinitum '25 Organizing Committee",
+    subtitle: "PSG College Of Technology"
   }
 ];
 

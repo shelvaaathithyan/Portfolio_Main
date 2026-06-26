@@ -227,19 +227,19 @@
   position: relative;
   width: 400px;
   height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transform-style: preserve-3d; /* For mouse tilt */
 }
 
 .profile-photo-wrapper {
   width: 220px;
   height: 220px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   z-index: 10;
 }
 

@@ -93,6 +93,18 @@ const filmData = [
     img: "/achivement.jpeg",
     title: "Achivement Award",
     subtitle: "PSG Polytechnic College"
+  },
+  {
+    id: 14,
+    img: "/iwma award.jpeg",
+    title: "Received 10K Cash Prize",
+    subtitle: "IWMA Science Expo"
+  },
+  {
+    id: 15,
+    img: "/presentiwma.jpeg",
+    title: "Presented Smart Bin V3",
+    subtitle: "IWMA Science Expo"
   }
 ];
 

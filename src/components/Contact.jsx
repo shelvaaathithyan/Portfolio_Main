@@ -87,6 +87,12 @@ const filmData = [
     img: "/sate.jpeg",
     title: "Regional Level Science Expo",
     subtitle: "Conducted by CBSE"
+  },
+  {
+    id: 13,
+    img: "/achivement.jpeg",
+    title: "Achivement Award",
+    subtitle: "PSG Polytechnic College"
   }
 ];
 

@@ -12,7 +12,14 @@ const quests = [
   { id: 6, src: '/thalapathy.png', alt: 'Movies', glow: 'rgba(255, 0, 0, 0.4)' },
   { id: 7, src: '/thalapathy2.png', alt: 'Movies 2', glow: 'rgba(255, 0, 0, 0.4)' },
   { id: 8, src: '/spidermangame.jpg', alt: 'Gaming', glow: 'rgba(0, 0, 255, 0.4)' },
-  { id: 9, src: '/msd.jpeg', alt: 'MS Dhoni', glow: 'rgba(255, 255, 0, 0.4)' }
+  { id: 9, src: '/msd.jpeg', alt: 'MS Dhoni', glow: 'rgba(255, 255, 0, 0.4)' },
+  { id: 10, src: '/thalapathy3.png', alt: 'Thalapathy 3', glow: 'rgba(255, 0, 0, 0.4)' },
+  { id: 11, src: '/rajini.jpeg', alt: 'Rajinikanth', glow: 'rgba(255, 165, 0, 0.4)' },
+  { id: 12, src: '/samson.jpeg', alt: 'Sanju Samson', glow: 'rgba(0, 0, 255, 0.4)' },
+  { id: 13, src: '/brevis.jpeg', alt: 'Dewald Brevis', glow: 'rgba(0, 255, 0, 0.4)' },
+  { id: 14, src: '/rajini2.jpeg', alt: 'Rajinikanth 2', glow: 'rgba(255, 165, 0, 0.4)' },
+  { id: 15, src: '/simbu.jpeg', alt: 'Simbu', glow: 'rgba(255, 0, 0, 0.4)' },
+  { id: 16, src: '/deadpool.jpeg', alt: 'Deadpool', glow: 'rgba(255, 0, 0, 0.4)' }
 ];
 
 // Duplicate to allow seamless scroll
@@ -26,7 +33,7 @@ const SideQuests = () => {
     gsap.to(trackRef.current, {
       xPercent: -50,
       ease: "none",
-      duration: 25,
+      duration: 45, // Increased duration to maintain speed with more items
       repeat: -1
     });
   }, { scope: trackRef });

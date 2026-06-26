@@ -29,13 +29,14 @@ const COMMANDS = {
       <div className="help-grid">
         <div className="help-cmd proto">spider</div><div className="help-cmd proto">ironman</div>
         <div className="help-cmd proto">thor</div><div className="help-cmd proto">multiverse</div>
+        <div className="help-cmd proto">bat</div>
       </div>
 
       <div className="help-divider" style={{ marginTop: '16px' }}>────────────────────────────────</div>
 
       <div className="help-status-header" style={{ color: '#00D4AA', marginBottom: '8px' }}>STATUS:</div>
       <div style={{ color: '#4DA3FF', marginBottom: '4px' }}>13 COMMANDS AVAILABLE</div>
-      <div style={{ color: '#FF4D4D', marginBottom: '16px' }}>4 HIDDEN PROTOCOLS DETECTED</div>
+      <div style={{ color: '#FF4D4D', marginBottom: '16px' }}>5 HIDDEN PROTOCOLS DETECTED</div>
       
       <div style={{ color: '#00D4AA', display: 'flex', alignItems: 'center' }}>
         SYSTEM STATUS: ONLINE <span className="help-cursor">█</span>

@@ -36,8 +36,8 @@ const filmData = [
   {
     id: 4,
     img: "/del.jpeg",
-    title: "National Science Expo",
-    subtitle: "Mayoor School,Noida"
+    title: "National Level Science Expo",
+    subtitle: "Conducted by CBSE"
   },
   {
     id: 5,
@@ -48,20 +48,20 @@ const filmData = [
   {
     id: 6,
     img: "/infinitum 2025.jpeg",
-    title: "Infinitum 2K25",
+    title: "Infinitum '25",
     subtitle: "PSG College Of Technology",
     position: "center 65%"
   },
   {
     id: 7,
     img: "/infinitum 2026.jpeg",
-    title: "Infinitum 2K26",
+    title: "Infinitum '26",
     subtitle: "PSG College Of Technology"
   },
   {
     id: 8,
     img: "/oblivion 2025.jpeg",
-    title: "Oblivion 2025",
+    title: "Oblivion '25",
     subtitle: "SNS College Of Technology"
   },
   {
@@ -81,6 +81,12 @@ const filmData = [
     img: "/smart bin.jpeg",
     title: "Codissia Science Expo",
     subtitle: "Smart Bin V1"
+  },
+  {
+    id: 12,
+    img: "/sate.jpeg",
+    title: "Regional Level Science Expo",
+    subtitle: "Conducted by CBSE"
   }
 ];
 

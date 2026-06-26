@@ -175,6 +175,7 @@ const parseCommand = (rawInput) => {
   if (input === 'spider') return 'spider';
   if (input === 'ironman') return 'ironman';
   if (input === 'thor') return 'thor';
+  if (input === 'bat' || input === 'batman') return 'bat';
   if (input === 'multiverse') return 'multiverse';
   if (input === 'simulate' || input === 'collaborate') return 'simulate';
   
@@ -424,7 +425,7 @@ const Terminal = ({ onOpenSimulation }) => {
       } else if (parsed === 'resume') {
         window.open('/Shelvaaathithyan_Resume.pdf', '_blank');
         outputComponent = <div className="status-green" style={{ marginBottom: '1rem' }}>Downloading Resume...</div>;
-      } else if (parsed === 'spider' || parsed === 'ironman' || parsed === 'thor') {
+      } else if (parsed === 'spider' || parsed === 'ironman' || parsed === 'thor' || parsed === 'bat') {
         setCmdHistory(prev => [...prev, trimmed]);
         setInput('');
         setHistory(prev => [...prev, { 
@@ -521,7 +522,7 @@ const Terminal = ({ onOpenSimulation }) => {
               <div className="easter-egg-gif-container">
                 {easterEggType && (
                   <img 
-                    src={`/${easterEggType}gif.gif`} 
+                    src={easterEggType === 'bat' ? '/bat.gif' : `/${easterEggType}gif.gif`} 
                     alt="Core" 
                     className="easter-egg-core-hologram" 
                     onError={() => console.error(`${easterEggType} GIF failed to load`)}

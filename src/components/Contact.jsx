@@ -111,6 +111,18 @@ const filmData = [
     img: "/infinitumorg.png",
     title: "Infinitum '25 Organizing Committee",
     subtitle: "PSG College Of Technology"
+  },
+  {
+    id: 17,
+    img: "/singa2.jpeg",
+    title: "Ethical Decision on Entrepreneurship",
+    subtitle: "Curtin University, Singapore"
+  },
+  {
+    id: 18,
+    img: "/singa1.jpeg",
+    title: "Trip to Singapore",
+    subtitle: "Recognition of Ideathon-Hackathon"
   }
 ];
 

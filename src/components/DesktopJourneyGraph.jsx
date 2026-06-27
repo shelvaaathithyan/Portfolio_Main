@@ -51,7 +51,7 @@ const graphData = [
   {
     year: 2026, x: 950, y: 10, title: 'Turning Passion Into Profession',
     direction: 'diagonal-down-left',
-    milestones: ["VisionBite, my first client project, and my research internship at SCRC IIIT Hyderabad marked the transition from student projects to professional impact. The ideas that began as curiosity years ago were now becoming real-world solutions, research contributions, and opportunities to create value through technology."]
+    milestones: ["VisionBite, my first client project, and my research internship at SERC IIIT Hyderabad marked the transition from student projects to professional impact. The ideas that began as curiosity years ago were now becoming real-world solutions, research contributions, and opportunities to create value through technology."]
   }
 ];
 
